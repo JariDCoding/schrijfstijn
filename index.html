@@ -16,9 +16,10 @@
         <h1 class="hero-title">Schrijfstijn</h1>
         <img class="schrijfstijn-icon" src="./Schrijfstijn%20home%20page/Schrijfstijnscripthero.svg" alt="Schrijfstijn">
         <p class="hero-body">
-            <span class="hero-body-line">Lorem ispum lorem ipsum Lorem ispum lorem ipsum</span>
-            <span class="hero-body-line">Lorem ispum lorem ipsum Lorem ispum lorem</span>
-            <span class="hero-body-line">lorem ipsum lorem ipsum</span>
+            <span class="hero-body-line">Welkom bij Schrijfstijn. Het audio productie & songwriting</span>
+            <span class="hero-body-line">bedrijf. Gedreven door een passie voor creativiteit schenken</span>
+            <span class="hero-body-line">aan elk project de nodige aandacht en precisie. </span>
+            <span class="hero-body-line">Zo trachten wou jou muzikale visie tot leven te brengen.  </span>
         </p>
         <a class="hero-cta" href="#">Start een aanvraag →</a>
         <img class="hero-photo" src="./Schrijfstijn%20home%20page/schrijfstijnhero.png" alt="">
@@ -55,9 +56,11 @@
         <p class="about-name">Stijn Bouvé</p>
         <p class="about-alias">HanzKazan</p>
         <p class="about-body">
-            <span class="about-body-line">Lorem ispum lorem ipsum Lorem ispum lorem ipsum</span>
-            <span class="about-body-line">Lorem ispum lorem ipsumLorem ispum lorem</span>
-            <span class="about-body-line">lorem ipsum lorem ipsum</span>
+            <span class="about-body-line">Sinds 2016 is Stijn actief bezig met het ontwikkelen van songteksten.</span>
+            <span class="about-body-line">Waar hij aanvankelijk begon als hiphop artiest groeide hij al snel uit tot</span>
+            <span class="about-body-line">volwaardig pop songwriter. In zijn 10 jaar ervaring leerde Stijn ook de kunst van audio productie.  De dag van vandaag kan je bij Stijn terecht</span>
+            <span class="about-body-line">kunst van audio productie.  De dag van vandaag kan je bij Stijn terecht</span>
+            <span class="about-body-line">voor producties, songwriting, opnames & consultatie.</span>
         </p>
         <a class="about-cta" href="#">Ontdek meer →</a>
     </section>
@@ -73,21 +76,20 @@
         <p class="waarom-heading">Passie voor muziek</p>
         <p class="waarom-subheading">Songwriting</p>
         <div class="waarom-body">
-            <span class="waarom-body-line">Lorem ispum lorem ipsum Lorem ispum lorem ipsum</span>
-            <span class="waarom-body-line">Lorem ispum lorem ipsumLorem ispum lorem</span>
-            <span class="waarom-body-line">lorem ipsum lorem ipsum</span>
+            <span class="waarom-body-line">Schrijfstijn ondersteund uw creatief project. Van idee tot concrete uitwerking. </span>
+            <span class="waarom-body-line">Met meer dan 10 jaar ervaring bied SchrijfStijn het volledig omkaderend </span>
+            <span class="waarom-body-line">traject. Creatieve invulling, Instrumental, melodiën, teksten, opnames, mix & master. Wij helpen waar nodig!</span>
         </div>
         <a class="waarom-cta" href="#">Start een aanvraag →</a>
 
         <!-- Stats right -->
-        <!-- TODO: replace with local animated SVGs when provided -->
-        <img class="waarom-stat-num waarom-stat-num-1" src="https://www.figma.com/api/mcp/asset/ddd9917e-eed0-4136-b07e-b68db3241e76" alt="6+">
+        <img class="waarom-stat-num waarom-stat-num-1" data-src="./Schrijfstijn%20home%20page/waarom-stat-6.svg" alt="6+">
         <p class="waarom-stat-label waarom-stat-label-1">Jaar ervaring</p>
 
-        <img class="waarom-stat-num waarom-stat-num-2" src="https://www.figma.com/api/mcp/asset/0ea66f34-db4a-4252-b184-5720033693b1" alt="48+">
+        <img class="waarom-stat-num waarom-stat-num-2" data-src="./Schrijfstijn%20home%20page/waarom-stat-48.svg" alt="48+">
         <p class="waarom-stat-label waarom-stat-label-2">Projecten uitgevoerd</p>
 
-        <img class="waarom-stat-num waarom-stat-num-3" src="https://www.figma.com/api/mcp/asset/119c4d06-cb42-418c-bdc3-002bac0a191c" alt="100%">
+        <img class="waarom-stat-num waarom-stat-num-3" data-src="./Schrijfstijn%20home%20page/waarom-stat-100.svg" alt="100%">
         <p class="waarom-stat-label waarom-stat-label-3">Op maat gewerkt</p>
 
         <!-- Bottom: trusted by -->
@@ -320,9 +322,11 @@
                 setTimeout(function () { show(lines[0]); }, 2500);
                 setTimeout(function () { show(lines[1]); }, 2700);
                 setTimeout(function () { show(lines[2]); }, 2900);
+                setTimeout(function () { show(lines[3]); }, 3100);
+                setTimeout(function () { show(lines[4]); }, 3300);
 
                 // 6. CTA
-                setTimeout(function () { show(cta); }, 3200);
+                setTimeout(function () { show(cta); }, 3600);
             }
 
             var io = new IntersectionObserver(function (entries) {
@@ -388,9 +392,9 @@
                 setTimeout(function () { show(cta); }, 3200);
 
                 // 7. Stats — staggered in pairs (num + label together)
-                setTimeout(function () { show(sn1); show(sl1); }, 3700);
-                setTimeout(function () { show(sn2); show(sl2); }, 4100);
-                setTimeout(function () { show(sn3); show(sl3); }, 4500);
+                setTimeout(function () { setSrc(sn1); show(sn1); show(sl1); }, 3700);
+                setTimeout(function () { setSrc(sn2); show(sn2); show(sl2); }, 4100);
+                setTimeout(function () { setSrc(sn3); show(sn3); show(sl3); }, 4500);
 
                 // 8. Trusted by + logos
                 setTimeout(function () { show(trusted); },    4900);
