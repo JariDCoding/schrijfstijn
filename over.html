@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <title>Over Schrijfstijn</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Italianno&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            font-size: clamp(16px, min(1.1111vw, 1.4815vh), 42.667px);
+        }
+
+        /* ── Reset & base ── */
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: #f8f4f0;
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 400;
+            color: #000;
+            line-height: normal;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Hero ── */
+        .os-hero {
+            position: relative;
+            width: 90rem;
+            height: 58.75rem;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* ── Large typographic words ── */
+        .os-word {
+            position: absolute;
+            margin: 0;
+            font-weight: 400;
+            font-size: 9.375rem;
+            line-height: 1;
+            white-space: nowrap;
+            color: #000;
+            opacity: 0;
+            transform: translateY(1.25rem);
+            filter: blur(0.5rem);
+            animation: os-word-in 0.77s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        #os-the    { left: 12.375rem; top: 8.5625rem; animation-delay: 0.08s; }
+        #os-man    { left:  5.625rem; top: 16.6875rem; animation-delay: 0.22s; }
+        #os-behind { left: 52.3125rem; top: 36.8125rem; animation-delay: 0.60s; }
+        #os-song   { left: 60.375rem; top: 46.375rem; animation-delay: 0.76s; }
+
+        /* ── Hero photo (removebg — transparent) ── */
+        .os-photo {
+            position: absolute;
+            left: 26.1875rem;
+            top: 9.875rem;
+            width: 33.4375rem;
+            height: 47.875rem;
+            object-fit: cover;
+            display: block;
+            opacity: 0;
+            transform: scale(1.04) translateY(0.625rem);
+            animation: os-photo-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.38s forwards;
+        }
+
+        /* ── Body text ── */
+        .os-body {
+            position: absolute;
+            left: 63.75rem;
+            top: 12.5rem;
+            width: 21.9375rem;
+            margin: 0;
+            font-size: 1.625rem;
+            line-height: 1.5;
+        }
+
+        .os-body-line {
+            display: block;
+            opacity: 0;
+            transform: translateY(0.625rem);
+            animation: os-soft-in 0.64s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .os-body-line:nth-child(1) { animation-delay: 0.90s; }
+        .os-body-line:nth-child(2) { animation-delay: 1.02s; }
+        .os-body-line:nth-child(3) { animation-delay: 1.14s; }
+
+        /* ── "Your" red script SVG ── */
+        .os-your {
+            position: absolute;
+            left: 70.125rem;
+            top: 44.625rem;
+            width: 11.5893rem;
+            height: 4.9644rem;
+            max-width: none;
+            display: block;
+        }
+
+        .os-hero img[data-src] { visibility: hidden; }
+
+        /* ── CTA button (ticket shape) ── */
+        .os-cta {
+            position: absolute;
+            left: 7.5rem;
+            top: 44.25rem;
+            width: 18.6875rem;
+            height: 9.5625rem;
+            display: block;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(0.75rem);
+            animation: os-soft-in 0.64s cubic-bezier(0.22, 0.61, 0.36, 1) 1.28s forwards;
+        }
+
+        .os-cta-ticket {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .os-cta-border {
+            position: absolute;
+            left: 1.5rem;
+            top: 1.25rem;
+            width: 15.75rem;
+            height: 7.0625rem;
+            border: 0.0776rem solid #f8f4f0;
+            pointer-events: none;
+        }
+
+        .os-cta-label {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 3.9375rem;
+            text-align: center;
+            font-size: 1.25rem;
+            letter-spacing: 0.08em;
+            color: #fff;
+            white-space: nowrap;
+        }
+
+        /* ── Keyframes ── */
+        @keyframes os-word-in {
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        @keyframes os-soft-in {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes os-photo-in {
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .os-word,
+            .os-body-line,
+            .os-cta,
+            .os-photo {
+                animation: none;
+                opacity: 1;
+                transform: none;
+                filter: none;
+            }
+        }
+
+        /* ── Over ons section ──
+           height trimmed so photo-large bottom (1024) sits 2px above section end.
+           margin-top 345 → V_hero_oo = 16 + 345 + 121 = 482px (matches old V_oo_vd). */
+        .oo {
+            position: relative;
+            width: 90rem;
+            height: 64.125rem;
+            margin: 21.5625rem auto 0;
+            overflow: hidden;
+            background: #f8f4f0;
+        }
+
+        .oo img[data-src] { visibility: hidden; }
+
+        /* "Schrijfstijn" title */
+        .oo-title {
+            position: absolute;
+            left: 11.0625rem;
+            top: 7.5625rem;
+            margin: 0;
+            font-size: 6.875rem;
+            font-weight: 400;
+            line-height: 1;
+            white-space: nowrap;
+            color: #000;
+            opacity: 0;
+            transform: translateY(1.25rem);
+            filter: blur(0.5rem);
+            transition: opacity 0.77s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.77s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        filter 0.77s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        /* "achter jouw hit" */
+        .oo-subtitle {
+            position: absolute;
+            left: 37.1875rem;
+            top: 14.6875rem;
+            width: 37.0625rem;
+            margin: 0;
+            font-size: 6.25rem;
+            font-weight: 400;
+            line-height: 1;
+            color: #000;
+            opacity: 0;
+            transform: translateY(1.25rem);
+            filter: blur(0.375rem);
+            transition: opacity 0.77s cubic-bezier(0.22, 0.61, 0.36, 1) 0.14s,
+                        transform 0.77s cubic-bezier(0.22, 0.61, 0.36, 1) 0.14s,
+                        filter 0.77s cubic-bezier(0.22, 0.61, 0.36, 1) 0.14s;
+        }
+
+        /* "De persoon" animated red script */
+        .oo-script {
+            position: absolute;
+            left: 46.05rem;
+            top: 10.1938rem;
+            width: 18.5502rem;
+            height: 5.6188rem;
+            max-width: none;
+            display: block;
+        }
+
+        /* Decorative horizontal lines */
+        .oo-line-1 {
+            position: absolute;
+            left: 66.1875rem;
+            top: 12.5rem;
+            width: 22.375rem;
+            height: 0.125rem;
+            background: #000;
+            transform-origin: left center;
+            transform: scaleX(0);
+            transition: transform 0.64s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s;
+        }
+
+        .oo-line-2 {
+            position: absolute;
+            left: 41.625rem;
+            top: 57.4375rem;
+            width: 36.0625rem;
+            height: 0.125rem;
+            background: #000;
+            transform-origin: left center;
+            transform: scaleX(0);
+            transition: transform 0.64s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        /* Large photo (left) */
+        .oo-photo-large {
+            position: absolute;
+            left: 11.0625rem;
+            top: 23.125rem;
+            width: 24.875rem;
+            height: 40.875rem;
+            background: #d7d6d4;
+            opacity: 0;
+            transform: scale(1.04) translateY(0.625rem);
+            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s,
+                        transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s;
+        }
+
+        /* Small photo (right) */
+        .oo-photo-small {
+            position: absolute;
+            left: 76.3125rem;
+            top: 14.875rem;
+            width: 13.6653rem;
+            height: 23.6875rem;
+            background: #d7d6d4;
+            opacity: 0;
+            transform: translateY(0.875rem);
+            transition: opacity 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+                        transform 1.0s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+        }
+
+        /* Body text */
+        .oo-body {
+            position: absolute;
+            left: 41.625rem;
+            top: 35.9375rem;
+            width: 32.625rem;
+            margin: 0;
+            font-size: 1.625rem;
+            line-height: 1.5;
+        }
+
+        .oo-body-line {
+            display: block;
+            opacity: 0;
+            transform: translateY(0.625rem);
+            transition: opacity 0.64s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.64s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        /* ── Visible states ── */
+        .oo-title.is-visible,
+        .oo-subtitle.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .oo-line-1.is-visible,
+        .oo-line-2.is-visible { transform: scaleX(1); }
+
+        .oo-photo-large.is-visible {
+            opacity: 0.8;
+            transform: scale(1) translateY(0);
+        }
+
+        .oo-photo-small.is-visible {
+            opacity: 0.8;
+            transform: translateY(0);
+        }
+
+        .oo-body-line.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .oo-title, .oo-subtitle, .oo-body-line { transition: none; opacity: 1; transform: none; filter: none; }
+            .oo-line-1, .oo-line-2 { transition: none; transform: scaleX(1); }
+            .oo-photo-large { transition: none; opacity: 0.8; transform: none; }
+            .oo-photo-small { transition: none; opacity: 0.8; transform: none; }
+        }
+
+        /* ── Vertrouwd door section ──
+           margin-top 0 → V_oo_vd = 2 (.oo trailing) + 0 + 161 (.vd-title top) = 163px
+           (matches old logos→Waarom-Schrijfstijn distance). */
+        .vd {
+            position: relative;
+            width: 90rem;
+            height: 36.25rem;
+            margin: 0 auto 0;
+            overflow: hidden;
+            background: #f8f4f0;
+        }
+
+        .vd-title {
+            position: absolute;
+            left: 35.75rem;
+            top: 10.0625rem;
+            margin: 0;
+            width: 18.5625rem;
+            font-family: "Italianno", serif;
+            font-size: 4.25rem;
+            line-height: 1;
+            color: #000;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateY(1rem);
+            transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .vd-logo {
+            position: absolute;
+            top: 17.75rem;
+            width: 13.75rem;
+            height: 13.75rem;
+            object-fit: contain;
+            display: block;
+            opacity: 0;
+            transform: translateY(0.875rem);
+            transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .vd-logo-1 { left:   2.75rem; transition-delay: 0.08s, 0.08s; }
+        .vd-logo-2 { left:  26.8125rem; transition-delay: 0.18s, 0.18s; }
+        .vd-logo-3 { left:  50.8125rem; transition-delay: 0.28s, 0.28s; }
+        .vd-logo-4 { left: 74.8125rem; transition-delay: 0.38s, 0.38s; }
+
+        .vd-title.is-visible { opacity: 1; transform: translateY(0); }
+        .vd-logo.is-visible  { opacity: 1; transform: translateY(0); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .vd-title, .vd-logo { transition: none; opacity: 1; transform: none; }
+        }
+
+        /* ── USP / Waarom Schrijfstijn section ──
+           margin-top 364 → V_vd_usp = 76 (.vd trailing) + 364 + 42 (.usp-title top) = 482px
+           (matches old V_oo_vd). */
+        .usp {
+            position: relative;
+            width: 90rem;
+            height: 68.75rem;
+            margin: 22.75rem auto 0;
+            overflow: hidden;
+            background: #f8f4f0;
+        }
+
+        .usp img[data-src] { visibility: hidden; }
+
+        .usp-title {
+            position: absolute;
+            left: 7.4375rem;
+            top: 2.625rem;
+            margin: 0;
+            font-size: 4.25rem;
+            font-weight: 400;
+            line-height: 1;
+            white-space: nowrap;
+            color: #000;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(1.25rem);
+            filter: blur(0.375rem);
+            transition: opacity 0.77s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.77s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        filter 0.77s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .usp-script {
+            position: absolute;
+            left: 7.4375rem;
+            top: 4.375rem;
+            width: 49.4375rem;
+            height: 6.0625rem;
+            max-width: none;
+            display: block;
+        }
+
+        /* Photos */
+        .usp-photo {
+            position: absolute;
+            object-fit: cover;
+            display: block;
+            opacity: 0;
+            transform: scale(1.04) translateY(0.625rem);
+            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .usp-photo-placeholder {
+            position: absolute;
+            left: 13.5625rem;
+            top: 28.6875rem;
+            width: 15.4375rem;
+            height: 32rem;
+            background: #c4c4c4;
+            opacity: 0;
+            transform: scale(1.04) translateY(0.625rem);
+            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.10s,
+                        transform 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.10s;
+        }
+
+        .usp-photo-2 { left: 40.1875rem; top: 20.5rem; width: 16.5625rem; height: 34.0625rem; transition-delay: 0.20s, 0.20s; }
+        .usp-photo-3 { left: 66rem; top: 26.3125rem; width: 15.4375rem; height: 32rem; transition-delay: 0.30s, 0.30s; }
+
+        /* Stat numbers */
+        .usp-stat {
+            position: absolute;
+            display: block;
+            max-width: none;
+            opacity: 0;
+            transform: translateY(0.875rem);
+            transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .usp-stat-1 { left: 11.4125rem; top: 26.9438rem; width: 7.25rem; height: 2.875rem; transition-delay: 0.40s, 0.40s; }
+        .usp-stat-2 { left: 38.3875rem; top: 19.025rem; width:  4.5625rem; height: 2.8125rem; transition-delay: 0.50s, 0.50s; }
+        .usp-stat-3 { left: 62.1125rem; top: 23.8438rem; width: 10.6875rem; height: 3.9375rem; transition-delay: 0.60s, 0.60s; }
+
+        /* Labels — same visual rule as homepage services cards:
+           right = 1440 - photo_right - 40px  (text right edge sits ~2 chars past photo right)
+           top   = photo_bottom - 21px         (42px font: midline exactly on photo bottom) */
+        .usp-label {
+            position: absolute;
+            margin: 0;
+            font-size: 2.625rem;
+            font-weight: 400;
+            line-height: 1;
+            white-space: nowrap;
+            color: #000;
+            opacity: 0;
+            transform: translateY(0.625rem);
+            transition: opacity 0.64s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.64s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .usp-label-1 { right: 58.5rem; top: 59.375rem; transition-delay: 0.55s, 0.55s; }
+        .usp-label-2 { right: 30.75rem; top: 53.25rem; transition-delay: 0.65s, 0.65s; }
+        .usp-label-3 { right:  6.0625rem; top: 57rem; transition-delay: 0.75s, 0.75s; }
+
+        /* Visible states */
+        .usp-title.is-visible  { opacity: 1; transform: translateY(0); filter: blur(0); }
+        .usp-photo-placeholder.is-visible { opacity: 0.8; transform: scale(1) translateY(0); }
+        .usp-photo.is-visible  { opacity: 1; transform: scale(1) translateY(0); }
+        .usp-stat.is-visible   { opacity: 1; transform: translateY(0); }
+        .usp-label.is-visible  { opacity: 1; transform: translateY(0); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .usp-title  { transition: none; opacity: 1; transform: none; filter: none; }
+            .usp-photo-placeholder { transition: none; opacity: 0.8; transform: none; }
+            .usp-photo  { transition: none; opacity: 1; transform: none; }
+            .usp-stat   { transition: none; opacity: 1; transform: none; }
+            .usp-label  { transition: none; opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <section class="os-hero">
+
+        <!-- Large typographic words -->
+        <h1 class="os-word" id="os-the">THE</h1>
+        <p  class="os-word" id="os-man">MAN</p>
+        <p  class="os-word" id="os-behind">BEHIND</p>
+        <p  class="os-word" id="os-song">SONG</p>
+
+        <!-- Centre photo / hero image -->
+        <img class="os-photo"
+             src="./Schrijfstijn%20home%20page/over-hero.png"
+             alt="Stijn Bouvé">
+
+        <!-- Body text — right column -->
+        <p class="os-body">
+            <span class="os-body-line">Lorem ispum lorem ipsum Lorem ispum</span>
+            <span class="os-body-line">lorem ipsum Lorem ispum lorem ipsum</span>
+            <span class="os-body-line">Lorem ispum lorem ipsum Lorem</span>
+        </p>
+
+        <!-- "Your" animated red script (data-src — SMIL starts on cue) -->
+        <img class="os-your"
+             data-src="./Schrijfstijn%20home%20page/your-script.svg"
+             alt="Your">
+
+        <!-- CTA — ticket-shaped button -->
+        <a class="os-cta" href="#">
+            <img class="os-cta-ticket"
+                 src="./Schrijfstijn%20home%20page/cta-ticket.svg"
+                 alt="">
+            <div class="os-cta-border"></div>
+            <span class="os-cta-label">START&nbsp; AANVRAAG</span>
+        </a>
+
+    </section>
+
+    <!-- ── Over ons section ── -->
+    <section class="oo">
+
+        <!-- "Schrijfstijn" large title -->
+        <h2 class="oo-title">Schrijfstijn</h2>
+
+        <!-- "De persoon" animated red script -->
+        <img class="oo-script"
+             data-src="./Schrijfstijn%20home%20page/de-persoon-script.svg"
+             alt="De persoon">
+
+        <!-- Decorative line after "De persoon" -->
+        <div class="oo-line-1"></div>
+
+        <!-- "achter jouw hit" subtitle -->
+        <p class="oo-subtitle">achter jouw hit</p>
+
+        <!-- Large photo placeholder (left) -->
+        <div class="oo-photo-large"></div>
+
+        <!-- Small photo placeholder (right) -->
+        <div class="oo-photo-small"></div>
+
+        <!-- Body text -->
+        <p class="oo-body">
+            <span class="oo-body-line">Lorem ispum lorem ipsum Lorem ispum lorem</span>
+            <span class="oo-body-line">Lorem ispum lorem ipsumLorem ispum lorem</span>
+            <span class="oo-body-line">lorem ipsum lorem ipsum Lorem ispum lorem ipsum Lorem ispum lorem ipsum</span>
+            <span class="oo-body-line">Lorem ispum lorem ipsumLorem ispum lorem</span>
+            <span class="oo-body-line">lorem ipsum lorem ipsum</span>
+        </p>
+
+        <!-- Bottom decorative line -->
+        <div class="oo-line-2"></div>
+
+    </section>
+
+    <!-- ── Vertrouwd door section ── -->
+    <section class="vd">
+
+        <p class="vd-title">Vertrouwd door</p>
+
+        <img class="vd-logo vd-logo-1"
+             src="./Schrijfstijn%20home%20page/studio-100.png"
+             alt="Studio 100">
+        <img class="vd-logo vd-logo-2"
+             src="./Schrijfstijn%20home%20page/studio-100.png"
+             alt="Studio 100">
+        <img class="vd-logo vd-logo-3"
+             src="./Schrijfstijn%20home%20page/studio-100.png"
+             alt="Studio 100">
+        <img class="vd-logo vd-logo-4"
+             src="./Schrijfstijn%20home%20page/studio-100.png"
+             alt="Studio 100">
+
+    </section>
+
+    <!-- ── USP / Waarom Schrijfstijn section ── -->
+    <section class="usp">
+
+        <h2 class="usp-title">Waarom Schrijfstijn?</h2>
+
+        <!-- "Passie, kennis, begrip, efficiënt" animated red script -->
+        <img class="usp-script"
+             data-src="./Schrijfstijn%20home%20page/passie-kennis-begrip-efficient.svg"
+             alt="Passie, kennis, begrip, efficiënt">
+
+        <!-- Left photo placeholder -->
+        <div class="usp-photo-placeholder"></div>
+
+        <!-- Middle photo — Jaar ervaring -->
+        <img class="usp-photo usp-photo-2"
+             src="./Schrijfstijn%20home%20page/usp-jaar-ervaring.png"
+             alt="Jaar ervaring">
+
+        <!-- Right photo — Maatwerk -->
+        <img class="usp-photo usp-photo-3"
+             src="./Schrijfstijn%20home%20page/usp-maatwerk.png"
+             alt="Maatwerk">
+
+        <!-- Stat numbers -->
+        <img class="usp-stat usp-stat-1"
+             data-src="./Schrijfstijn%20home%20page/usp-stat-48.svg"
+             alt="48+">
+        <img class="usp-stat usp-stat-2"
+             data-src="./Schrijfstijn%20home%20page/usp-stat-6.svg"
+             alt="6+">
+        <img class="usp-stat usp-stat-3"
+             data-src="./Schrijfstijn%20home%20page/usp-stat-100.svg"
+             alt="100%">
+
+        <!-- Labels -->
+        <p class="usp-label usp-label-1">Projecten</p>
+        <p class="usp-label usp-label-2">Jaar ervaring</p>
+        <p class="usp-label usp-label-3">Maatwerk</p>
+
+    </section>
+
+    <script>
+        // ── Shared helpers (master animation DNA) ──
+        function show(el) { if (el) el.classList.add('is-visible'); }
+        function setSrc(el) {
+            if (!el || !el.dataset.src) return;
+            el.src = el.dataset.src;
+            el.removeAttribute('data-src');
+            el.style.visibility = 'visible';
+        }
+        function isReducedMotion() {
+            return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        }
+
+        // Trigger "Your" SVG at 0.9s so SMIL begin="0.5s" fires at t=1.4s total
+        (function () {
+            var img = document.querySelector('.os-your');
+            if (!img || !img.dataset.src) return;
+            if (isReducedMotion()) { setSrc(img); return; }
+            setTimeout(function () { setSrc(img); }, 900);
+        })();
+
+        // Over ons section — scroll-triggered animations
+        (function () {
+            var section = document.querySelector('.oo');
+            if (!section) return;
+            var triggered = false;
+
+            var io = new IntersectionObserver(function (entries) {
+                if (triggered || !entries[0].isIntersecting) return;
+                triggered = true;
+                io.disconnect();
+
+                var title     = section.querySelector('.oo-title');
+                var subtitle  = section.querySelector('.oo-subtitle');
+                var line1     = section.querySelector('.oo-line-1');
+                var line2     = section.querySelector('.oo-line-2');
+                var photoLg   = section.querySelector('.oo-photo-large');
+                var photoSm   = section.querySelector('.oo-photo-small');
+                var script    = section.querySelector('.oo-script');
+                var lines     = section.querySelectorAll('.oo-body-line');
+
+                if (isReducedMotion()) {
+                    [title, subtitle, line1, line2, photoLg, photoSm].forEach(show);
+                    lines.forEach(show);
+                    setSrc(script);
+                    return;
+                }
+
+                setTimeout(function () { show(title); },     0);
+                setTimeout(function () { show(line1); },    80);
+                setTimeout(function () { show(subtitle); }, 140);
+                setTimeout(function () { show(photoSm); },  200);
+                setTimeout(function () { show(photoLg); },  300);
+
+                // "De persoon" script — SMIL begin="0.5s" inside the file handles its own buffer
+                setSrc(script);
+
+                // Body text lines — staggered
+                Array.from(lines).forEach(function (line, i) {
+                    setTimeout(function () { show(line); }, 460 + i * 80);
+                });
+
+                setTimeout(function () { show(line2); }, 760);
+            }, { threshold: 0.15 });
+
+            io.observe(section);
+        })();
+
+        // Vertrouwd door — staggered logo reveal on scroll (CSS transition-delay drives stagger)
+        (function () {
+            var section = document.querySelector('.vd');
+            if (!section) return;
+            var triggered = false;
+
+            var io = new IntersectionObserver(function (entries) {
+                if (triggered || !entries[0].isIntersecting) return;
+                triggered = true;
+                io.disconnect();
+
+                var title = section.querySelector('.vd-title');
+                var logos = section.querySelectorAll('.vd-logo');
+
+                if (isReducedMotion()) {
+                    show(title);
+                    logos.forEach(show);
+                    return;
+                }
+
+                show(title);
+                logos.forEach(show);
+            }, { threshold: 0.15 });
+
+            io.observe(section);
+        })();
+
+        // USP / Waarom Schrijfstijn — scroll-triggered animations (CSS transition-delay drives stagger)
+        (function () {
+            var section = document.querySelector('.usp');
+            if (!section) return;
+            var triggered = false;
+
+            var io = new IntersectionObserver(function (entries) {
+                if (triggered || !entries[0].isIntersecting) return;
+                triggered = true;
+                io.disconnect();
+
+                var title       = section.querySelector('.usp-title');
+                var script      = section.querySelector('.usp-script');
+                var photoPh     = section.querySelector('.usp-photo-placeholder');
+                var photos      = section.querySelectorAll('.usp-photo');
+                var stats       = section.querySelectorAll('.usp-stat');
+                var labels      = section.querySelectorAll('.usp-label');
+
+                if (isReducedMotion()) {
+                    show(title);
+                    show(photoPh);
+                    photos.forEach(show);
+                    labels.forEach(show);
+                    stats.forEach(function (el) { setSrc(el); show(el); });
+                    setSrc(script);
+                    return;
+                }
+
+                show(title);
+
+                // "Passie..." script — SMIL begin="0.5s" inside the file handles its own buffer
+                setSrc(script);
+
+                // Photos — CSS transition-delay handles stagger
+                show(photoPh);
+                photos.forEach(show);
+
+                // Stat numbers — load SMIL SVGs immediately; SMIL begin="0.5s" sequences each reveal
+                stats.forEach(function (el) {
+                    setSrc(el);
+                    show(el);
+                });
+
+                labels.forEach(show);
+            }, { threshold: 0.15 });
+
+            io.observe(section);
+        })();
+    </script>
+</body>
+</html>

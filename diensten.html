@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <title>Onze diensten — Schrijfstijn</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Italianno&display=swap" rel="stylesheet">
+
+    <style>
+        html {
+            font-size: clamp(16px, min(1.1111vw, 1.4815vh), 42.667px);
+        }
+
+        /* ── Reset & base ── */
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: #f8f4f0;
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 400;
+            color: #000;
+            line-height: normal;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Hero ── */
+        .ds-hero {
+            position: relative;
+            width: 90rem;
+            height: 58.125rem;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        /* Main title */
+        .ds-title {
+            position: absolute;
+            left: 14.9375rem;
+            top: 10.0625rem;
+            margin: 0;
+            font-weight: 400;
+            font-size: 6.875rem;
+            line-height: 1;
+            white-space: nowrap;
+            color: #000;
+            opacity: 0;
+            transform: translateY(1.5rem);
+            filter: blur(0.5rem);
+            animation: ds-title-in 0.77s cubic-bezier(0.22, 0.61, 0.36, 1) 0.08s forwards;
+        }
+
+        /* Red script SVG */
+        .ds-script {
+            position: absolute;
+            left: 16.7813rem;
+            top: 14.7925rem;
+            width: 56.75rem;
+            height: 5.125rem;
+            max-width: none;
+            display: block;
+        }
+
+        /* Hide SVGs until JS sets src so SMIL starts from t=0 on cue */
+        .ds-hero img[data-src],
+        .ds-section2 img[data-src],
+        .svc img[data-src] { visibility: hidden; }
+
+        /* Photo */
+        .ds-photo {
+            position: absolute;
+            left: 33.0625rem;
+            top: 24.3125rem;
+            width: 23.875rem;
+            height: 34.125rem;
+            object-fit: cover;
+            display: block;
+            box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            transform: scale(1.04) translateY(0.625rem);
+            animation: ds-photo-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.7s forwards;
+        }
+
+        /* Body text — left column */
+        .ds-body-left {
+            position: absolute;
+            left: 6.875rem;
+            top: 31.4375rem;
+            width: 22rem;
+            margin: 0;
+            font-size: 1.625rem;
+            line-height: 1.5;
+        }
+
+        /* Body text — right column */
+        .ds-body-right {
+            position: absolute;
+            left: 62rem;
+            top: 43.875rem;
+            width: 22rem;
+            margin: 0;
+            font-size: 1.625rem;
+            line-height: 1.5;
+        }
+
+        .ds-body-line {
+            display: block;
+            opacity: 0;
+            transform: translateY(0.625rem);
+            animation: ds-soft-in 0.64s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .ds-body-left  .ds-body-line:nth-child(1) { animation-delay: 1.16s; }
+        .ds-body-left  .ds-body-line:nth-child(2) { animation-delay: 1.28s; }
+        .ds-body-left  .ds-body-line:nth-child(3) { animation-delay: 1.40s; }
+        .ds-body-right .ds-body-line:nth-child(1) { animation-delay: 1.56s; }
+        .ds-body-right .ds-body-line:nth-child(2) { animation-delay: 1.68s; }
+        .ds-body-right .ds-body-line:nth-child(3) { animation-delay: 1.80s; }
+
+        /* CTA */
+        .ds-cta {
+            position: absolute;
+            left: 6.875rem;
+            top: 55.3125rem;
+            display: inline-block;
+            font-size: 1.625rem;
+            color: #000;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1;
+            opacity: 0;
+            transform: translateY(0.75rem);
+            animation: ds-soft-in 0.64s cubic-bezier(0.22, 0.61, 0.36, 1) 2.0s forwards;
+        }
+
+        .ds-cta::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 1.8125rem;
+            width: 13.0625rem;
+            height: 0.0625rem;
+            background: #000;
+        }
+
+        /* ── Keyframes ── */
+        @keyframes ds-title-in {
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        @keyframes ds-soft-in {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes ds-photo-in {
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ds-title,
+            .ds-body-line,
+            .ds-cta,
+            .ds-photo {
+                animation: none;
+                opacity: 1;
+                transform: none;
+                filter: none;
+            }
+        }
+
+        /* ── Onze diensten title section ── */
+        .ds-section2 {
+            position: relative;
+            width: 90rem;
+            height: 21.25rem;
+            margin: 13.375rem auto 0;
+            overflow: hidden;
+            background: #f8f4f0;
+        }
+
+        .ds-section2-title {
+            position: absolute;
+            left: 25.5625rem;
+            top: 4.625rem;
+            margin: 0;
+            font-weight: 400;
+            font-size: 6.875rem;
+            line-height: 1;
+            white-space: nowrap;
+            color: #000;
+            opacity: 0;
+            transform: translateY(1.25rem);
+            filter: blur(0.375rem);
+            transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        filter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .ds-section2-title.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        .ds-section2-script {
+            position: absolute;
+            left: 18.875rem;
+            top: 9.5356rem;
+            width: 54.3917rem;
+            height: 6.6206rem;
+            max-width: none;
+            display: block;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ds-section2-title {
+                transition: none;
+                opacity: 1;
+                transform: none;
+                filter: none;
+            }
+        }
+
+        /* ── Section 1 Diensten ── */
+        .svc {
+            position: relative;
+            width: 90rem;
+            height: 198.625rem;
+            margin: 0 auto;
+            overflow: hidden;
+            background: #f8f4f0;
+        }
+
+        /* Numbers 01 / 02 / 03 (SVG images) */
+        .svc-num-img {
+            position: absolute;
+            display: block;
+            max-width: none;
+            z-index: 1;
+        }
+
+        /* Red script SVG (Van pop…, Van schets…, Van twijfel…) */
+        .svc-script {
+            position: absolute;
+            max-width: none;
+            display: block;
+        }
+
+        /* Service photos */
+        .svc-photo {
+            position: absolute;
+            object-fit: cover;
+            display: block;
+            box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+        }
+
+        /* Service labels — Songwriting / Producing / Consulting */
+        .svc-label {
+            position: absolute;
+            margin: 0;
+            font-weight: 400;
+            font-size: 4.25rem;
+            line-height: normal;
+            color: #000;
+            white-space: nowrap;
+        }
+
+        /* Body text */
+        .svc-body {
+            position: absolute;
+            margin: 0;
+            width: 31rem;
+            font-size: 1.625rem;
+            line-height: 1.5;
+        }
+
+        .svc-body-line {
+            display: block;
+        }
+
+        /* CTAs */
+        .svc-cta {
+            position: absolute;
+            display: inline-block;
+            font-size: 1.625rem;
+            color: #000;
+            text-decoration: none;
+            white-space: nowrap;
+            line-height: 1;
+        }
+
+        .svc-cta::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 1.8125rem;
+            width: var(--ul-w, 12.5rem);
+            height: 0.0625rem;
+            background: #000;
+        }
+
+        /* ── svc animation — initial hidden states ── */
+        .svc-label {
+            opacity: 0;
+            transform: translateY(0.875rem);
+            transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .svc-cta {
+            opacity: 0;
+            transform: translateY(0.875rem);
+            transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .svc-body-line {
+            opacity: 0;
+            transform: translateY(0.625rem);
+            transition: opacity 0.64s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.64s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .svc-photo {
+            opacity: 0;
+            transform: scale(1.04) translateY(0.625rem);
+            transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ── svc animation — visible states ── */
+        .svc-label.is-visible,
+        .svc-cta.is-visible,
+        .svc-body-line.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .svc-photo.is-visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .svc-label, .svc-cta,
+            .svc-body-line, .svc-photo {
+                transition: none;
+                opacity: 1;
+                transform: none;
+                filter: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="ds-hero">
+        <h1 class="ds-title">Van gevoel naar geluid</h1>
+
+        <img class="ds-script"
+             data-src="./Schrijfstijn%20home%20page/waar-woorden-muziek-worden.svg"
+             alt="Waar woorden muziek worden">
+
+        <img class="ds-photo"
+             src="./Schrijfstijn%20home%20page/112piano.png"
+             alt="Stijn Bouvé aan de piano">
+
+        <p class="ds-body-left">
+            <span class="ds-body-line">Lorem ispum lorem ipsum Lorem ispum lorem ipsum</span>
+            <span class="ds-body-line">Lorem ispum lorem ipsum Lorem ispum lorem</span>
+            <span class="ds-body-line">lorem ipsum lorem ipsum</span>
+        </p>
+
+        <p class="ds-body-right">
+            <span class="ds-body-line">Lorem ispum lorem ipsum Lorem ispum lorem ipsum</span>
+            <span class="ds-body-line">Lorem ispum lorem ipsum Lorem ispum lorem</span>
+            <span class="ds-body-line">lorem ipsum lorem ipsum</span>
+        </p>
+
+        <a class="ds-cta" href="#">Start een aanvraag →</a>
+    </section>
+
+    <section class="ds-section2">
+        <h2 class="ds-section2-title">Onze diensten</h2>
+
+        <img class="ds-section2-script"
+             data-src="./Schrijfstijn%20home%20page/van-idee-tot-afgewerkt-geluid.svg"
+             alt="Van idee tot afgewerkt geluid">
+    </section>
+
+    <section class="svc">
+        <!-- ── Block 1: Songwriting ── -->
+        <img class="svc-num-img"    data-block="1"
+             data-src="./Schrijfstijn%20home%20page/01-diensten.svg"
+             alt="01"
+             style="left:3.5625rem;top:9.875rem;width:6.6875rem;height:5.1875rem;">
+
+        <img class="svc-photo"      data-block="1"
+             src="./Schrijfstijn%20home%20page/svc-songwriting.jpg"
+             alt="Songwriting"
+             style="left:6.875rem;top:12.4375rem;width:32.3125rem;height:43.8125rem;">
+
+        <img class="svc-script"     data-block="1"
+             data-src="./Schrijfstijn%20home%20page/van-pop-tot-pure-emotie.svg"
+             alt="Van pop tot pure emotie"
+             style="left:56.6875rem;top:17.1875rem;width:26rem;height:4.0625rem;">
+
+        <p class="svc-body" style="left:48.125rem;top:31.1875rem;">
+            <span class="svc-body-line" data-block="1">Lorem ispum lorem ipsum Lorem ispum lorem ipsum lorem ipsumLorem ispum lorem</span>
+            <span class="svc-body-line" data-block="1">lorem ipsum lorem ipsum Lorem ispum lorem ipsumLorem ispum lorem lorem ipsum lorem ipsum lorem ipsum Lorem ispum lorem</span>
+        </p>
+
+        <p class="svc-label"        data-block="1" style="left:22.875rem;top:53.0625rem;">Songwriting</p>
+
+        <a class="svc-cta"          data-block="1"
+           style="left:69.375rem;top:53.0625rem;--ul-w:12.5rem;"
+           href="#">Start songwriting →</a>
+
+        <!-- ── Block 2: Producing ── -->
+        <img class="svc-num-img"    data-block="2"
+             data-src="./Schrijfstijn%20home%20page/02-diensten.svg"
+             alt="02"
+             style="left:79.6875rem;top:72.5rem;width:7.9375rem;height:5.0625rem;">
+
+        <img class="svc-script"     data-block="2"
+             data-src="./Schrijfstijn%20home%20page/van-schets-tot-volle-productie.svg"
+             alt="Van schets tot volle productie"
+             style="left:5.8125rem;top:79.9375rem;width:32.25rem;height:4.125rem;">
+
+        <img class="svc-photo"      data-block="2"
+             src="./Schrijfstijn%20home%20page/svc-producing.jpg"
+             alt="Producing"
+             style="left:51rem;top:75rem;width:32.625rem;height:44.1875rem;">
+
+        <p class="svc-body" style="left:12.0625rem;top:91.375rem;">
+            <span class="svc-body-line" data-block="2">Lorem ispum lorem ipsum Lorem ispum lorem ipsum lorem ipsumLorem ispum lorem</span>
+            <span class="svc-body-line" data-block="2">lorem ipsum lorem ipsum Lorem ispum lorem ipsumLorem ispum lorem lorem ipsum lorem ipsum lorem ipsum Lorem ispum lorem</span>
+        </p>
+
+        <p class="svc-label"        data-block="2" style="left:47.0625rem;top:116.125rem;">Producing</p>
+
+        <a class="svc-cta"          data-block="2"
+           style="left:7.8125rem;top:114.9375rem;--ul-w:11.4375rem;"
+           href="#">Start producing →</a>
+
+        <!-- ── Block 3: Consulting ── -->
+        <img class="svc-num-img"    data-block="3"
+             data-src="./Schrijfstijn%20home%20page/03-diensten.svg"
+             alt="03"
+             style="left:35.4375rem;top:135.5625rem;width:7.75rem;height:5.0625rem;">
+
+        <img class="svc-photo"      data-block="3"
+             src="./Schrijfstijn%20home%20page/svc-consulting.jpg"
+             alt="Consulting"
+             style="left:6.875rem;top:138.0625rem;width:32.411rem;height:44.3125rem;">
+
+        <img class="svc-script"     data-block="3"
+             data-src="./Schrijfstijn%20home%20page/van-twijfel-naar-duidelijkheid.svg"
+             alt="Van twijfel naar duidelijkheid"
+             style="left:49.875rem;top:143.0625rem;width:34.625rem;height:4.125rem;">
+
+        <p class="svc-body" style="left:48.125rem;top:156.375rem;">
+            <span class="svc-body-line" data-block="3">Lorem ispum lorem ipsum Lorem ispum lorem ipsum lorem ipsumLorem ispum lorem</span>
+            <span class="svc-body-line" data-block="3">lorem ipsum lorem ipsum Lorem ispum lorem ipsumLorem ispum lorem lorem ipsum lorem ipsum lorem ipsum Lorem ispum lorem</span>
+        </p>
+
+        <p class="svc-label"        data-block="3" style="left:24.875rem;top:179rem;">Consulting</p>
+
+        <a class="svc-cta"          data-block="3"
+           style="left:46.0625rem;top:176.8125rem;--ul-w:11.875rem;"
+           href="#">Start consultatie →</a>
+    </section>
+
+    <script>
+        // Hero SVG — trigger immediately so SMIL starts fresh at page load (begin="0.5s")
+        (function () {
+            var heroScript = document.querySelector('.ds-script');
+            if (!heroScript || !heroScript.dataset.src) return;
+            heroScript.src = heroScript.dataset.src;
+            heroScript.removeAttribute('data-src');
+            heroScript.style.visibility = 'visible';
+        })();
+
+        // Section 2 — trigger when scrolled into view
+        (function () {
+            var section = document.querySelector('.ds-section2');
+            var title   = document.querySelector('.ds-section2-title');
+            var script  = document.querySelector('.ds-section2-script');
+
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            function setSrc(el) {
+                if (!el || !el.dataset.src) return;
+                el.src = el.dataset.src;
+                el.removeAttribute('data-src');
+                el.style.visibility = 'visible';
+            }
+
+            if (prefersReduced) {
+                if (title) title.classList.add('is-visible');
+                setSrc(script);
+                return;
+            }
+
+            var triggered = false;
+            var io = new IntersectionObserver(function (entries) {
+                if (triggered || !entries[0].isIntersecting) return;
+                triggered = true;
+                title.classList.add('is-visible');
+                setTimeout(function () { setSrc(script); }, 630);
+                io.disconnect();
+            }, { threshold: 0.15 });
+
+            io.observe(section);
+        })();
+
+        // Section 1 Diensten — one observer on .svc, single cascade revealing all 3 blocks
+        (function () {
+            var section = document.querySelector('.svc');
+            if (!section) return;
+
+            function show(el) { if (el) el.classList.add('is-visible'); }
+
+            function setSrc(el) {
+                if (!el || !el.dataset.src) return;
+                el.src = el.dataset.src;
+                el.removeAttribute('data-src');
+                el.style.visibility = 'visible';
+            }
+
+            function q(cls, block) {
+                return document.querySelector('.' + cls + '[data-block="' + block + '"]');
+            }
+
+            function qa(cls, block) {
+                return document.querySelectorAll('.' + cls + '[data-block="' + block + '"]');
+            }
+
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (prefersReduced) {
+                [1, 2, 3].forEach(function (b) {
+                    setSrc(q('svc-num-img', b));
+                    setSrc(q('svc-script',  b));
+                    show(q('svc-photo', b));
+                    show(q('svc-label', b));
+                    show(q('svc-cta',   b));
+                    Array.from(qa('svc-body-line', b)).forEach(show);
+                });
+                return;
+            }
+
+            var triggered = false;
+            var io = new IntersectionObserver(function (entries) {
+                if (triggered || !entries[0].isIntersecting) return;
+                triggered = true;
+                io.disconnect();
+
+                var T   = 1400;  // base delay before first block starts
+                var gap = 1320;  // gap between blocks
+
+                [1, 2, 3].forEach(function (b, i) {
+                    var base = T + i * gap;
+                    var photo = q('svc-photo',   b);
+                    var num   = q('svc-num-img', b);
+                    var script = q('svc-script', b);
+                    var label = q('svc-label',   b);
+                    var cta   = q('svc-cta',     b);
+                    var lines = qa('svc-body-line', b);
+
+                    // photo (+0ms): show + also set num src so SMIL fires (num has SMIL begin="0.5s")
+                    setTimeout(function () { show(photo); }, base + 0);
+                    // num (+300ms): reveal number image src
+                    setTimeout(function () { setSrc(num); }, base + 300);
+                    // body lines (+500ms then staggered 120ms)
+                    Array.from(lines).forEach(function (line, li) {
+                        setTimeout(function () { show(line); }, base + 500 + li * 120);
+                    });
+                    // label (+700ms)
+                    setTimeout(function () { show(label); }, base + 700);
+                    // cta (+900ms) — also kick script SVG here (~630-700ms after title)
+                    setTimeout(function () { show(cta); }, base + 900);
+                    setTimeout(function () { setSrc(script); }, base + 700);
+                });
+            }, { threshold: 0.15 });
+
+            io.observe(section);
+        })();
+    </script>
+</body>
+</html>

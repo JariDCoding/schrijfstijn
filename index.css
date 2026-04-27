@@ -1,0 +1,1017 @@
+html {
+    font-size: clamp(16px, min(1.1111vw, 1.4815vh), 42.667px);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f8f4f0;
+    font-family: "Cormorant Garamond", serif;
+    font-weight: 400;
+    color: #000;
+    line-height: normal;
+    -webkit-font-smoothing: antialiased;
+}
+
+.hero {
+    position: relative;
+    width: 90rem;
+    height: 58.125rem;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.hero-title {
+    position: absolute;
+    left: 8.125rem;
+    top: 13.5625rem;
+    margin: 0;
+    font-weight: 400;
+    font-size: 11.125rem;
+    line-height: 1;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(1.5rem);
+    filter: blur(0.5rem);
+    animation: hero-title-in 0.77s cubic-bezier(0.22, 0.61, 0.36, 1) 0.08s forwards;
+}
+
+.schrijfstijn-icon {
+    position: absolute;
+    left: 8.4625rem;
+    top: 21.4169rem;
+    width: 25.4576rem;
+    height: 8.5644rem;
+    max-width: none;
+}
+
+.hero-body {
+    position: absolute;
+    left: 8.125rem;
+    top: 32.625rem;
+    margin: 0;
+    font-size: 1.625rem;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.hero-body-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(0.625rem);
+    animation: hero-soft-in 0.64s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+}
+
+.hero-body-line:nth-child(1) { animation-delay: 1.16s; }
+.hero-body-line:nth-child(2) { animation-delay: 1.28s; }
+.hero-body-line:nth-child(3) { animation-delay: 1.40s; }
+
+.hero-cta {
+    position: absolute;
+    left: 8.125rem;
+    top: 44.1875rem;
+    display: inline-block;
+    font-size: 1.625rem;
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(0.75rem);
+    animation: hero-soft-in 0.64s cubic-bezier(0.22, 0.61, 0.36, 1) 2.32s forwards;
+}
+
+.hero-cta::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 1.8125rem;
+    width: 13.0625rem;
+    height: 0.0625rem;
+    background: #000;
+}
+
+.hero-photo {
+    position: absolute;
+    left: 48.25rem;
+    top: 32.4375rem;
+    width: 35.5rem;
+    height: 20.9375rem;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transform: scale(1.04) translateY(0.625rem);
+    animation: hero-photo-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
+}
+
+@keyframes hero-title-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes hero-soft-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hero-photo-in {
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-title,
+    .hero-body-line,
+    .hero-cta,
+    .hero-photo {
+        animation: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}
+
+/* ─── Services section ─────────────────────────────────────────── */
+
+.services {
+    position: relative;
+    width: 90rem;
+    height: 81.875rem;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+/* Title */
+.services-title {
+    position: absolute;
+    left: 22.75rem;
+    top: 10.4375rem;
+    margin: 0;
+    font-weight: 400;
+    font-size: 4.25rem;
+    line-height: 1;
+    white-space: nowrap;
+    color: #000;
+    /* animate in */
+    opacity: 0;
+    transform: translateY(1.25rem);
+    filter: blur(0.375rem);
+    transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                filter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Red cursive subtitle "Songwriting met gevoel" — animated by SMIL */
+.services-script {
+    position: absolute;
+    left: 26.1125rem;
+    top: 12.875rem;
+    width: 38.8557rem;
+    height: 6.0188rem;
+    max-width: none;
+    display: block;
+}
+
+/* Photos — match hero-photo: expo-out curve + scale(1.04), same brand feel */
+.services-photo {
+    position: absolute;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transform: scale(1.04) translateY(0.625rem);
+    transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.services-photo-01 { left: 11.125rem; top: 42rem; width: 15.4375rem; height: 31.375rem; }
+.services-photo-02 { left: 37.875rem; top: 33.5rem; width: 16.5625rem; height: 34.0625rem; }
+.services-photo-03 { left: 63.625rem; top: 39.3125rem; width: 15.4375rem; height: 32rem; }
+
+/* Script numbers 01 / 02 / 03 — hover over photos, animated by SMIL */
+.services-num {
+    position: absolute;
+    display: block;
+    max-width: none;
+    z-index: 1;
+}
+
+/* Hide data-src images until JS sets src — prevents broken-image placeholder.
+   Visibility is restored when JS removes the data-src attribute after the swap. */
+.services img[data-src] {
+    visibility: hidden;
+}
+
+.services-num-01 { left: 8.5rem; top: 40.125rem; width: 3.7448rem; height: 2.8813rem; }
+.services-num-02 { left: 35.25rem; top: 31.6875rem; width: 4.4385rem; height: 2.8125rem; }
+.services-num-03 { left: 61rem; top: 37.5rem; width: 4.3198rem; height: 2.8188rem; }
+
+/* Service labels — Figma-exact positions (label straddles photo bottom edge) */
+.services-label {
+    position: absolute;
+    margin: 0;
+    font-weight: 400;
+    font-size: 2.625rem;
+    line-height: 1;
+    white-space: nowrap;
+    color: #000;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* label midline = photo bottom edge (half-on / half-off the photo) */
+.services-label-01 { left: 16.4375rem;  top: 72.0625rem; transition-delay: 0.22s; }
+.services-label-02 { left: 46.25rem;  top: 66.25rem; transition-delay: 0.38s; }
+.services-label-03 { left: 70.0625rem; top: 70rem; transition-delay: 0.54s; }
+
+/* CTAs — plain text link + underline (Figma exact positions) */
+.services-cta {
+    position: absolute;
+    font-size: 1rem;
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(0.625rem);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.services-cta::after {
+    content: "";
+    display: block;
+    margin-top: 0.1875rem;
+    width: 6.125rem;
+    height: 0.0625rem;
+    background: #000;
+}
+
+/* 16px below label bottom (label top + 42 + 16) */
+.services-cta-01 { left: 11.125rem;  top: 75.6875rem; transition-delay: 0.32s; }
+.services-cta-02 { left: 37.875rem;  top: 69.875rem; transition-delay: 0.48s; }
+.services-cta-03 { left: 63.625rem; top: 73.625rem; transition-delay: 0.64s; }
+
+/* ── Visible state — both class-based (JS sequential) and section-class (fallback) ── */
+.services--visible .services-title,
+.services-title.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+.services--visible .services-photo,
+.services-photo.is-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.services--visible .services-label,
+.services-label.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.services--visible .services-cta,
+.services-cta.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* When JS adds .is-visible it handles delay itself — clear CSS delay so they don't double-stack */
+.services-photo.is-visible,
+.services-label.is-visible,
+.services-cta.is-visible {
+    transition-delay: 0s;
+}
+
+/* prefers-reduced-motion override */
+@media (prefers-reduced-motion: reduce) {
+    .services-title,
+    .services-photo {
+        transition: none;
+        animation: none;
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: none;
+        clip-path: none;
+    }
+    .services-label,
+    .services-cta {
+        transition: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+        clip-path: none;
+    }
+}
+
+/* ─── Over Schrijfstijn section ────────────────────────────────── */
+
+.about {
+    position: relative;
+    width: 90rem;
+    height: 58.125rem;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.about-title {
+    position: absolute;
+    left: 9.375rem;
+    top: 6.25rem;
+    margin: 0;
+    font-weight: 400;
+    font-size: 4.25rem;
+    line-height: 1;
+    white-space: nowrap;
+    color: #000;
+    opacity: 0;
+    transform: translateY(1.25rem);
+    filter: blur(0.375rem);
+    transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                filter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* SVG "De persoon achter de songteksten" — animated by SMIL */
+.about-script {
+    position: absolute;
+    left: 8.7375rem;
+    top: 8.6563rem;
+    width: 52.7299rem;
+    height: 6.0313rem;
+    max-width: none;
+    display: block;
+}
+
+.about-photo {
+    position: absolute;
+    left: 11.25rem;
+    top: 25.8125rem;
+    width: 20.375rem;
+    height: 29.125rem;
+    object-fit: cover;
+    display: block;
+    opacity: 0;
+    transform: scale(1.04) translateY(0.625rem);
+    transition: opacity 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-name {
+    position: absolute;
+    left: 42.4375rem;
+    top: 25.8125rem;
+    margin: 0;
+    font-weight: 400;
+    font-size: 2.625rem;
+    line-height: 1;
+    white-space: nowrap;
+    color: #000;
+    opacity: 0;
+    transform: translateY(0.875rem);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.about-alias {
+    position: absolute;
+    left: 42.4375rem;
+    top: 29.4375rem;
+    margin: 0;
+    font-family: "Italianno", serif;
+    font-weight: 400;
+    font-size: 2.625rem;
+    line-height: 1;
+    white-space: nowrap;
+    color: #525252;
+    opacity: 0;
+    transform: translateY(0.875rem);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.about-body {
+    position: absolute;
+    left: 42.4375rem;
+    top: 36.3125rem;
+    margin: 0;
+    font-size: 1.625rem;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+
+.about-body-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(0.625rem);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* body-line delays removed — JS handles sequencing */
+
+.about-cta {
+    position: absolute;
+    left: 42.4375rem;
+    top: 47.875rem;
+    font-size: 1.625rem;
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(0.625rem);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.about-cta::after {
+    content: "";
+    display: block;
+    margin-top: 0.1875rem;
+    width: 9.8125rem;
+    height: 0.0625rem;
+    background: #000;
+}
+
+/* ── Visible state (IntersectionObserver) ── */
+.about--visible .about-title {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+.about--visible .about-photo {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+.about--visible .about-name,
+.about--visible .about-alias {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about--visible .about-body-line {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about--visible .about-cta {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── JS individual is-visible (sequential reveal) ── */
+.about-title.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+.about-photo.is-visible     { opacity: 1; transform: scale(1) translateY(0); }
+.about-name.is-visible,
+.about-alias.is-visible,
+.about-body-line.is-visible,
+.about-cta.is-visible       { opacity: 1; transform: translateY(0); }
+
+/* Hide about-script until JS sets src — prevents broken placeholder */
+.about img[data-src] { visibility: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+    .about-title,
+    .about-photo,
+    .about-name,
+    .about-alias,
+    .about-body-line,
+    .about-cta {
+        transition: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+}
+
+/* ─── Waarom Schrijfstijn section ──────────────────────────────── */
+
+.waarom {
+    position: relative;
+    width: 90rem;
+    height: 88.75rem;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.waarom-title {
+    position: absolute;
+    left: 7.4375rem;
+    top: 2.625rem;
+    margin: 0;
+    font-weight: 400;
+    font-size: 4.25rem;
+    line-height: 1;
+    white-space: nowrap;
+    color: #000;
+    opacity: 0;
+    transform: translateY(1.25rem);
+    filter: blur(0.375rem);
+    transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                filter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Red cursive "Passie, kennis, begrip, efficiënt" — SMIL animated SVG */
+.waarom-script {
+    position: absolute;
+    left: 7.4438rem;
+    top: 5.675rem;
+    width: 49.3898rem;
+    height: 6.0125rem;
+    max-width: none;
+    display: block;
+}
+
+/* Portrait center — mask clips to 272×466px visible area at offset (74,7)
+   Container: left=560, top=420, w=447, h=579
+   Visible area: left=560+74=634, top=420+7=427, w=272, h=466
+   clip-path inset(top right bottom left): top=7, right=447-346=101, bottom=579-473=106, left=74 */
+.waarom-photo {
+    position: absolute;
+    left: 35rem;
+    top: 26.25rem;
+    width: 27.9375rem;
+    height: 36.1875rem;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    clip-path: inset(0.4375rem 6.3125rem 6.625rem 4.625rem);
+    opacity: 0;
+    transform: scale(1.04) translateY(0.75rem);
+    transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Left content */
+.waarom-heading {
+    position: absolute;
+    left: 6.0625rem;
+    top: 24.5rem;
+    margin: 0;
+    font-weight: 400;
+    font-size: 2.625rem;
+    line-height: 1;
+    color: #000;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(0.875rem);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.waarom-subheading {
+    position: absolute;
+    left: 6.0625rem;
+    top: 27.75rem;
+    margin: 0;
+    font-family: "Italianno", serif;
+    font-weight: 400;
+    font-size: 2.625rem;
+    line-height: 1;
+    color: #525252;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(0.875rem);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.waarom-body {
+    position: absolute;
+    left: 5.9375rem;
+    top: 38.25rem;
+    margin: 0;
+    font-size: 1.625rem;
+    line-height: 1.5;
+    max-width: 26.8125rem;
+}
+
+.waarom-body-line {
+    display: block;
+    opacity: 0;
+    transform: translateY(0.625rem);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* body-line delays removed — JS handles sequencing */
+
+.waarom-cta {
+    position: absolute;
+    left: 5.9375rem;
+    top: 55.75rem;
+    font-size: 1.625rem;
+    color: #000;
+    text-decoration: none;
+    white-space: nowrap;
+    line-height: 1;
+    opacity: 0;
+    transform: translateY(0.625rem);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.waarom-cta::after {
+    content: "";
+    display: block;
+    margin-top: 0.1875rem;
+    width: 13.0625rem;
+    height: 0.0625rem;
+    background: #000;
+}
+
+/* Stats */
+.waarom-stat-num {
+    position: absolute;
+    display: block;
+    max-width: none;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.waarom-stat-num-1 { left: 63.8713rem; top: 23.5588rem; width: 4.9695rem;  height: 3.0938rem;  }
+.waarom-stat-num-2 { left: 70.1325rem; top: 37.8506rem; width: 7.9531rem; height: 3.1488rem; }
+.waarom-stat-num-3 { left: 63.5rem;    top: 51.1594rem; width: 11.7184rem; height: 4.3244rem; }
+
+.waarom-stat-label {
+    position: absolute;
+    margin: 0;
+    font-size: 1.625rem;
+    line-height: 1;
+    color: #000;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(0.625rem);
+    transition: opacity 0.7s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.waarom-stat-label-1 { left: 64.0075rem; top: 26.875rem; }
+.waarom-stat-label-2 { left: 70.3788rem; top: 41.1875rem; }
+.waarom-stat-label-3 { left: 64.0075rem; top: 55.5rem; }
+
+/* Bottom trusted */
+.waarom-trusted {
+    position: absolute;
+    left: 35.6875rem;
+    top: 66.5625rem;
+    margin: 0;
+    font-family: "Italianno", serif;
+    font-size: 4.25rem;
+    line-height: 1;
+    color: #000;
+    opacity: 0;
+    transform: translateY(1rem);
+    transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.waarom-logo {
+    position: absolute;
+    top: 77.875rem;
+    width: 13.75rem;
+    height: 6.4375rem;
+    object-fit: contain;
+    display: block;
+    opacity: 0;
+    transform: translateY(0.875rem);
+    transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.waarom-logo-1 { left: 32.9375rem;  }
+.waarom-logo-2 { left: 80.9375rem; }
+
+/* ── Visible state ── */
+.waarom--visible .waarom-title {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+.waarom--visible .waarom-photo {
+    opacity: 0.8;
+    transform: scale(1) translateY(0);
+}
+
+.waarom--visible .waarom-heading,
+.waarom--visible .waarom-subheading,
+.waarom--visible .waarom-cta,
+.waarom--visible .waarom-trusted {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.waarom--visible .waarom-body-line,
+.waarom--visible .waarom-stat-num,
+.waarom--visible .waarom-stat-label,
+.waarom--visible .waarom-logo {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── JS individual is-visible (sequential reveal) ── */
+.waarom-title.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+.waarom-photo.is-visible { opacity: 0.8; transform: scale(1) translateY(0); }
+.waarom-heading.is-visible,
+.waarom-subheading.is-visible,
+.waarom-cta.is-visible,
+.waarom-trusted.is-visible     { opacity: 1; transform: translateY(0); }
+.waarom-body-line.is-visible,
+.waarom-stat-num.is-visible,
+.waarom-stat-label.is-visible,
+.waarom-logo.is-visible        { opacity: 1; transform: translateY(0); }
+
+/* Hide data-src elements until JS sets src */
+.waarom img[data-src] { visibility: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+    .waarom-title,
+    .waarom-photo,
+    .waarom-heading,
+    .waarom-subheading,
+    .waarom-body-line,
+    .waarom-cta,
+    .waarom-stat-num,
+    .waarom-stat-label,
+    .waarom-trusted,
+    .waarom-logo {
+        transition: none;
+        opacity: 1;
+        transform: none;
+        filter: none;
+    }
+    .waarom-photo {
+        opacity: 0.8;
+        clip-path: none;
+    }
+}
+
+/* ─── Wide-screen alignment: left-align all sections on viewports > 1440px ── */
+@media (min-width: 1441px) {
+    .hero,
+    .services,
+    .about,
+    .waarom,
+    .wf-wrap,
+    .wf-sticky {
+        margin-left: 0;
+        margin-right: auto;
+    }
+}
+
+/* ─── Visual section spacing ─────────────────────────────────────
+   Rule: measure from bottommost visible element of section A
+         to topmost visible element of section B.
+
+   hero (photo bottom @ 854px, section h=930 → dead=76px)
+   ↓  288px visual  →  services title @ 167px  →  margin: 76+45+167=288 ✓
+   services (CTA-01 text bottom @ 1227px, h=1310 → dead=83px)
+   ↓  178px visual  →  about title @ 100px      →  margin: 83+(−5)+100=178 ✓
+   about (photo bottom @ 858px, h=930 → dead=72px)
+   ↓  178px visual  →  waarom title @ 42px      →  margin: 72+64+42=178 ✓
+   waarom (logo bottom @ 1349px, h=1420 → dead=71px)
+   ↓  178px visual  →  wf-title @ 18vh≈162px   →  margin: 71+(−55)+162=178 ✓
+   ─────────────────────────────────────────────────────────────── */
+.services { margin-top:  2.8125rem; }
+.about    { margin-top:  -0.3125rem; }
+.waarom   { margin-top: 12.1875rem; }
+.wf-wrap  { margin-top: -3.4375rem; }
+
+/* ─── Workflow: scroll-pinned 6-step section ────────────────────── */
+
+/* Outer wrapper — tall enough for 6 scroll steps */
+.wf-wrap {
+    position: relative;
+    width: 90rem;
+    /* 100vh * 8 = 1 intro hold + 6 step scrolls */
+    height: calc(100vh * 8);
+}
+
+/* The sticky panel — always 100vh tall */
+.wf-sticky {
+    position: sticky;
+    top: calc(6.875rem - 27vh);
+    width: 90rem;
+    height: 100vh;
+    min-height: 53.75rem;
+    overflow: hidden;
+    background: #f8f4f0;
+}
+
+/* Section title — lower in viewport (~27vh), pure vh so it scales on any screen */
+.wf-title {
+    position: absolute;
+    left: 6.4375rem;
+    top: 27vh;
+    margin: 0;
+    font-weight: 400;
+    font-size: 4.25rem;
+    line-height: 1;
+    white-space: nowrap;
+    color: #000;
+}
+
+/* Red cursive subtitle — overlaps title baseline, 67px below title top */
+.wf-subtitle-svg {
+    position: absolute;
+    left: 6.4956rem;
+    top: calc(27vh + 4.1875rem);
+    width: 33.39rem;
+    height: 4.0928rem;
+    max-width: none;
+    display: block;
+}
+
+/* Hide subtitle SVG until JS sets src */
+.wf-sticky img[data-src] { visibility: hidden; }
+
+/* Progress bar track — top: 44vh, bottom anchored to step content top.
+   Step content = 151px (50.71 num + 22 gap + 78 body×2).
+   Step area top = 97vh - 151px → bar height = (97vh - 151px) - 44vh = calc(53vh - 151px) */
+.wf-bar-track {
+    position: absolute;
+    left: 5.8125rem;
+    top: 44vh;
+    width: 0.1875rem;
+    height: calc(53vh - 9.4375rem);
+    border-radius: 6.25rem;
+    background: rgba(217, 217, 217, 0.28);
+}
+
+/* Progress bar fill (JS-driven height) */
+.wf-bar-fill {
+    position: absolute;
+    left: 5.8125rem;
+    top: 44vh;
+    width: 0.1875rem;
+    height: 0;
+    border-radius: 6.25rem;
+    background: #525252;
+    transition: height 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+/* Step indicator dots — identical span to bar */
+.wf-dots {
+    position: absolute;
+    left: 5.3125rem;
+    top: 44vh;
+    width: 1.1875rem;
+    display: flex;
+    flex-direction: column;
+    height: calc(53vh - 9.4375rem);
+    justify-content: space-between;
+    padding: 0;
+    pointer-events: none;
+}
+
+.wf-dot {
+    width: 0.4375rem;
+    height: 0.4375rem;
+    border-radius: 50%;
+    background: rgba(217, 217, 217, 0.5);
+    align-self: center;
+    transition: background 0.35s, transform 0.35s;
+    transform: scale(1);
+}
+
+.wf-dot.is-active {
+    background: #525252;
+    transform: scale(1.4);
+}
+
+/* Step content area — bottom-anchored so body text always fits within viewport.
+   Content bottom sits 3vh from viewport bottom → bottom: calc(3vh + 151px) */
+.wf-step-area {
+    position: absolute;
+    left: 3.5625rem;
+    bottom: calc(3vh + 9.4375rem);
+    width: 33.75rem;
+}
+
+.wf-step {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(0.875rem);
+    transition: opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+                transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+    pointer-events: none;
+}
+
+.wf-step.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Step number + title row — Figma: num left 57, title left 161 → gap 38px */
+.wf-step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.375rem;
+    margin-bottom: 0;
+}
+
+/* Step num — Figma: 65.91×50.71px */
+.wf-step-num {
+    font-family: "Italianno", serif;
+    font-size: 4.0625rem;
+    color: #D53212;
+    line-height: 0.78;
+    white-space: nowrap;
+    display: block;
+    width: 4.1194rem;
+    height: 3.1694rem;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+/* Step title — Figma: font-size 42px */
+.wf-step-title {
+    margin: 0;
+    font-weight: 400;
+    font-size: 2.625rem;
+    line-height: 1;
+    color: #000;
+    white-space: nowrap;
+}
+
+/* Step body — Figma: left 93px (= step-area left 57 + 36), top 992px (= 73px below num top) */
+.wf-step-body {
+    margin: 1.375rem 0 0 2.25rem;
+    font-size: 1.625rem;
+    line-height: 1.5;
+    color: #000;
+    max-width: 27.3125rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Right image area — top 28vh, height = 20% more than original 64vh-151px */
+.wf-image-area {
+    position: absolute;
+    left: 38.6875rem;
+    top: 28vh;
+    right: 6.875rem;
+    height: calc(76.8vh - 11.325rem);
+}
+
+.wf-image-slot {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.wf-image-slot.is-active {
+    opacity: 1;
+}
+
+/* Placeholder box — user replaces content with <img> */
+.wf-image-ph {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.04);
+    border: 0.0625rem solid rgba(0, 0, 0, 0.08);
+    border-radius: 0.125rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .wf-bar-fill { transition: none; }
+    .wf-step { transition: none; opacity: 1; transform: none; }
+    .wf-image-slot { transition: none; opacity: 0; }
+    .wf-image-slot.is-active { opacity: 1; }
+    .wf-dot { transition: none; }
+}
