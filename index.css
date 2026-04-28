@@ -1,5 +1,5 @@
 html {
-    font-size: clamp(16px, min(1.1111vw, 1.4815vh), 42.667px);
+    font-size: clamp(14px, min(1.0vw, 1.4815vh), 42.667px);
 }
 
 * {
@@ -42,7 +42,7 @@ body {
 .schrijfstijn-icon {
     position: absolute;
     left: 8.4625rem;
-    top: 22.4169rem;
+    top: 21.4794rem;
     width: 25.4576rem;
     height: 8.5644rem;
     max-width: none;
@@ -176,7 +176,7 @@ body {
 .services-script {
     position: absolute;
     left: 26.1125rem;
-    top: 13.356rem;
+    top: 12.4185rem;
     width: 38.8557rem;
     height: 6.0188rem;
     max-width: none;
@@ -350,7 +350,7 @@ body {
 .about-script {
     position: absolute;
     left: 8.7375rem;
-    top: 9.531rem;
+    top: 8.5935rem;
     width: 52.7299rem;
     height: 6.0313rem;
     max-width: none;
@@ -390,7 +390,7 @@ body {
 .about-alias {
     position: absolute;
     left: 42.4375rem;
-    top: 27.1875rem;
+    top: 29rem;
     margin: 0;
     font-family: "Italianno", serif;
     font-weight: 400;
@@ -411,11 +411,11 @@ body {
     margin: 0;
     font-size: 1.625rem;
     line-height: 1.5;
-    max-width: 44rem;
 }
 
 .about-body-line {
     display: block;
+    white-space: nowrap;
     opacity: 0;
     transform: translateY(0.625rem);
     transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
@@ -537,7 +537,7 @@ body {
 .waarom-script {
     position: absolute;
     left: 7.4438rem;
-    top: 5.55rem;
+    top: 4.6125rem;
     width: 49.3898rem;
     height: 6.0125rem;
     max-width: none;
