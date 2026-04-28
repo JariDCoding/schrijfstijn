@@ -42,7 +42,7 @@ body {
 .schrijfstijn-icon {
     position: absolute;
     left: 8.4625rem;
-    top: 21.4169rem;
+    top: 22.4169rem;
     width: 25.4576rem;
     height: 8.5644rem;
     max-width: none;
@@ -51,7 +51,7 @@ body {
 .hero-body {
     position: absolute;
     left: 8.125rem;
-    top: 32.625rem;
+    top: 32.4375rem;
     margin: 0;
     font-size: 1.625rem;
     line-height: 1.5;
@@ -73,7 +73,7 @@ body {
 .hero-cta {
     position: absolute;
     left: 8.125rem;
-    top: 52rem;
+    top: 44.3125rem;
     display: inline-block;
     font-size: 1.625rem;
     color: #000;
@@ -147,7 +147,7 @@ body {
 .services {
     position: relative;
     width: 90rem;
-    height: 81.875rem;
+    height: 87.1875rem;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -176,7 +176,7 @@ body {
 .services-script {
     position: absolute;
     left: 26.1125rem;
-    top: 12.875rem;
+    top: 13.356rem;
     width: 38.8557rem;
     height: 6.0188rem;
     max-width: none;
@@ -212,9 +212,9 @@ body {
     visibility: hidden;
 }
 
-.services-num-01 { left: 8.5rem; top: 40.125rem; width: 3.7448rem; height: 2.8813rem; }
-.services-num-02 { left: 35.25rem; top: 31.6875rem; width: 4.4385rem; height: 2.8125rem; }
-.services-num-03 { left: 61rem; top: 37.5rem; width: 4.3198rem; height: 2.8188rem; }
+.services-num-01 { left: 9.0875rem; top: 39.919rem;  width: 3.7448rem; height: 2.8813rem; }
+.services-num-02 { left: 35.4625rem; top: 31.8625rem; width: 4.4385rem; height: 2.8125rem; }
+.services-num-03 { left: 61.4rem;   top: 37.8rem;   width: 4.3198rem; height: 2.8188rem; }
 
 /* Service labels — Figma-exact positions (label straddles photo bottom edge) */
 .services-label {
@@ -232,9 +232,9 @@ body {
 }
 
 /* label midline = photo bottom edge (half-on / half-off the photo) */
-.services-label-01 { left: 16.4375rem;  top: 72.0625rem; transition-delay: 0.22s; }
-.services-label-02 { left: 46.25rem;  top: 66.25rem; transition-delay: 0.38s; }
-.services-label-03 { left: 70.0625rem; top: 70rem; transition-delay: 0.54s; }
+.services-label-01 { left: 16.4375rem;  top: 71.5rem;    transition-delay: 0.22s; }
+.services-label-02 { left: 46.25rem;   top: 65.5625rem; transition-delay: 0.38s; }
+.services-label-03 { left: 70.0625rem; top: 69.25rem;   transition-delay: 0.54s; }
 
 /* CTAs — plain text link + underline (Figma exact positions) */
 .services-cta {
@@ -260,9 +260,9 @@ body {
 }
 
 /* 16px below label bottom (label top + 42 + 16) */
-.services-cta-01 { left: 11.125rem;  top: 75.6875rem; transition-delay: 0.32s; }
-.services-cta-02 { left: 37.875rem;  top: 69.875rem; transition-delay: 0.48s; }
-.services-cta-03 { left: 63.625rem; top: 73.625rem; transition-delay: 0.64s; }
+.services-cta-01 { left: 11.125rem;  top: 75.5625rem; transition-delay: 0.32s; }
+.services-cta-02 { left: 37.75rem;   top: 69.75rem;  transition-delay: 0.48s; }
+.services-cta-03 { left: 63.5625rem; top: 73.5rem;   transition-delay: 0.64s; }
 
 /* ── Visible state — both class-based (JS sequential) and section-class (fallback) ── */
 .services--visible .services-title,
@@ -323,7 +323,7 @@ body {
 .about {
     position: relative;
     width: 90rem;
-    height: 70rem;
+    height: 68rem;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -350,7 +350,7 @@ body {
 .about-script {
     position: absolute;
     left: 8.7375rem;
-    top: 8.6563rem;
+    top: 9.531rem;
     width: 52.7299rem;
     height: 6.0313rem;
     max-width: none;
@@ -360,7 +360,7 @@ body {
 .about-photo {
     position: absolute;
     left: 11.25rem;
-    top: 25.8125rem;
+    top: 24.5rem;
     width: 20.375rem;
     height: 29.125rem;
     object-fit: cover;
@@ -374,7 +374,7 @@ body {
 .about-name {
     position: absolute;
     left: 42.4375rem;
-    top: 25.8125rem;
+    top: 25.6875rem;
     margin: 0;
     font-weight: 400;
     font-size: 2.625rem;
@@ -390,7 +390,7 @@ body {
 .about-alias {
     position: absolute;
     left: 42.4375rem;
-    top: 29.4375rem;
+    top: 27.1875rem;
     margin: 0;
     font-family: "Italianno", serif;
     font-weight: 400;
@@ -407,7 +407,7 @@ body {
 .about-body {
     position: absolute;
     left: 42.4375rem;
-    top: 36.3125rem;
+    top: 32.25rem;
     margin: 0;
     font-size: 1.625rem;
     line-height: 1.5;
@@ -427,7 +427,7 @@ body {
 .about-cta {
     position: absolute;
     left: 42.4375rem;
-    top: 63rem;
+    top: 47.9375rem;
     font-size: 1.625rem;
     color: #000;
     text-decoration: none;
@@ -510,7 +510,7 @@ body {
 .waarom {
     position: relative;
     width: 90rem;
-    height: 88.75rem;
+    height: 91.25rem;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -537,7 +537,7 @@ body {
 .waarom-script {
     position: absolute;
     left: 7.4438rem;
-    top: 5.675rem;
+    top: 5.55rem;
     width: 49.3898rem;
     height: 6.0125rem;
     max-width: none;
@@ -584,7 +584,7 @@ body {
 .waarom-subheading {
     position: absolute;
     left: 6.0625rem;
-    top: 27.75rem;
+    top: 26rem;
     margin: 0;
     font-family: "Italianno", serif;
     font-weight: 400;
@@ -600,8 +600,8 @@ body {
 
 .waarom-body {
     position: absolute;
-    left: 5.9375rem;
-    top: 38.25rem;
+    left: 6.0625rem;
+    top: 34.125rem;
     margin: 0;
     font-size: 1.625rem;
     line-height: 1.5;
@@ -621,7 +621,7 @@ body {
 .waarom-cta {
     position: absolute;
     left: 5.9375rem;
-    top: 58.5rem;
+    top: 55.75rem;
     font-size: 1.625rem;
     color: #000;
     text-decoration: none;
@@ -814,10 +814,10 @@ body {
         height: 50.625rem; /* 1080px — exactly one viewport */
     }
 
-    .hero-title        { top: 11.8rem;  }   /* 13.5625 × 0.871 */
-    .schrijfstijn-icon { top: 18.65rem; }   /* 21.4169 × 0.871 */
-    .hero-body         { top: 28.4rem;  }   /* 32.625  × 0.871 */
-    .hero-cta          { top: 45.3rem;  }   /* 52 × 0.871 */
+    .hero-title        { top: 11.8rem;   }   /* 13.5625  × 0.871 */
+    .schrijfstijn-icon { top: 19.525rem; }   /* 22.4169  × 0.871 */
+    .hero-body         { top: 28.25rem;  }   /* 32.4375  × 0.871 */
+    .hero-cta          { top: 38.6rem;   }   /* 44.3125  × 0.871 */
     .hero-photo        { top: 28.25rem; height: 18.25rem; } /* top × 0.871, height × 0.871 */
 }
 
@@ -841,23 +841,11 @@ body {
     }
 }
 
-/* ─── Visual section spacing ─────────────────────────────────────
-   Rule: measure from bottommost visible element of section A
-         to topmost visible element of section B.
-
-   hero (photo bottom @ 854px, section h=930 → dead=76px)
-   ↓  288px visual  →  services title @ 167px  →  margin: 76+45+167=288 ✓
-   services (CTA-01 text bottom @ 1227px, h=1310 → dead=83px)
-   ↓  178px visual  →  about title @ 100px      →  margin: 83+(−5)+100=178 ✓
-   about (photo bottom @ 858px, h=930 → dead=72px)
-   ↓  178px visual  →  waarom title @ 42px      →  margin: 72+64+42=178 ✓
-   waarom (logo bottom @ 1349px, h=1420 → dead=71px)
-   ↓  178px visual  →  wf-title @ 18vh≈162px   →  margin: 71+(−55)+162=178 ✓
-   ─────────────────────────────────────────────────────────────── */
-.services { margin-top:  2.8125rem; }
-.about    { margin-top:  -0.3125rem; }
-.waarom   { margin-top: 12.1875rem; }
-.wf-wrap  { margin-top: -3.4375rem; }
+/* ─── Section spacing — matches Figma: sections stack directly, no gaps ─── */
+.services { margin-top: 0; }
+.about    { margin-top: 0; }
+.waarom   { margin-top: 0; }
+.wf-wrap  { margin-top: 0; }
 
 /* ─── Workflow: scroll-pinned 6-step section ────────────────────── */
 
