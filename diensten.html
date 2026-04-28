@@ -353,6 +353,38 @@
                 filter: none;
             }
         }
+
+        /* ── Wide-screen alignment: left-align all sections on viewports > 1440px ── */
+        @media (min-width: 1441px) {
+            .ds-hero,
+            .ds-section2,
+            .svc {
+                margin-left: 0;
+                margin-right: auto;
+            }
+        }
+
+        /* ── 1920 × 1080 optimisation ────────────────────────────────────────────────
+           Root em: 1920 / 90 = 21.333px → 90rem fills exactly 1920px.
+           Hero height compressed to 50.625rem (= 1080px) so the full hero sits in
+           one viewport. All vertical hero positions scaled × 0.8710 (50.625/58.125).
+           ds-section2 and svc scale naturally via rem.                              */
+        @media (min-width: 1920px) and (min-height: 1080px) {
+            html {
+                font-size: 21.3333px;
+            }
+
+            .ds-hero {
+                height: 50.625rem; /* 1080px — exactly one viewport */
+            }
+
+            .ds-title      { top: 8.76rem;  }   /* 10.0625 × 0.871 */
+            .ds-script     { top: 12.88rem; }   /* 14.7925 × 0.871 */
+            .ds-photo      { top: 21.17rem; height: 29.72rem; } /* top × 0.871, height × 0.871 */
+            .ds-body-left  { top: 27.38rem; }   /* 31.4375 × 0.871 */
+            .ds-body-right { top: 38.21rem; }   /* 43.875  × 0.871 */
+            .ds-cta        { top: 48.17rem; }   /* 55.3125 × 0.871 */
+        }
     </style>
 </head>
 <body>

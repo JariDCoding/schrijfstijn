@@ -516,6 +516,39 @@
             .usp-stat   { transition: none; opacity: 1; transform: none; }
             .usp-label  { transition: none; opacity: 1; transform: none; }
         }
+
+        /* ── Wide-screen alignment: left-align all sections on viewports > 1440px ── */
+        @media (min-width: 1441px) {
+            .os-hero, .oo, .vd, .usp {
+                margin-left: 0;
+                margin-right: auto;
+            }
+        }
+
+        /* ── 1920 × 1080 optimisation ────────────────────────────────────────────────
+           Root em: 1920 / 90 = 21.333px → 90rem fills exactly 1920px.
+           Hero height compressed to 50.625rem (= 1080px) so the full hero sits in
+           one viewport. All vertical hero positions scaled × 0.8617 (50.625/58.75).
+           oo, vd and usp scale naturally via rem.                                   */
+        @media (min-width: 1920px) and (min-height: 1080px) {
+            html {
+                font-size: 21.3333px;
+            }
+
+            .os-hero {
+                height: 50.625rem; /* 1080px — exactly one viewport */
+            }
+
+            /* Vertical positions scaled × 0.8617 (= 50.625 / 58.75) */
+            #os-the    { top:  7.38rem; }   /*  8.5625 × 0.8617 */
+            #os-man    { top: 14.38rem; }   /* 16.6875 × 0.8617 */
+            #os-behind { top: 31.72rem; }   /* 36.8125 × 0.8617 */
+            #os-song   { top: 39.96rem; }   /* 46.375  × 0.8617 */
+            .os-photo  { top:  8.51rem; height: 41.25rem; } /* top × 0.8617, height × 0.8617 */
+            .os-body   { top: 10.77rem; }   /* 12.5    × 0.8617 */
+            .os-your   { top: 38.45rem; }   /* 44.625  × 0.8617 */
+            .os-cta    { top: 38.13rem; }   /* 44.25   × 0.8617 */
+        }
     </style>
 </head>
 <body>
