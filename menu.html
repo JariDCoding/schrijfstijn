@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <title>Menu — Schrijfstijn</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Italianno&display=swap" rel="stylesheet">
+
+    <style>
+        /* ─── Reset & base ──────────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --cream:  #f8f4f0;
+            --ink:    #0d0b09;
+            --red:    #D53212;
+            --muted:  #8a7f76;
+            --rule:   rgba(13,11,9,0.12);
+            --ease-out: cubic-bezier(0.76, 0, 0.24, 1);
+            --ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
+        }
+
+        html, body {
+            width: 100%; height: 100%;
+            background: var(--cream);
+            font-family: "Cormorant Garamond", serif;
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden;
+        }
+
+        /* ─── Demo background (simulate the page behind) ────────────── */
+        .demo-bg {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+            user-select: none;
+        }
+        .demo-bg__word {
+            font-size: clamp(6rem, 14vw, 14rem);
+            font-weight: 300;
+            color: rgba(13,11,9,0.04);
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+
+        /* ─── Grain overlay (depth & texture) ───────────────────────── */
+        .grain {
+            position: fixed;
+            inset: -50%;
+            width: 200%;
+            height: 200%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.028;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-size: 128px 128px;
+            animation: grain-shift 0.5s steps(1) infinite;
+        }
+        @keyframes grain-shift {
+            0%  { transform: translate(0, 0); }
+            20% { transform: translate(-5%, -8%); }
+            40% { transform: translate(-10%, 5%); }
+            60% { transform: translate(4%, -6%); }
+            80% { transform: translate(-6%, 3%); }
+        }
+
+        /* ─── Trigger button ─────────────────────────────────────────── */
+        .nav-trigger {
+            position: fixed;
+            top: 2.75rem;
+            right: 3.5rem;
+            z-index: 1001;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+        .nav-trigger__line {
+            display: block;
+            height: 1px;
+            background: var(--ink);
+            transform-origin: right center;
+            transition: width 0.5s var(--ease-out),
+                        transform 0.55s var(--ease-out),
+                        opacity 0.3s ease;
+        }
+        .nav-trigger__line:nth-child(1) { width: 28px; }
+        .nav-trigger__line:nth-child(2) { width: 20px; }
+        .nav-trigger__line:nth-child(3) { width: 14px; }
+
+        .nav-trigger:hover .nav-trigger__line:nth-child(1) { width: 28px; }
+        .nav-trigger:hover .nav-trigger__line:nth-child(2) { width: 28px; }
+        .nav-trigger:hover .nav-trigger__line:nth-child(3) { width: 28px; }
+
+        /* Morphs to × when open */
+        .nav-trigger.is-open .nav-trigger__line:nth-child(1) {
+            width: 28px;
+            transform: translateY(7px) rotate(45deg);
+        }
+        .nav-trigger.is-open .nav-trigger__line:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+        .nav-trigger.is-open .nav-trigger__line:nth-child(3) {
+            width: 28px;
+            transform: translateY(-7px) rotate(-45deg);
+        }
+
+        /* ─── Overlay ────────────────────────────────────────────────── */
+        .nav-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            pointer-events: none;
+
+            /* Curtain sweeps from bottom — theatrical reveal */
+            clip-path: inset(0 0 100% 0);
+            transition: clip-path 0.9s var(--ease-out);
+        }
+        .nav-overlay.is-open {
+            pointer-events: all;
+            clip-path: inset(0 0 0% 0);
+        }
+
+        /* Cream canvas */
+        .nav-canvas {
+            position: absolute;
+            inset: 0;
+            background: var(--cream);
+        }
+
+        /* ─── Inner layout ───────────────────────────────────────────── */
+        .nav-inner {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            grid-template-columns: 55% 45%;
+        }
+
+        /* ─── Left column ────────────────────────────────────────────── */
+        .nav-left {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 0 5vw 5vh 7vw;
+        }
+
+        /* Top eyebrow */
+        .nav-eyebrow {
+            padding-top: 7.5vh;
+            font-size: 0.6875rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--muted);
+            opacity: 0;
+            transform: translateY(8px);
+            transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+        }
+        .nav-overlay.is-open .nav-eyebrow {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Horizontal separator rule */
+        .nav-sep {
+            height: 1px;
+            background: var(--rule);
+            margin-top: 1.5vh;
+            width: 0;
+            transition: width 0.8s var(--ease-out) 0.2s;
+        }
+        .nav-overlay.is-open .nav-sep { width: 100%; }
+
+        /* Nav list */
+        .nav-list {
+            list-style: none;
+            margin-top: auto;
+            padding-bottom: 4vh;
+        }
+
+        .nav-item {
+            overflow: hidden;
+            padding: 0.15rem 0;
+        }
+
+        .nav-item__inner {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            transform: translateY(110%);
+            transition: transform 0.82s var(--ease-out);
+        }
+        .nav-item:nth-child(1) .nav-item__inner { transition-delay: 0.28s; }
+        .nav-item:nth-child(2) .nav-item__inner { transition-delay: 0.36s; }
+        .nav-item:nth-child(3) .nav-item__inner { transition-delay: 0.44s; }
+        .nav-item:nth-child(4) .nav-item__inner { transition-delay: 0.52s; }
+        .nav-overlay.is-open .nav-item__inner { transform: translateY(0); }
+
+        /* Closing animation: go back down */
+        .nav-overlay:not(.is-open) .nav-item__inner {
+            transition-delay: 0s !important;
+        }
+
+        .nav-item__num {
+            display: block;
+            font-family: "Italianno", serif;
+            font-size: 1.125rem;
+            color: var(--red);
+            line-height: 1;
+            transform: translateX(0);
+            transition: transform 0.4s var(--ease-spring), opacity 0.3s ease;
+        }
+
+        .nav-link {
+            display: inline-block;
+            font-family: "Cormorant Garamond", serif;
+            font-style: italic;
+            font-weight: 300;
+            font-size: clamp(3.75rem, 7.2vw, 7.5rem);
+            line-height: 0.9;
+            letter-spacing: -0.025em;
+            color: var(--ink);
+            text-decoration: none;
+            position: relative;
+        }
+
+        /* Sweep underline */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0.06em;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: var(--red);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s var(--ease-out);
+        }
+
+        /* Hover: text shifts right, underline sweeps in */
+        .nav-item:hover .nav-link {
+            transform: translateX(0.5rem);
+            transition: transform 0.4s var(--ease-spring);
+        }
+        .nav-item:hover .nav-link::after {
+            transform: scaleX(1);
+        }
+        .nav-item:hover .nav-item__num {
+            transform: translateX(0.5rem);
+        }
+
+        /* Sub-label in Italianno beneath each item */
+        .nav-item__sub {
+            font-family: "Italianno", serif;
+            font-size: 1.3rem;
+            color: var(--muted);
+            line-height: 1;
+            margin-top: 0.2rem;
+            padding-left: 0.1rem;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: opacity 0.35s ease, transform 0.35s var(--ease-spring);
+        }
+        .nav-item:hover .nav-item__sub {
+            opacity: 1;
+            transform: translateX(0.5rem);
+        }
+
+        /* ─── Right column ───────────────────────────────────────────── */
+        .nav-right {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Vertical rule that draws down */
+        .nav-rule {
+            position: absolute;
+            left: 0;
+            top: 8vh;
+            width: 1px;
+            height: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent,
+                var(--rule) 8%,
+                var(--rule) 92%,
+                transparent
+            );
+            transition: height 0.9s var(--ease-out) 0.2s;
+        }
+        .nav-overlay.is-open .nav-rule { height: 84vh; }
+
+        /* Photo reveal slots */
+        .nav-photos {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-photo {
+            position: absolute;
+            width: 62%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            opacity: 0;
+            transform: scale(1.06) translateY(12px);
+            transition: opacity 0.55s ease,
+                        transform 0.55s var(--ease-out);
+            pointer-events: none;
+        }
+        .nav-photo.is-visible {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+
+        /* Large outline monogram — shown when no photo is hovered */
+        .nav-monogram {
+            position: absolute;
+            bottom: 6vh;
+            right: 4vw;
+            font-family: "Italianno", serif;
+            font-size: clamp(5rem, 10vw, 12rem);
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(13,11,9,0.10);
+            line-height: 1;
+            white-space: nowrap;
+            user-select: none;
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.9s ease 0.55s, transform 0.9s ease 0.55s;
+        }
+        .nav-overlay.is-open .nav-monogram {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Year/edition label top-right */
+        .nav-edition {
+            position: absolute;
+            top: 7.5vh;
+            right: 2.5vw;
+            font-size: 0.6875rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--muted);
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+            opacity: 0;
+            transition: opacity 0.6s ease 0.55s;
+        }
+        .nav-overlay.is-open .nav-edition { opacity: 1; }
+
+        /* ─── Footer bar ─────────────────────────────────────────────── */
+        .nav-footer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 8vh;
+            min-height: 56px;
+            display: flex;
+            align-items: center;
+            padding: 0 7vw 0 7vw;
+            border-top: 1px solid var(--rule);
+            justify-content: space-between;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.6s ease 0.58s, transform 0.6s ease 0.58s;
+        }
+        .nav-overlay.is-open .nav-footer {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-footer__brand {
+            font-family: "Italianno", serif;
+            font-size: 1.875rem;
+            color: var(--red);
+            line-height: 1;
+        }
+        .nav-footer__meta {
+            font-size: 0.6875rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-align: right;
+            line-height: 2;
+        }
+        .nav-footer__meta a {
+            color: var(--muted);
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+        .nav-footer__meta a:hover { color: var(--ink); }
+
+        /* ─── Custom cursor ──────────────────────────────────────────── */
+        .cursor {
+            position: fixed;
+            top: 0; left: 0;
+            width: 36px; height: 36px;
+            border: 1px solid rgba(13,11,9,0.35);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.4s var(--ease-spring),
+                        border-color 0.3s ease,
+                        width 0.4s var(--ease-spring),
+                        height 0.4s var(--ease-spring);
+            mix-blend-mode: multiply;
+        }
+        .cursor.is-active { transform: translate(-50%, -50%) scale(1); }
+        .cursor.is-hover {
+            width: 56px; height: 56px;
+            border-color: var(--red);
+        }
+        .cursor::after {
+            content: '→';
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 0.875rem;
+            color: var(--red);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+        .cursor.is-hover::after { opacity: 1; }
+
+        /* ─── Accessibility ──────────────────────────────────────────── */
+        .sr-only {
+            position: absolute; width: 1px; height: 1px;
+            padding: 0; margin: -1px; overflow: hidden;
+            clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Grain texture overlay for depth -->
+<div class="grain" aria-hidden="true"></div>
+
+<!-- Custom cursor (shows inside menu) -->
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<!-- Page background hint -->
+<div class="demo-bg" aria-hidden="true">
+    <span class="demo-bg__word">Schrijfstijn</span>
+</div>
+
+<!-- ── Menu trigger ─────────────────────────────────────────────────────── -->
+<button
+    class="nav-trigger"
+    id="navTrigger"
+    aria-expanded="false"
+    aria-controls="navOverlay"
+    aria-label="Menu openen"
+>
+    <span class="nav-trigger__line"></span>
+    <span class="nav-trigger__line"></span>
+    <span class="nav-trigger__line"></span>
+</button>
+
+<!-- ── Navigation overlay ───────────────────────────────────────────────── -->
+<nav
+    class="nav-overlay"
+    id="navOverlay"
+    aria-hidden="true"
+    aria-label="Hoofdnavigatie"
+>
+    <div class="nav-canvas"></div>
+
+    <div class="nav-inner">
+
+        <!-- Left: navigation links -->
+        <div class="nav-left">
+            <p class="nav-eyebrow">— Navigatie</p>
+            <div class="nav-sep"></div>
+
+            <ul class="nav-list">
+
+                <li class="nav-item" data-photo="photo-home">
+                    <div class="nav-item__inner">
+                        <span class="nav-item__num">01</span>
+                        <a class="nav-link" href="./index.html">Home</a>
+                        <span class="nav-item__sub">De thuisbasis</span>
+                    </div>
+                </li>
+
+                <li class="nav-item" data-photo="photo-diensten">
+                    <div class="nav-item__inner">
+                        <span class="nav-item__num">02</span>
+                        <a class="nav-link" href="./diensten.html">Diensten</a>
+                        <span class="nav-item__sub">Songwriting · Productie · Consulting</span>
+                    </div>
+                </li>
+
+                <li class="nav-item" data-photo="photo-over">
+                    <div class="nav-item__inner">
+                        <span class="nav-item__num">03</span>
+                        <a class="nav-link" href="./over.html">Over</a>
+                        <span class="nav-item__sub">Ontmoet Stijn Bouvé</span>
+                    </div>
+                </li>
+
+                <li class="nav-item" data-photo="photo-contact">
+                    <div class="nav-item__inner">
+                        <span class="nav-item__num">04</span>
+                        <a class="nav-link" href="#contact">Contact</a>
+                        <span class="nav-item__sub">Start een aanvraag</span>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+
+        <!-- Right: visual area -->
+        <div class="nav-right">
+            <div class="nav-rule"></div>
+
+            <!-- Photography — one per nav item, revealed on hover -->
+            <div class="nav-photos">
+                <img
+                    id="photo-home"
+                    class="nav-photo"
+                    src="./Schrijfstijn%20home%20page/schrijfstijnhero.png"
+                    alt=""
+                    aria-hidden="true"
+                >
+                <img
+                    id="photo-diensten"
+                    class="nav-photo"
+                    src="./Schrijfstijn%20home%20page/svc-songwriting.jpg"
+                    alt=""
+                    aria-hidden="true"
+                >
+                <img
+                    id="photo-over"
+                    class="nav-photo"
+                    src="./Schrijfstijn%20home%20page/stijn-portrait.png"
+                    alt=""
+                    aria-hidden="true"
+                >
+                <img
+                    id="photo-contact"
+                    class="nav-photo"
+                    src="./Schrijfstijn%20home%20page/studio-100.png"
+                    alt=""
+                    aria-hidden="true"
+                >
+            </div>
+
+            <!-- Decorative monogram -->
+            <p class="nav-monogram" aria-hidden="true">Schrijfstijn</p>
+
+            <!-- Edition label -->
+            <p class="nav-edition" aria-hidden="true">Est. 2016 · België</p>
+        </div>
+
+    </div>
+
+    <!-- Footer bar -->
+    <footer class="nav-footer">
+        <span class="nav-footer__brand">Schrijfstijn</span>
+        <div class="nav-footer__meta">
+            <a href="mailto:info@schrijfstijn.be">info@schrijfstijn.be</a><br>
+            Songwriting &amp; Audio Productie
+        </div>
+    </footer>
+
+</nav>
+
+<script>
+    /* ── State ──────────────────────────────────────────────────────── */
+    const trigger  = document.getElementById('navTrigger');
+    const overlay  = document.getElementById('navOverlay');
+    const cursor   = document.getElementById('cursor');
+    const navItems = overlay.querySelectorAll('.nav-item');
+    let isOpen = false;
+
+    /* ── Open / close ───────────────────────────────────────────────── */
+    function openMenu() {
+        isOpen = true;
+        trigger.classList.add('is-open');
+        trigger.setAttribute('aria-expanded', 'true');
+        overlay.classList.add('is-open');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        isOpen = false;
+        trigger.classList.remove('is-open');
+        trigger.setAttribute('aria-expanded', 'false');
+        overlay.classList.remove('is-open');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        hideAllPhotos();
+    }
+
+    trigger.addEventListener('click', () => isOpen ? closeMenu() : openMenu());
+
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && isOpen) closeMenu();
+    });
+
+    /* Close on nav link click */
+    overlay.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    /* ── Photo hover ────────────────────────────────────────────────── */
+    function hideAllPhotos() {
+        overlay.querySelectorAll('.nav-photo').forEach(p => p.classList.remove('is-visible'));
+    }
+
+    navItems.forEach(item => {
+        const photoId = item.dataset.photo;
+        const photo   = photoId ? document.getElementById(photoId) : null;
+
+        item.addEventListener('mouseenter', () => {
+            hideAllPhotos();
+            if (photo) photo.classList.add('is-visible');
+            cursor.classList.add('is-hover');
+        });
+
+        item.addEventListener('mouseleave', () => {
+            if (photo) photo.classList.remove('is-visible');
+            cursor.classList.remove('is-hover');
+        });
+    });
+
+    /* ── Custom cursor ──────────────────────────────────────────────── */
+    let mouseX = 0, mouseY = 0;
+    let curX   = 0, curY   = 0;
+    let rafId  = null;
+
+    document.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+
+        if (!cursor.classList.contains('is-active')) {
+            cursor.classList.add('is-active');
+        }
+    });
+
+    function animateCursor() {
+        curX += (mouseX - curX) * 0.12;
+        curY += (mouseY - curY) * 0.12;
+        cursor.style.left = curX + 'px';
+        cursor.style.top  = curY + 'px';
+        rafId = requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    /* Pause cursor raf when menu is closed (minor optimisation) */
+    document.addEventListener('mouseleave', () => {
+        cursor.classList.remove('is-active');
+    });
+</script>
+</body>
+</html>

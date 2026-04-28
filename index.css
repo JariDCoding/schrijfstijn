@@ -510,7 +510,7 @@ body {
 .waarom {
     position: relative;
     width: 90rem;
-    height: 91.25rem;
+    height: 63rem;
     margin: 0 auto;
     overflow: hidden;
 }
@@ -787,12 +787,18 @@ body {
 .waarom   { margin-top: 0; }
 .wf-wrap  { margin-top: 0; }
 
+/* ─── 1920 × 1080: 20% less whitespace — section = 1536px, margins = 192px ─ */
+@media (min-width: 1920px) and (max-width: 2559px) and (min-height: 1080px) {
+    html { font-size: 17.067px; }
+}
+
 /* ─── Workflow: scroll-pinned 6-step section ────────────────────── */
 
 /* Outer wrapper — tall enough for 6 scroll steps */
 .wf-wrap {
     position: relative;
     width: 90rem;
+    margin: 0 auto;
     /* 100vh * 8 = 1 intro hold + 6 step scrolls */
     height: calc(100vh * 8);
 }
@@ -838,29 +844,46 @@ body {
 /* Progress bar track — top: 44vh, bottom anchored to step content top.
    Step content = 151px (50.71 num + 22 gap + 78 body×2).
    Step area top = 97vh - 151px → bar height = (97vh - 151px) - 44vh = calc(53vh - 151px) */
+/* Renaissance calligraphic stroke — tapers at ends like an ink pen */
 .wf-bar-track {
     position: absolute;
     left: 5.8125rem;
     top: 44vh;
-    width: 0.1875rem;
+    width: 0.125rem;
     height: calc(53vh - 9.4375rem);
-    border-radius: 6.25rem;
-    background: rgba(217, 217, 217, 0.28);
+    border-radius: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(0,0,0,0.08) 6%,
+        rgba(0,0,0,0.26) 28%,
+        rgba(0,0,0,0.32) 50%,
+        rgba(0,0,0,0.20) 74%,
+        rgba(0,0,0,0.06) 94%,
+        transparent
+    );
 }
 
-/* Progress bar fill (JS-driven height) */
+/* Red ink fill with same calligraphic taper */
 .wf-bar-fill {
     position: absolute;
     left: 5.8125rem;
     top: 44vh;
-    width: 0.1875rem;
+    width: 0.125rem;
     height: 0;
-    border-radius: 6.25rem;
-    background: #525252;
+    border-radius: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(213,50,18,0.35) 8%,
+        rgba(213,50,18,0.72) 50%,
+        rgba(213,50,18,0.45) 92%,
+        transparent
+    );
     transition: height 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-/* Step indicator dots — identical span to bar */
+/* Step indicator dots — diamond (pen-nib) shape */
 .wf-dots {
     position: absolute;
     left: 5.3125rem;
@@ -875,18 +898,18 @@ body {
 }
 
 .wf-dot {
-    width: 0.4375rem;
-    height: 0.4375rem;
-    border-radius: 50%;
-    background: rgba(217, 217, 217, 0.5);
+    width: 0.3125rem;
+    height: 0.3125rem;
+    border-radius: 0;
+    background: rgba(0,0,0,0.18);
     align-self: center;
+    transform: rotate(45deg) scale(1);
     transition: background 0.35s, transform 0.35s;
-    transform: scale(1);
 }
 
 .wf-dot.is-active {
-    background: #525252;
-    transform: scale(1.4);
+    background: #D53212;
+    transform: rotate(45deg) scale(1.5);
 }
 
 /* Step content area — bottom-anchored so body text always fits within viewport.
@@ -961,12 +984,12 @@ body {
     overflow: hidden;
 }
 
-/* Right image area — top 28vh, height = 20% more than original 64vh-151px */
+/* Right image area — top 28vh, right offset mirrors bar's left offset */
 .wf-image-area {
     position: absolute;
-    left: 38.6875rem;
+    left: 33rem;
     top: 28vh;
-    right: 0;
+    right: 5.8125rem;
     height: calc(76.8vh - 11.325rem);
 }
 
@@ -996,4 +1019,133 @@ body {
     .wf-image-slot { transition: none; opacity: 0; }
     .wf-image-slot.is-active { opacity: 1; }
     .wf-dot { transition: none; }
+}
+
+/* ─── Trusted-by carousel — full viewport width ─────────────────── */
+
+.trusted {
+    width: 100%;
+    overflow: hidden;
+    padding: 4rem 0 5rem;
+    border-top: 0.0625rem solid rgba(0, 0, 0, 0.08);
+}
+
+.trusted-eyebrow {
+    text-align: center;
+    font-family: "Italianno", serif;
+    font-size: 2.625rem;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.38);
+    margin: 0 0 3rem;
+}
+
+.trusted-marquee {
+    width: 100%;
+    overflow: hidden;
+}
+
+.trusted-track {
+    display: flex;
+    align-items: center;
+    gap: 8rem;
+    width: max-content;
+    animation: trusted-scroll 20s linear infinite;
+}
+
+.trusted-logo {
+    height: 3.75rem;
+    width: auto;
+    object-fit: contain;
+    opacity: 0.45;
+    filter: grayscale(100%);
+    flex-shrink: 0;
+}
+
+@keyframes trusted-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .trusted-track { animation: none; }
+}
+
+/* ─── iPhone 14 Pro Max mobile hero ─────────────────────────────── */
+
+@media (max-width: 430px) {
+    .hero {
+        width: 100vw;
+        height: 100svh;
+        overflow: hidden;
+    }
+
+    /* Gradient from photo into cream — editorial transition */
+    .hero::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 55%;
+        background: linear-gradient(
+            to bottom,
+            transparent,
+            rgba(248, 244, 240, 0.88) 45%,
+            #f8f4f0 75%
+        );
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .hero-photo {
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        transform: scale(1.04) translateY(0);
+        animation: hero-photo-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
+    }
+
+    .hero-title {
+        left: 1.5rem;
+        top: 48svh;
+        font-size: 13vw;
+        white-space: nowrap;
+        line-height: 1;
+        z-index: 2;
+    }
+
+    .schrijfstijn-icon {
+        left: 1.5rem;
+        top: calc(48svh + 13vw + 1.5vw);
+        width: 52vw;
+        height: auto;
+        z-index: 2;
+    }
+
+    .hero-body {
+        left: 1.5rem;
+        right: 1.5rem;
+        top: calc(48svh + 13vw + 11vw);
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        z-index: 2;
+    }
+
+    .hero-body-line {
+        white-space: normal;
+    }
+
+    .hero-cta {
+        left: 1.5rem;
+        top: calc(48svh + 13vw + 34vw);
+        font-size: 1rem;
+        z-index: 2;
+    }
+
+    .hero-cta::after {
+        width: 9.5rem;
+    }
 }

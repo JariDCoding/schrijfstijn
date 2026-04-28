@@ -517,20 +517,12 @@
             .usp-label  { transition: none; opacity: 1; transform: none; }
         }
 
-        /* ── Wide-screen alignment: left-align all sections on viewports > 1440px ── */
-        @media (min-width: 1441px) {
-            .os-hero, .oo, .vd, .usp {
-                margin-left: 0;
-                margin-right: auto;
-            }
-        }
-
-        /* ── 1920 × 1080 optimisation ────────────────────────────────────────────────
+        /* ── 1920 × 1080: sections fill the full viewport at this resolution ─────────
            Root em: 1920 / 90 = 21.333px → 90rem fills exactly 1920px.
            Hero height compressed to 50.625rem (= 1080px) so the full hero sits in
            one viewport. All vertical hero positions scaled × 0.8617 (50.625/58.75).
            oo, vd and usp scale naturally via rem.                                   */
-        @media (min-width: 1920px) and (min-height: 1080px) {
+        @media (min-width: 1920px) and (max-width: 2559px) and (min-height: 1080px) {
             html {
                 font-size: 21.3333px;
             }
@@ -540,14 +532,28 @@
             }
 
             /* Vertical positions scaled × 0.8617 (= 50.625 / 58.75) */
-            #os-the    { top:  7.38rem; }   /*  8.5625 × 0.8617 */
-            #os-man    { top: 14.38rem; }   /* 16.6875 × 0.8617 */
-            #os-behind { top: 31.72rem; }   /* 36.8125 × 0.8617 */
-            #os-song   { top: 39.96rem; }   /* 46.375  × 0.8617 */
-            .os-photo  { top:  8.51rem; height: 41.25rem; } /* top × 0.8617, height × 0.8617 */
-            .os-body   { top: 10.77rem; }   /* 12.5    × 0.8617 */
-            .os-your   { top: 38.45rem; }   /* 44.625  × 0.8617 */
-            .os-cta    { top: 38.13rem; }   /* 44.25   × 0.8617 */
+            #os-the    { top:  7.38rem; }
+            #os-man    { top: 14.38rem; }
+            #os-behind { top: 31.72rem; }
+            #os-song   { top: 39.96rem; }
+            .os-photo  { top:  8.51rem; height: 41.25rem; }
+            .os-body   { top: 10.77rem; }
+            .os-your   { top: 38.45rem; }
+            .os-cta    { top: 38.13rem; }
+        }
+
+        /* ── 2560 × 1440: section = 1920px centred with 320px editorial margins ── */
+        @media (min-width: 2560px) and (max-width: 3839px) and (min-height: 1440px) {
+            html {
+                font-size: 21.3333px;
+            }
+        }
+
+        /* ── 3840 × 2160 (4K): section = 2880px centred with 480px editorial margins */
+        @media (min-width: 3840px) and (min-height: 2160px) {
+            html {
+                font-size: 32px;
+            }
         }
     </style>
 </head>
