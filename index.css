@@ -966,7 +966,7 @@ body {
     position: absolute;
     left: 38.6875rem;
     top: 28vh;
-    right: 6.875rem;
+    right: 0;
     height: calc(76.8vh - 11.325rem);
 }
 
