@@ -55,11 +55,11 @@ body {
     margin: 0;
     font-size: 1.625rem;
     line-height: 1.5;
-    max-width: 37rem;
 }
 
 .hero-body-line {
     display: block;
+    white-space: nowrap;
     opacity: 0;
     transform: translateY(0.625rem);
     animation: hero-soft-in 0.64s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
@@ -775,71 +775,11 @@ body {
     }
 }
 
-/* ─── Wide-screen alignment: left-align all sections on viewports > 1440px ── */
-@media (min-width: 1441px) {
-    .hero,
-    .services,
-    .about,
-    .waarom,
-    .wf-wrap,
-    .wf-sticky {
-        margin-left: 0;
-        margin-right: auto;
-    }
-}
-
-/* ─── 1728px breakpoint (MacBook Pro 16" / 14" More Space) ──────────────────
-   Root em: 1728 / 90 = 19.2px → 90rem fills exactly 1728px.
-   Hero at 58.125rem × 19.2px = 1116px ≈ 1117px native height — fits without
-   a height override. All section positions scale proportionally via rem.    */
-@media (min-width: 1728px) {
-    html {
-        font-size: 19.2px;
-    }
-}
-
-/* ─── 1920 × 1080 optimisation ──────────────────────────────────────────────
-   Root em: 1920 / 90 = 21.333px → 90rem fills exactly 1920px.
-   Hero height compressed to 50.625rem (= 1080px) so the full hero sits in
-   one viewport. All vertical hero positions scaled × 0.8710 (50.625/58.125)
-   to keep the same proportional feel. Services/about/waarom scale via rem.
-   This rule also covers the hero at 2560 and 3840 — at those font-sizes
-   50.625rem evaluates to exactly the viewport height (1440px / 2160px).    */
-@media (min-width: 1920px) and (min-height: 1080px) {
-    html {
-        font-size: 21.3333px;
-    }
-
-    .hero {
-        height: 50.625rem; /* 1080px — exactly one viewport */
-    }
-
-    .hero-title        { top: 11.8rem;   }   /* 13.5625  × 0.871 */
-    .schrijfstijn-icon { top: 19.525rem; }   /* 22.4169  × 0.871 */
-    .hero-body         { top: 28.25rem;  }   /* 32.4375  × 0.871 */
-    .hero-cta          { top: 38.6rem;   }   /* 44.3125  × 0.871 */
-    .hero-photo        { top: 28.25rem; height: 18.25rem; } /* top × 0.871, height × 0.871 */
-}
-
-/* ─── 2560 × 1440 breakpoint (iMac 27" / QHD monitors) ─────────────────────
-   Root em: 2560 / 90 = 28.444px → 90rem fills exactly 2560px.
-   Hero stays at 50.625rem (from the 1920px rule); at 28.444px that = 1440px.
-   All section positions & heights continue to scale via rem.               */
-@media (min-width: 2560px) and (min-height: 1440px) {
-    html {
-        font-size: 28.4444px;
-    }
-}
-
-/* ─── 3840 × 2160 breakpoint (4K monitors) ──────────────────────────────────
-   Root em: 3840 / 90 = 42.667px → 90rem fills exactly 3840px.
-   Hero stays at 50.625rem (from the 1920px rule); at 42.667px that = 2160px.
-   All section positions & heights continue to scale via rem.               */
-@media (min-width: 3840px) and (min-height: 2160px) {
-    html {
-        font-size: 42.6667px;
-    }
-}
+/* ─── No fill-viewport breakpoints: the base clamp formula handles scaling.
+   At ≤1440px font-size stays at 16px. At 2560×1440 it naturally reaches
+   21.33px, giving 1920px-wide sections centred in 2560px with 320px margins.
+   Sections always use margin: 0 auto so editorial breathing room is automatic
+   at any viewport wider than 90rem × current font-size.                     */
 
 /* ─── Section spacing — matches Figma: sections stack directly, no gaps ─── */
 .services { margin-top: 0; }
