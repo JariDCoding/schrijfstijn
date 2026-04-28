@@ -411,11 +411,11 @@ body {
     margin: 0;
     font-size: 1.625rem;
     line-height: 1.5;
+    max-width: 45rem;
 }
 
 .about-body-line {
     display: block;
-    white-space: nowrap;
     opacity: 0;
     transform: translateY(0.625rem);
     transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
