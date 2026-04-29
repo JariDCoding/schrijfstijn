@@ -875,10 +875,10 @@
                 padding-bottom: 48px;
             }
 
-            /* Section header — tight so script sits flush under title */
+            /* Section header */
             .usp-header {
                 display: block;
-                padding: 44px 4.88vw 24px;
+                padding: 28px 4.88vw 20px;
             }
             .usp-title {
                 position: relative;
@@ -927,58 +927,59 @@
                 background: none;
             }
 
-            /* Photos — tall editorial aspect ratio matching desktop ~1:2 */
+            /* Photos — portrait aspect-ratio matches desktop's tall editorial columns */
             .usp-photo-placeholder {
                 position: relative;
                 left: auto; top: auto;
                 width: 100%;
-                height: 260px;
+                aspect-ratio: 3 / 4;
+                height: auto;
                 background: #d7d6d4;
                 opacity: 0.82 !important;
                 transform: none !important;
                 transition: none !important;
                 display: block;
-                margin-bottom: 24px;
                 flex-shrink: 0;
             }
             .usp-photo {
                 position: relative;
                 left: auto; top: auto;
                 width: 100%;
-                height: 260px;
+                aspect-ratio: 3 / 4;
+                height: auto;
                 object-fit: cover;
+                object-position: top center;
                 opacity: 1 !important;
                 transform: none !important;
                 transition: none !important;
                 display: block;
-                margin-bottom: 24px;
                 flex-shrink: 0;
             }
 
-            /* Stat SVGs — large statement numbers matching desktop scale */
+            /* Stat SVGs — sit above photo, same hierarchy as desktop */
             .usp-stat {
                 position: relative;
                 left: auto; top: auto;
                 width: auto;
-                height: 4rem;
+                height: 3.5rem;
                 max-width: none;
                 display: block;
-                margin-bottom: 8px;
+                margin-bottom: 14px;
                 opacity: 1 !important;
                 transform: none !important;
             }
 
-            /* Labels — desktop is 2.625rem full black Cormorant Garamond */
+            /* Labels — 2.625rem full-black Cormorant Garamond, matches desktop */
             .usp-label {
                 position: relative;
                 left: auto; top: auto; right: auto;
                 font-family: "Cormorant Garamond", serif;
-                font-size: clamp(30px, 7.9vw, 40px);
+                font-size: clamp(28px, 7.5vw, 38px);
                 font-weight: 400;
                 line-height: 1;
                 color: #000;
                 white-space: nowrap;
-                margin: 0;
+                margin: 16px 0 0;
                 opacity: 1 !important;
                 transform: none !important;
             }
@@ -1184,28 +1185,28 @@
 
         <div class="usp-carousel">
             <article class="usp-card">
-                <div class="usp-photo-placeholder"></div>
                 <img class="usp-stat usp-stat-1"
                      data-src="./Schrijfstijn%20home%20page/usp-stat-48.svg"
                      alt="48+">
+                <div class="usp-photo-placeholder"></div>
                 <p class="usp-label usp-label-1">Projecten</p>
             </article>
             <article class="usp-card">
-                <img class="usp-photo usp-photo-2"
-                     src="./Schrijfstijn%20home%20page/usp-jaar-ervaring.png"
-                     alt="Jaar ervaring">
                 <img class="usp-stat usp-stat-2"
                      data-src="./Schrijfstijn%20home%20page/usp-stat-6.svg"
                      alt="6+">
+                <img class="usp-photo usp-photo-2"
+                     src="./Schrijfstijn%20home%20page/usp-jaar-ervaring.png"
+                     alt="Jaar ervaring">
                 <p class="usp-label usp-label-2">Jaar ervaring</p>
             </article>
             <article class="usp-card">
-                <img class="usp-photo usp-photo-3"
-                     src="./Schrijfstijn%20home%20page/usp-maatwerk.png"
-                     alt="Maatwerk">
                 <img class="usp-stat usp-stat-3"
                      data-src="./Schrijfstijn%20home%20page/usp-stat-100.svg"
                      alt="100%">
+                <img class="usp-photo usp-photo-3"
+                     src="./Schrijfstijn%20home%20page/usp-maatwerk.png"
+                     alt="Maatwerk">
                 <p class="usp-label usp-label-3">Maatwerk</p>
             </article>
         </div>
