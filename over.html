@@ -642,11 +642,11 @@
                 z-index: 3;
             }
 
-            /* Quote body text — italic, top of hero */
+            /* Quote body text — italic, positioned in mid-hero */
             .os-body {
                 left: 5vw; right: 5vw;
                 width: auto;
-                top: 4svh;
+                top: 33svh;
                 font-size: clamp(11px, 3.7vw, 16px);
                 font-style: italic;
                 line-height: 1.55;
@@ -658,10 +658,10 @@
             /* CTA: ticket button at bottom */
             .os-cta {
                 display: block;
-                left: 7.7vw;
-                top: 87.8svh;
-                width: 28.1vw;
-                height: 47px;
+                left: 4.9vw;
+                top: 86.9svh;
+                width: 33.7vw;
+                height: 63px;
                 z-index: 2;
             }
             .os-cta-border {
@@ -677,8 +677,105 @@
                 letter-spacing: 0.12em;
             }
 
-            /* Sections below hero — not yet optimised for mobile */
-            .oo, .vd, .usp { display: none; }
+            /* USP — not yet optimised */
+            .usp { display: none; }
+
+            /* ── Over ons (.oo) — mobile layout ── */
+            .oo {
+                display: block;
+                position: relative;
+                width: 100vw;
+                height: 620px;
+                overflow: hidden;
+                background: #f8f4f0;
+            }
+            .oo-title {
+                position: absolute;
+                top: 34px;
+                left: 4.9vw;
+                font-size: 9.77vw;
+                line-height: 1;
+            }
+            .oo-script {
+                position: absolute;
+                top: 52px;
+                left: 48.8vw;
+                width: 26.7vw;
+                height: auto;
+            }
+            .oo-photo-large {
+                position: absolute;
+                top: 168px;
+                left: -1.6vw;
+                width: 42.3vw;
+                height: 299px;
+                opacity: 0.8;
+                background: #ccc;
+                overflow: hidden;
+            }
+            .oo-photo-small {
+                position: absolute;
+                top: 149px;
+                left: 82.8vw;
+                width: 17.2vw;
+                height: 122px;
+                opacity: 0.8;
+                background: #ccc;
+                overflow: hidden;
+            }
+            .oo-body {
+                position: absolute;
+                top: 368px;
+                left: 53.5vw;
+                width: 45.1vw;
+                font-size: 10px;
+                line-height: 1.6;
+                color: rgba(13,11,9,0.65);
+            }
+            .oo-body-line { display: block; white-space: normal; }
+            .oo-line-1, .oo-subtitle { display: none; }
+            .oo-line-2 {
+                display: block;
+                position: absolute;
+                top: 533px;
+                left: 13.3vw;
+                width: 17.4vw;
+                height: 1px;
+                background: rgba(13,11,9,0.15);
+            }
+
+            /* ── Vertrouwd door (.vd) — mobile layout ── */
+            .vd {
+                display: block;
+                position: relative;
+                width: 100vw;
+                height: 220px;
+                background: #f8f4f0;
+                overflow: visible;
+                padding-top: 20px;
+            }
+            .vd-title {
+                position: relative;
+                top: 0;
+                width: 100%;
+                text-align: center;
+                font-family: "Italianno", serif;
+                font-size: 26px;
+                color: rgba(13,11,9,0.7);
+                margin-bottom: 16px;
+            }
+            .vd-logo {
+                position: absolute;
+                top: 72px;
+                width: 19.8vw;
+                height: 19.8vw;
+                object-fit: contain;
+            }
+            /* 4 logos evenly spaced 5vw→95vw, gap = 3.6vw between each */
+            .vd-logo-1 { left: 5vw; }
+            .vd-logo-2 { left: 28.4vw; }
+            .vd-logo-3 { left: 51.8vw; }
+            .vd-logo-4 { left: 75.2vw; }
         }
     </style>
 </head>
@@ -772,9 +869,8 @@
 
         <!-- Body text — right column -->
         <p class="os-body">
-            <span class="os-body-line">Lorem ispum lorem ipsum Lorem ispum</span>
-            <span class="os-body-line">lorem ipsum Lorem ispum lorem ipsum</span>
-            <span class="os-body-line">Lorem ispum lorem ipsum Lorem</span>
+            <span class="os-body-line">'Ik kies altijd voor de</span>
+            <span class="os-body-line">persoonlijke aanpak'</span>
         </p>
 
         <!-- "Your" animated red script (data-src — SMIL starts on cue) -->
