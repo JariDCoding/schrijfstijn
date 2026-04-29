@@ -365,6 +365,13 @@
             }
         }
 
+        /* ── 1728 × 1114 (MacBook Pro 14") ──────────────────────────────────────────
+           Root em: 1728 / 90 = 19.2px → 90rem fills exactly 1728px.
+           Hero 58.125rem × 19.2px = 1116px ≈ viewport height — negligible clip.   */
+        @media (min-width: 1728px) and (max-width: 1919px) and (min-height: 1080px) {
+            html { font-size: 19.2px; }
+        }
+
         /* ── 1920 × 1080 ─────────────────────────────────────────────────────────────
            Root em: 1920 / 90 = 21.333px → 90rem fills exactly 1920px.
            Hero height compressed to 50.625rem (= 1080px) — full hero in one viewport.
