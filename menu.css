@@ -1,11 +1,11 @@
 /* ── Schrijfstijn overlay navigation ── */
 
 :root {
-    --menu-bg:     #0c0a09;
-    --menu-cream:  #f0ece8;
+    --menu-bg:     #f8f4f0;
+    --menu-ink:    #0d0b09;
     --menu-red:    #D53212;
     --menu-muted:  #4a433d;
-    --menu-rule:   rgba(240,236,232,0.1);
+    --menu-rule:   rgba(13,11,9,0.1);
     --menu-ease:   cubic-bezier(0.76, 0, 0.24, 1);
     --menu-spring: cubic-bezier(0.34, 1.12, 0.64, 1);
 }
@@ -42,7 +42,7 @@
 .menu-trigger__bar:nth-child(2) { width: 20px; }
 .menu-trigger__bar:nth-child(3) { width: 12px; }
 .menu-trigger:hover .menu-trigger__bar { width: 30px; }
-.menu-trigger.is-open .menu-trigger__bar { background-color: var(--menu-cream); }
+.menu-trigger.is-open .menu-trigger__bar { background-color: var(--menu-ink); }
 .menu-trigger.is-open .menu-trigger__bar:nth-child(1) { width: 30px; transform: translateY(8px) rotate(45deg); }
 .menu-trigger.is-open .menu-trigger__bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .menu-trigger.is-open .menu-trigger__bar:nth-child(3) { width: 30px; transform: translateY(-8px) rotate(-45deg); }
@@ -127,7 +127,7 @@
     transition: background 0.35s ease;
 }
 .menu-nav-item:first-child { border-top: 1px solid var(--menu-rule); }
-.menu-nav-item.is-hovered { background: rgba(255,255,255,0.02); }
+.menu-nav-item.is-hovered { background: rgba(13,11,9,0.03); }
 
 /* Vertical red pen-stroke */
 .menu-nav-item::after {
@@ -174,16 +174,16 @@
     font-style: italic; font-weight: 300;
     font-size: clamp(2.75rem, min(8.5vw, 9vh), 7.75rem);
     line-height: 0.88; letter-spacing: -0.03em;
-    color: rgba(240,236,232,0.52);
+    color: rgba(13,11,9,0.52);
     text-decoration: none; display: block; white-space: nowrap;
     transition: color 0.32s ease, transform 0.4s var(--menu-spring);
     will-change: transform;
 }
 .menu-nav-item.is-hovered .menu-nav-link {
-    color: var(--menu-cream); transform: translateX(0.625rem);
+    color: var(--menu-ink); transform: translateX(0.625rem);
 }
 .menu-overlay.has-hover .menu-nav-item:not(.is-hovered) .menu-nav-link {
-    color: rgba(240,236,232,0.1);
+    color: rgba(13,11,9,0.1);
 }
 .menu-overlay.has-hover .menu-nav-item:not(.is-hovered) .menu-nav-num {
     color: rgba(213,50,18,0.12);
@@ -193,7 +193,7 @@
 .menu-nav-sub {
     font-family: "Italianno", serif;
     font-size: clamp(0.875rem, 1.25vw, 1.375rem);
-    color: rgba(240,236,232,0.28); line-height: 1; white-space: nowrap;
+    color: rgba(13,11,9,0.28); line-height: 1; white-space: nowrap;
     margin-left: auto;
     opacity: 0; transform: translateX(12px);
     transition: opacity 0.28s ease 0.05s, transform 0.35s var(--menu-spring) 0.05s;
@@ -201,7 +201,7 @@
 .menu-nav-item.is-hovered .menu-nav-sub { opacity: 1; transform: translateX(0); }
 
 /* Active page marker */
-.menu-nav-item[data-active] .menu-nav-link { color: rgba(240,236,232,0.75); }
+.menu-nav-item[data-active] .menu-nav-link { color: rgba(13,11,9,0.75); }
 .menu-nav-item[data-active] .menu-nav-num { color: rgba(213,50,18,0.65); }
 .menu-nav-item[data-active]::before {
     content: '';
@@ -225,7 +225,7 @@
     font-family: "Italianno", serif;
     font-size: clamp(8rem, 18vw, 22rem);
     color: transparent;
-    -webkit-text-stroke: 1px rgba(240,236,232,0.05);
+    -webkit-text-stroke: 1px rgba(13,11,9,0.05);
     user-select: none; pointer-events: none;
     opacity: 0; transition: opacity 0.55s ease 0.52s;
 }
@@ -236,7 +236,7 @@
     position: absolute; bottom: 4vh; right: 2.5rem;
     writing-mode: vertical-rl; transform: rotate(180deg);
     font-size: 0.5rem; letter-spacing: 0.26em; text-transform: uppercase;
-    color: rgba(240,236,232,0.16);
+    color: rgba(13,11,9,0.16);
     font-family: "Cormorant Garamond", serif;
     user-select: none; pointer-events: none;
     opacity: 0; transition: opacity 0.6s ease 0.64s;
@@ -283,13 +283,13 @@
     text-align: right; line-height: 2.4;
 }
 .menu-footer-meta a { color: var(--menu-muted); text-decoration: none; transition: color 0.22s; }
-.menu-footer-meta a:hover { color: var(--menu-cream); }
+.menu-footer-meta a:hover { color: var(--menu-ink); }
 
 /* ── Custom cursor ── */
 .menu-cursor {
     position: fixed; top: 0; left: 0;
     width: 32px; height: 32px;
-    border: 1px solid rgba(240,236,232,0.2);
+    border: 1px solid rgba(13,11,9,0.2);
     border-radius: 50%; pointer-events: none; z-index: 9998;
     transform: translate(-50%,-50%) scale(0);
     transition: transform 0.42s var(--menu-spring), width 0.42s var(--menu-spring),
