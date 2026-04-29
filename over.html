@@ -919,22 +919,26 @@
             }
             .usp-carousel::-webkit-scrollbar { display: none; }
 
-            /* Cards — relative so stat can overlay photo top-left */
+            /* Cards — relative so stat can overlay photo top-left.
+               Cards 1 & 3 are 53vw, card 2 is 57vw — mirrors desktop where
+               photo 2 is 7% wider, giving taller physical height at the
+               same 10:21 ratio (no ratio change, width difference only). */
             .usp-card {
-                flex: 0 0 70vw;
+                flex: 0 0 53vw;
                 scroll-snap-align: start;
                 display: flex;
                 flex-direction: column;
                 background: none;
                 position: relative;
             }
+            .usp-carousel > .usp-card:nth-child(2) { flex-basis: 57vw; }
 
-            /* Photos — varied portrait heights like desktop; card 1 shortest, card 2 tallest */
+            /* Photos — exact desktop aspect ratio (15.4rem × 32rem ≈ 10:21) */
             .usp-photo-placeholder {
                 position: relative;
                 left: auto; top: auto;
                 width: 100%;
-                aspect-ratio: 3 / 4;
+                aspect-ratio: 10 / 21;
                 height: auto;
                 background: #d7d6d4;
                 opacity: 0.82 !important;
@@ -947,7 +951,7 @@
                 position: relative;
                 left: auto; top: auto;
                 width: 100%;
-                aspect-ratio: 5 / 8;
+                aspect-ratio: 10 / 21;
                 height: auto;
                 object-fit: cover;
                 object-position: top center;
@@ -957,8 +961,6 @@
                 display: block;
                 flex-shrink: 0;
             }
-            /* Card 3 — medium height between card 1 and 2 */
-            .usp-photo-3 { aspect-ratio: 7 / 10; height: auto; }
 
             /* Stat SVGs — overlaid top-left of photo, matching desktop position */
             .usp-stat {
@@ -979,11 +981,11 @@
                 position: relative;
                 left: auto; top: auto; right: auto;
                 font-family: "Cormorant Garamond", serif;
-                font-size: clamp(28px, 7.5vw, 38px);
+                font-size: clamp(24px, 6.5vw, 34px);
                 font-weight: 400;
-                line-height: 1;
+                line-height: 1.1;
                 color: #000;
-                white-space: nowrap;
+                white-space: normal;
                 margin: 16px 0 0;
                 opacity: 1 !important;
                 transform: none !important;
