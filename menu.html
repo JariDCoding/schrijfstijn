@@ -2,676 +2,552 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Menu — Schrijfstijn</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Italianno&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Italianno&display=swap" rel="stylesheet">
     <style>
-        /* ─── Reset & base ──────────────────────────────────────────── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         :root {
-            --cream:  #f8f4f0;
-            --ink:    #0d0b09;
+            --bg:     #0c0a09;
+            --cream:  #f0ece8;
             --red:    #D53212;
-            --muted:  #8a7f76;
-            --rule:   rgba(13,11,9,0.12);
-            --ease-out: cubic-bezier(0.76, 0, 0.24, 1);
-            --ease-spring: cubic-bezier(0.34, 1.2, 0.64, 1);
+            --muted:  #4a433d;
+            --rule:   rgba(240,236,232,0.1);
+            --ease:   cubic-bezier(0.76, 0, 0.24, 1);
+            --spring: cubic-bezier(0.34, 1.12, 0.64, 1);
         }
 
         html, body {
             width: 100%; height: 100%;
-            background: var(--cream);
+            background: #f8f4f0;
             font-family: "Cormorant Garamond", serif;
             -webkit-font-smoothing: antialiased;
             overflow: hidden;
         }
 
-        /* ─── Demo background (simulate the page behind) ────────────── */
+        /* ── Demo background ── */
         .demo-bg {
-            position: fixed;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            pointer-events: none;
-            user-select: none;
+            position: fixed; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            pointer-events: none; user-select: none;
         }
-        .demo-bg__word {
-            font-size: clamp(6rem, 14vw, 14rem);
-            font-weight: 300;
-            color: rgba(13,11,9,0.04);
-            letter-spacing: -0.04em;
-            line-height: 1;
+        .demo-bg p {
+            font-size: clamp(5rem, 14vw, 13rem);
+            font-weight: 300; font-style: italic;
+            color: rgba(13,11,9,0.05); letter-spacing: -0.04em;
         }
 
-        /* ─── Grain overlay (depth & texture) ───────────────────────── */
+        /* ── Grain ── */
         .grain {
-            position: fixed;
-            inset: -50%;
-            width: 200%;
-            height: 200%;
-            pointer-events: none;
-            z-index: 9999;
-            opacity: 0.028;
+            position: fixed; inset: -50%; width: 200%; height: 200%;
+            pointer-events: none; z-index: 99999; opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
             background-size: 128px 128px;
-            animation: grain-shift 0.5s steps(1) infinite;
+            animation: grain 0.5s steps(1) infinite;
         }
-        @keyframes grain-shift {
-            0%  { transform: translate(0, 0); }
-            20% { transform: translate(-5%, -8%); }
-            40% { transform: translate(-10%, 5%); }
-            60% { transform: translate(4%, -6%); }
-            80% { transform: translate(-6%, 3%); }
-        }
-
-        /* ─── Trigger button ─────────────────────────────────────────── */
-        .nav-trigger {
-            position: fixed;
-            top: 2.75rem;
-            right: 3.5rem;
-            z-index: 1001;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 6px;
-            background: none;
-            border: none;
-            padding: 0.5rem;
-        }
-        .nav-trigger__line {
-            display: block;
-            height: 1px;
-            background: var(--ink);
-            transform-origin: right center;
-            transition: width 0.5s var(--ease-out),
-                        transform 0.55s var(--ease-out),
-                        opacity 0.3s ease;
-        }
-        .nav-trigger__line:nth-child(1) { width: 28px; }
-        .nav-trigger__line:nth-child(2) { width: 20px; }
-        .nav-trigger__line:nth-child(3) { width: 14px; }
-
-        .nav-trigger:hover .nav-trigger__line:nth-child(1) { width: 28px; }
-        .nav-trigger:hover .nav-trigger__line:nth-child(2) { width: 28px; }
-        .nav-trigger:hover .nav-trigger__line:nth-child(3) { width: 28px; }
-
-        /* Morphs to × when open */
-        .nav-trigger.is-open .nav-trigger__line:nth-child(1) {
-            width: 28px;
-            transform: translateY(7px) rotate(45deg);
-        }
-        .nav-trigger.is-open .nav-trigger__line:nth-child(2) {
-            opacity: 0;
-            transform: scaleX(0);
-        }
-        .nav-trigger.is-open .nav-trigger__line:nth-child(3) {
-            width: 28px;
-            transform: translateY(-7px) rotate(-45deg);
+        @keyframes grain {
+            0%  { transform: translate(0,0); }
+            20% { transform: translate(-5%,-8%); }
+            40% { transform: translate(-10%,5%); }
+            60% { transform: translate(4%,-6%); }
+            80% { transform: translate(-6%,3%); }
         }
 
-        /* ─── Overlay ────────────────────────────────────────────────── */
-        .nav-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
+        /* ── Trigger ── */
+        .trigger {
+            position: fixed; top: 2.5rem; right: 3rem;
+            z-index: 1001; cursor: pointer;
+            background: none; border: none; padding: 0.625rem;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 7px;
+        }
+        .trigger__bar {
+            display: block; height: 1px; background: #0d0b09;
+            transition: width 0.5s var(--ease), transform 0.55s var(--ease),
+                        background-color 0.3s, opacity 0.3s;
+        }
+        .trigger__bar:nth-child(1) { width: 30px; }
+        .trigger__bar:nth-child(2) { width: 20px; }
+        .trigger__bar:nth-child(3) { width: 12px; }
+        .trigger:hover .trigger__bar { width: 30px; }
+        .trigger.is-open .trigger__bar { background-color: var(--cream); }
+        .trigger.is-open .trigger__bar:nth-child(1) { width: 30px; transform: translateY(8px) rotate(45deg); }
+        .trigger.is-open .trigger__bar:nth-child(2) { opacity: 0; transform: scaleX(0); }
+        .trigger.is-open .trigger__bar:nth-child(3) { width: 30px; transform: translateY(-8px) rotate(-45deg); }
+
+        /* ── Overlay — sweeps from right like ink across parchment ── */
+        .overlay {
+            position: fixed; inset: 0; z-index: 1000;
             pointer-events: none;
-
-            /* Curtain sweeps from bottom — theatrical reveal */
-            clip-path: inset(0 0 100% 0);
-            transition: clip-path 0.9s var(--ease-out);
+            clip-path: inset(0 0 0 100%);
+            transition: clip-path 0.72s var(--ease);
         }
-        .nav-overlay.is-open {
+        .overlay.is-open {
             pointer-events: all;
-            clip-path: inset(0 0 0% 0);
+            clip-path: inset(0 0 0 0%);
+            transition: clip-path 0.88s var(--ease);
         }
 
-        /* Cream canvas */
-        .nav-canvas {
-            position: absolute;
-            inset: 0;
-            background: var(--cream);
+        /* Dark canvas */
+        .canvas {
+            position: absolute; inset: 0;
+            background: var(--bg);
+            display: flex; flex-direction: column;
         }
 
-        /* ─── Inner layout ───────────────────────────────────────────── */
-        .nav-inner {
-            position: absolute;
-            inset: 0;
-            display: grid;
-            grid-template-columns: 55% 45%;
+        /* ── Top bar ── */
+        .top-bar {
+            flex-shrink: 0;
+            display: flex; align-items: center; gap: 1.25rem;
+            padding: 2.25rem 3rem;
+            opacity: 0; transform: translateY(-6px);
+            transition: opacity 0.48s ease 0.28s, transform 0.48s var(--ease) 0.28s;
+        }
+        .overlay.is-open .top-bar { opacity: 1; transform: translateY(0); }
+        .overlay:not(.is-open) .top-bar { transition-delay: 0s; }
+
+        .top-label {
+            font-size: 0.5625rem; letter-spacing: 0.28em;
+            text-transform: uppercase; color: var(--muted); white-space: nowrap;
+        }
+        .top-rule {
+            flex: 1; height: 1px; background: var(--rule);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.85s var(--ease) 0.34s;
+        }
+        .overlay.is-open .top-rule { transform: scaleX(1); }
+        .overlay:not(.is-open) .top-rule { transition-delay: 0s; }
+
+        .top-counter {
+            font-family: "Italianno", serif;
+            font-size: 1.375rem; color: var(--red); line-height: 1;
+            min-width: 3rem; text-align: right;
+            transition: opacity 0.18s;
         }
 
-        /* ─── Left column ────────────────────────────────────────────── */
-        .nav-left {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            padding: 0 5vw 5vh 7vw;
+        /* ── Dividers ── */
+        .divider {
+            flex-shrink: 0; height: 1px; background: var(--rule);
+            transform: scaleX(0); transform-origin: left;
+        }
+        .divider--top { transition: transform 0.85s var(--ease) 0.22s; }
+        .divider--bot { transition: transform 0.85s var(--ease) 0.46s; }
+        .overlay.is-open .divider { transform: scaleX(1); }
+        .overlay:not(.is-open) .divider { transform: scaleX(0); transition-delay: 0s; }
+
+        /* ── Body ── */
+        .body {
+            flex: 1; overflow: hidden;
+            display: grid; grid-template-columns: 62% 38%;
         }
 
-        /* Top eyebrow */
-        .nav-eyebrow {
-            padding-top: 7.5vh;
-            font-size: 0.6875rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--muted);
-            opacity: 0;
-            transform: translateY(8px);
-            transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
-        }
-        .nav-overlay.is-open .nav-eyebrow {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Horizontal separator rule */
-        .nav-sep {
-            height: 1px;
-            background: var(--rule);
-            margin-top: 1.5vh;
-            width: 0;
-            transition: width 0.8s var(--ease-out) 0.2s;
-        }
-        .nav-overlay.is-open .nav-sep { width: 100%; }
-
-        /* Nav list */
+        /* ── Nav list ── */
         .nav-list {
             list-style: none;
-            margin-top: auto;
-            padding-bottom: 4vh;
+            display: flex; flex-direction: column; justify-content: center;
+            border-right: 1px solid var(--rule);
         }
 
         .nav-item {
-            overflow: hidden;
-            padding: 0.15rem 0;
-        }
-
-        .nav-item__inner {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-            transform: translateY(110%);
-            transition: transform 0.82s var(--ease-out);
-        }
-        .nav-item:nth-child(1) .nav-item__inner { transition-delay: 0.28s; }
-        .nav-item:nth-child(2) .nav-item__inner { transition-delay: 0.36s; }
-        .nav-item:nth-child(3) .nav-item__inner { transition-delay: 0.44s; }
-        .nav-item:nth-child(4) .nav-item__inner { transition-delay: 0.52s; }
-        .nav-overlay.is-open .nav-item__inner { transform: translateY(0); }
-
-        /* Closing animation: go back down */
-        .nav-overlay:not(.is-open) .nav-item__inner {
-            transition-delay: 0s !important;
-        }
-
-        .nav-item__num {
-            display: block;
-            font-family: "Italianno", serif;
-            font-size: 1.125rem;
-            color: var(--red);
-            line-height: 1;
-            transform: translateX(0);
-            transition: transform 0.4s var(--ease-spring), opacity 0.3s ease;
-        }
-
-        .nav-link {
-            display: inline-block;
-            font-family: "Cormorant Garamond", serif;
-            font-style: italic;
-            font-weight: 300;
-            font-size: clamp(3.75rem, 7.2vw, 7.5rem);
-            line-height: 0.9;
-            letter-spacing: -0.025em;
-            color: var(--ink);
-            text-decoration: none;
             position: relative;
+            border-bottom: 1px solid var(--rule);
+            transition: background 0.35s ease;
+        }
+        .nav-item:first-child { border-top: 1px solid var(--rule); }
+        .nav-item.is-hovered { background: rgba(255,255,255,0.02); }
+
+        /* Vertical red pen-stroke — draws down on hover */
+        .nav-item::after {
+            content: '';
+            position: absolute; left: 0; top: 0;
+            width: 2px; height: 0;
+            background: linear-gradient(to bottom, transparent, var(--red) 20%, var(--red) 80%, transparent);
+            transition: height 0.42s var(--ease);
+        }
+        .nav-item.is-hovered::after { height: 100%; }
+
+        /* Slide-up reveal */
+        .nav-item__inner {
+            display: flex; align-items: center; gap: 1.75rem;
+            padding: 2.4vh 3rem;
+            transform: translateY(44px); opacity: 0;
+            transition: transform 0.8s var(--ease), opacity 0.8s ease;
+        }
+        .nav-item:nth-child(1) .nav-item__inner { transition-delay: 0.32s; }
+        .nav-item:nth-child(2) .nav-item__inner { transition-delay: 0.41s; }
+        .nav-item:nth-child(3) .nav-item__inner { transition-delay: 0.50s; }
+        .nav-item:nth-child(4) .nav-item__inner { transition-delay: 0.59s; }
+        .overlay.is-open .nav-item__inner { transform: translateY(0); opacity: 1; }
+        .overlay:not(.is-open) .nav-item__inner {
+            transition-delay: 0s !important;
+            transition-duration: 0.2s !important;
         }
 
-        /* Sweep underline */
-        .nav-link::after {
+        /* Number */
+        .nav-num {
+            font-family: "Italianno", serif;
+            font-size: clamp(1.25rem, 2vw, 2.25rem);
+            color: rgba(213,50,18,0.38); line-height: 1;
+            flex-shrink: 0; width: 2.5rem; text-align: right;
+            transition: color 0.3s ease, transform 0.38s var(--spring);
+        }
+        .nav-item.is-hovered .nav-num {
+            color: var(--red); transform: translateX(0.375rem);
+        }
+
+        /* Main link */
+        .nav-link {
+            font-style: italic; font-weight: 300;
+            font-size: clamp(2.75rem, min(8.5vw, 9vh), 7.75rem);
+            line-height: 0.88; letter-spacing: -0.03em;
+            color: rgba(240,236,232,0.52);
+            text-decoration: none; display: block; white-space: nowrap;
+            transition: color 0.32s ease, transform 0.4s var(--spring);
+            will-change: transform;
+        }
+        .nav-item.is-hovered .nav-link {
+            color: var(--cream); transform: translateX(0.625rem);
+        }
+        /* Deep dim when a different item is hovered */
+        .overlay.has-hover .nav-item:not(.is-hovered) .nav-link {
+            color: rgba(240,236,232,0.1);
+        }
+        .overlay.has-hover .nav-item:not(.is-hovered) .nav-num {
+            color: rgba(213,50,18,0.12);
+        }
+
+        /* Sub-label */
+        .nav-sub {
+            font-family: "Italianno", serif;
+            font-size: clamp(0.875rem, 1.25vw, 1.375rem);
+            color: rgba(240,236,232,0.28); line-height: 1; white-space: nowrap;
+            margin-left: auto;
+            opacity: 0; transform: translateX(12px);
+            transition: opacity 0.28s ease 0.05s, transform 0.35s var(--spring) 0.05s;
+        }
+        .nav-item.is-hovered .nav-sub { opacity: 1; transform: translateX(0); }
+
+        /* Active page marker — small red diamond (matches site motif) */
+        .nav-item[data-active] .nav-link {
+            color: rgba(240,236,232,0.75);
+        }
+        .nav-item[data-active] .nav-num { color: rgba(213,50,18,0.65); }
+        .nav-item[data-active]::before {
             content: '';
             position: absolute;
-            bottom: 0.06em;
-            left: 0;
-            width: 100%;
-            height: 1px;
+            left: 2.875rem; top: 50%; margin-top: -3px;
+            width: 5px; height: 5px;
             background: var(--red);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.5s var(--ease-out);
-        }
-
-        /* Hover: text shifts right, underline sweeps in */
-        .nav-item:hover .nav-link {
-            transform: translateX(0.5rem);
-            transition: transform 0.4s var(--ease-spring);
-        }
-        .nav-item:hover .nav-link::after {
-            transform: scaleX(1);
-        }
-        .nav-item:hover .nav-item__num {
-            transform: translateX(0.5rem);
-        }
-
-        /* Sub-label in Italianno beneath each item */
-        .nav-item__sub {
-            font-family: "Italianno", serif;
-            font-size: 1.3rem;
-            color: var(--muted);
-            line-height: 1;
-            margin-top: 0.2rem;
-            padding-left: 0.1rem;
+            transform: rotate(45deg);
+            border-radius: 0;
             opacity: 0;
-            transform: translateX(-8px);
-            transition: opacity 0.35s ease, transform 0.35s var(--ease-spring);
+            transition: opacity 0.5s ease 0.65s;
         }
-        .nav-item:hover .nav-item__sub {
-            opacity: 1;
-            transform: translateX(0.5rem);
-        }
+        .overlay.is-open .nav-item[data-active]::before { opacity: 1; }
 
-        /* ─── Right column ───────────────────────────────────────────── */
-        .nav-right {
-            position: relative;
-            overflow: hidden;
-        }
+        /* ── Photo panel ── */
+        .photo-panel { position: relative; overflow: hidden; }
 
-        /* Vertical rule that draws down */
-        .nav-rule {
-            position: absolute;
-            left: 0;
-            top: 8vh;
-            width: 1px;
-            height: 0;
-            background: linear-gradient(
-                to bottom,
-                transparent,
-                var(--rule) 8%,
-                var(--rule) 92%,
-                transparent
-            );
-            transition: height 0.9s var(--ease-out) 0.2s;
+        .photo-mono {
+            position: absolute; inset: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-family: "Italianno", serif;
+            font-size: clamp(8rem, 18vw, 22rem);
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(240,236,232,0.05);
+            user-select: none; pointer-events: none;
+            opacity: 0; transition: opacity 0.55s ease 0.52s;
         }
-        .nav-overlay.is-open .nav-rule { height: 84vh; }
+        .overlay.is-open .photo-mono { opacity: 1; }
+        .overlay.has-hover .photo-mono { opacity: 0; transition-delay: 0s; }
 
-        /* Photo reveal slots */
-        .nav-photos {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .photo-label {
+            position: absolute; bottom: 4vh; right: 2.5rem;
+            writing-mode: vertical-rl; transform: rotate(180deg);
+            font-size: 0.5rem; letter-spacing: 0.26em; text-transform: uppercase;
+            color: rgba(240,236,232,0.16);
+            user-select: none; pointer-events: none;
+            opacity: 0; transition: opacity 0.6s ease 0.64s;
         }
+        .overlay.is-open .photo-label { opacity: 1; }
 
         .nav-photo {
-            position: absolute;
-            width: 62%;
-            aspect-ratio: 3/4;
-            object-fit: cover;
-            opacity: 0;
-            transform: scale(1.06) translateY(12px);
-            transition: opacity 0.55s ease,
-                        transform 0.55s var(--ease-out);
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover; object-position: center 20%;
+            opacity: 0; transform: scale(1.07);
+            transition: opacity 0.55s ease, transform 0.55s var(--ease);
             pointer-events: none;
         }
-        .nav-photo.is-visible {
-            opacity: 1;
-            transform: scale(1) translateY(0);
-        }
+        .nav-photo.is-visible { opacity: 0.82; transform: scale(1); }
 
-        /* Large outline monogram — shown when no photo is hovered */
-        .nav-monogram {
-            position: absolute;
-            bottom: 6vh;
-            right: 4vw;
+        /* ── Footer ── */
+        .footer-bar {
+            flex-shrink: 0;
+            display: flex; align-items: center; gap: 1.5rem;
+            padding: 1.75rem 3rem;
+            opacity: 0; transform: translateY(5px);
+            transition: opacity 0.48s ease 0.58s, transform 0.48s var(--ease) 0.58s;
+        }
+        .overlay.is-open .footer-bar { opacity: 1; transform: translateY(0); }
+        .overlay:not(.is-open) .footer-bar { transition-delay: 0s; }
+
+        .footer-brand {
             font-family: "Italianno", serif;
-            font-size: clamp(5rem, 10vw, 12rem);
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(13,11,9,0.10);
-            line-height: 1;
-            white-space: nowrap;
-            user-select: none;
-            pointer-events: none;
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.9s ease 0.55s, transform 0.9s ease 0.55s;
+            font-size: 2rem; color: var(--red); line-height: 1;
         }
-        .nav-overlay.is-open .nav-monogram {
-            opacity: 1;
-            transform: translateY(0);
+        .footer-sep {
+            flex: 1; height: 1px; background: var(--rule);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.85s var(--ease) 0.65s;
         }
+        .overlay.is-open .footer-sep { transform: scaleX(1); }
+        .overlay:not(.is-open) .footer-sep { transition-delay: 0s; }
 
-        /* Year/edition label top-right */
-        .nav-edition {
-            position: absolute;
-            top: 7.5vh;
-            right: 2.5vw;
-            font-size: 0.6875rem;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--muted);
-            writing-mode: vertical-rl;
-            transform: rotate(180deg);
-            opacity: 0;
-            transition: opacity 0.6s ease 0.55s;
+        .footer-meta {
+            font-size: 0.5625rem; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--muted);
+            text-align: right; line-height: 2.4;
         }
-        .nav-overlay.is-open .nav-edition { opacity: 1; }
+        .footer-meta a { color: var(--muted); text-decoration: none; transition: color 0.22s; }
+        .footer-meta a:hover { color: var(--cream); }
 
-        /* ─── Footer bar ─────────────────────────────────────────────── */
-        .nav-footer {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 8vh;
-            min-height: 56px;
-            display: flex;
-            align-items: center;
-            padding: 0 7vw 0 7vw;
-            border-top: 1px solid var(--rule);
-            justify-content: space-between;
-            opacity: 0;
-            transform: translateY(6px);
-            transition: opacity 0.6s ease 0.58s, transform 0.6s ease 0.58s;
-        }
-        .nav-overlay.is-open .nav-footer {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .nav-footer__brand {
-            font-family: "Italianno", serif;
-            font-size: 1.875rem;
-            color: var(--red);
-            line-height: 1;
-        }
-        .nav-footer__meta {
-            font-size: 0.6875rem;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            color: var(--muted);
-            text-align: right;
-            line-height: 2;
-        }
-        .nav-footer__meta a {
-            color: var(--muted);
-            text-decoration: none;
-            transition: color 0.25s ease;
-        }
-        .nav-footer__meta a:hover { color: var(--ink); }
-
-        /* ─── Custom cursor ──────────────────────────────────────────── */
+        /* ── Custom cursor ── */
         .cursor {
-            position: fixed;
-            top: 0; left: 0;
-            width: 36px; height: 36px;
-            border: 1px solid rgba(13,11,9,0.35);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.4s var(--ease-spring),
-                        border-color 0.3s ease,
-                        width 0.4s var(--ease-spring),
-                        height 0.4s var(--ease-spring);
-            mix-blend-mode: multiply;
+            position: fixed; top: 0; left: 0;
+            width: 32px; height: 32px;
+            border: 1px solid rgba(240,236,232,0.2);
+            border-radius: 50%; pointer-events: none; z-index: 9998;
+            transform: translate(-50%,-50%) scale(0);
+            transition: transform 0.42s var(--spring), width 0.42s var(--spring),
+                        height 0.42s var(--spring), border-color 0.28s;
+            display: flex; align-items: center; justify-content: center;
         }
-        .cursor.is-active { transform: translate(-50%, -50%) scale(1); }
-        .cursor.is-hover {
-            width: 56px; height: 56px;
-            border-color: var(--red);
-        }
-        .cursor::after {
-            content: '→';
+        .cursor.is-active { transform: translate(-50%,-50%) scale(1); }
+        .cursor.is-hover  { width: 52px; height: 52px; border-color: rgba(213,50,18,0.6); }
+        .cursor__arrow {
             position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             font-family: "Cormorant Garamond", serif;
-            font-size: 0.875rem;
-            color: var(--red);
-            opacity: 0;
-            transition: opacity 0.25s ease;
+            font-size: 0.75rem; color: var(--red);
+            opacity: 0; transition: opacity 0.2s;
         }
-        .cursor.is-hover::after { opacity: 1; }
+        .cursor.is-hover .cursor__arrow { opacity: 1; }
 
-        /* ─── Accessibility ──────────────────────────────────────────── */
+        /* ── A11y ── */
         .sr-only {
-            position: absolute; width: 1px; height: 1px;
-            padding: 0; margin: -1px; overflow: hidden;
-            clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+            position: absolute; width: 1px; height: 1px; padding: 0;
+            margin: -1px; overflow: hidden; clip: rect(0,0,0,0);
+            white-space: nowrap; border: 0;
+        }
+
+        /* ── Desktop media queries ── */
+        @media (min-width: 1920px) {
+            .trigger { top: 3rem; right: 4rem; }
+            .top-bar, .footer-bar { padding-left: 4rem; padding-right: 4rem; }
+            .nav-item__inner { padding-left: 4rem; padding-right: 4rem; }
+        }
+        @media (min-width: 2560px) {
+            .trigger { top: 3.5rem; right: 5rem; }
+            .top-bar, .footer-bar { padding-left: 5rem; padding-right: 5rem; }
+            .nav-item__inner { padding-left: 5rem; }
         }
     </style>
 </head>
 <body>
 
-<!-- Grain texture overlay for depth -->
 <div class="grain" aria-hidden="true"></div>
-
-<!-- Custom cursor (shows inside menu) -->
-<div class="cursor" id="cursor" aria-hidden="true"></div>
-
-<!-- Page background hint -->
-<div class="demo-bg" aria-hidden="true">
-    <span class="demo-bg__word">Schrijfstijn</span>
+<div class="cursor" id="cursor" aria-hidden="true">
+    <span class="cursor__arrow">→</span>
 </div>
+<div class="demo-bg" aria-hidden="true"><p>Schrijfstijn</p></div>
 
-<!-- ── Menu trigger ─────────────────────────────────────────────────────── -->
-<button
-    class="nav-trigger"
-    id="navTrigger"
-    aria-expanded="false"
-    aria-controls="navOverlay"
-    aria-label="Menu openen"
->
-    <span class="nav-trigger__line"></span>
-    <span class="nav-trigger__line"></span>
-    <span class="nav-trigger__line"></span>
+<!-- Trigger -->
+<button class="trigger" id="trigger"
+    aria-expanded="false" aria-controls="overlay"
+    aria-label="Menu openen">
+    <span class="trigger__bar"></span>
+    <span class="trigger__bar"></span>
+    <span class="trigger__bar"></span>
 </button>
 
-<!-- ── Navigation overlay ───────────────────────────────────────────────── -->
-<nav
-    class="nav-overlay"
-    id="navOverlay"
-    aria-hidden="true"
-    aria-label="Hoofdnavigatie"
->
-    <div class="nav-canvas"></div>
+<!-- Navigation overlay -->
+<nav class="overlay" id="overlay"
+    aria-hidden="true" aria-label="Hoofdnavigatie">
+    <div class="canvas">
 
-    <div class="nav-inner">
+        <header class="top-bar">
+            <span class="top-label">— Navigatie</span>
+            <span class="top-rule"></span>
+            <span class="top-counter" id="topCounter">01</span>
+        </header>
 
-        <!-- Left: navigation links -->
-        <div class="nav-left">
-            <p class="nav-eyebrow">— Navigatie</p>
-            <div class="nav-sep"></div>
+        <div class="divider divider--top"></div>
 
-            <ul class="nav-list">
+        <div class="body">
 
-                <li class="nav-item" data-photo="photo-home">
+            <ul class="nav-list" id="navList">
+
+                <li class="nav-item" data-photo="p-home" data-idx="01" data-href="index.html">
                     <div class="nav-item__inner">
-                        <span class="nav-item__num">01</span>
+                        <span class="nav-num">01</span>
                         <a class="nav-link" href="./index.html">Home</a>
-                        <span class="nav-item__sub">De thuisbasis</span>
+                        <span class="nav-sub">De thuisbasis</span>
                     </div>
                 </li>
 
-                <li class="nav-item" data-photo="photo-diensten">
+                <li class="nav-item" data-photo="p-diensten" data-idx="02" data-href="diensten.html">
                     <div class="nav-item__inner">
-                        <span class="nav-item__num">02</span>
+                        <span class="nav-num">02</span>
                         <a class="nav-link" href="./diensten.html">Diensten</a>
-                        <span class="nav-item__sub">Songwriting · Productie · Consulting</span>
+                        <span class="nav-sub">Songwriting · Productie · Consulting</span>
                     </div>
                 </li>
 
-                <li class="nav-item" data-photo="photo-over">
+                <li class="nav-item" data-photo="p-over" data-idx="03" data-href="over.html">
                     <div class="nav-item__inner">
-                        <span class="nav-item__num">03</span>
+                        <span class="nav-num">03</span>
                         <a class="nav-link" href="./over.html">Over</a>
-                        <span class="nav-item__sub">Ontmoet Stijn Bouvé</span>
+                        <span class="nav-sub">Ontmoet Stijn Bouvé</span>
                     </div>
                 </li>
 
-                <li class="nav-item" data-photo="photo-contact">
+                <li class="nav-item" data-photo="p-contact" data-idx="04" data-href="contact.html">
                     <div class="nav-item__inner">
-                        <span class="nav-item__num">04</span>
+                        <span class="nav-num">04</span>
                         <a class="nav-link" href="#contact">Contact</a>
-                        <span class="nav-item__sub">Start een aanvraag</span>
+                        <span class="nav-sub">Start een aanvraag</span>
                     </div>
                 </li>
 
             </ul>
-        </div>
 
-        <!-- Right: visual area -->
-        <div class="nav-right">
-            <div class="nav-rule"></div>
+            <div class="photo-panel" id="photoPanel">
+                <div class="photo-mono" aria-hidden="true">S</div>
+                <p class="photo-label" aria-hidden="true">Est. 2016 · België</p>
 
-            <!-- Photography — one per nav item, revealed on hover -->
-            <div class="nav-photos">
-                <img
-                    id="photo-home"
-                    class="nav-photo"
-                    src="./Schrijfstijn%20home%20page/schrijfstijnhero.png"
-                    alt=""
-                    aria-hidden="true"
-                >
-                <img
-                    id="photo-diensten"
-                    class="nav-photo"
-                    src="./Schrijfstijn%20home%20page/svc-songwriting.jpg"
-                    alt=""
-                    aria-hidden="true"
-                >
-                <img
-                    id="photo-over"
-                    class="nav-photo"
-                    src="./Schrijfstijn%20home%20page/stijn-portrait.png"
-                    alt=""
-                    aria-hidden="true"
-                >
-                <img
-                    id="photo-contact"
-                    class="nav-photo"
-                    src="./Schrijfstijn%20home%20page/studio-100.png"
-                    alt=""
-                    aria-hidden="true"
-                >
+                <img id="p-home"     class="nav-photo"
+                     src="./Schrijfstijn%20home%20page/schrijfstijnhero.png"
+                     alt="" aria-hidden="true">
+                <img id="p-diensten" class="nav-photo"
+                     src="./Schrijfstijn%20home%20page/svc-songwriting.jpg"
+                     alt="" aria-hidden="true">
+                <img id="p-over"     class="nav-photo"
+                     src="./Schrijfstijn%20home%20page/stijn-portrait.png"
+                     alt="" aria-hidden="true">
+                <img id="p-contact"  class="nav-photo"
+                     src="./Schrijfstijn%20home%20page/studio-100.png"
+                     alt="" aria-hidden="true">
             </div>
 
-            <!-- Decorative monogram -->
-            <p class="nav-monogram" aria-hidden="true">Schrijfstijn</p>
-
-            <!-- Edition label -->
-            <p class="nav-edition" aria-hidden="true">Est. 2016 · België</p>
         </div>
+
+        <div class="divider divider--bot"></div>
+
+        <footer class="footer-bar">
+            <span class="footer-brand">Schrijfstijn</span>
+            <span class="footer-sep"></span>
+            <div class="footer-meta">
+                <a href="mailto:info@schrijfstijn.be">info@schrijfstijn.be</a><br>
+                Songwriting &amp; Audio Productie
+            </div>
+        </footer>
 
     </div>
-
-    <!-- Footer bar -->
-    <footer class="nav-footer">
-        <span class="nav-footer__brand">Schrijfstijn</span>
-        <div class="nav-footer__meta">
-            <a href="mailto:info@schrijfstijn.be">info@schrijfstijn.be</a><br>
-            Songwriting &amp; Audio Productie
-        </div>
-    </footer>
-
 </nav>
 
 <script>
-    /* ── State ──────────────────────────────────────────────────────── */
-    const trigger  = document.getElementById('navTrigger');
-    const overlay  = document.getElementById('navOverlay');
-    const cursor   = document.getElementById('cursor');
-    const navItems = overlay.querySelectorAll('.nav-item');
+    const trigger = document.getElementById('trigger');
+    const overlay = document.getElementById('overlay');
+    const counter = document.getElementById('topCounter');
+    const cursor  = document.getElementById('cursor');
+    const items   = [...overlay.querySelectorAll('.nav-item')];
     let isOpen = false;
 
-    /* ── Open / close ───────────────────────────────────────────────── */
-    function openMenu() {
+    /* ── Active page marker ── */
+    const page = window.location.pathname.split('/').pop() || 'index.html';
+    items.forEach(item => {
+        if (item.dataset.href === page) item.dataset.active = '1';
+    });
+
+    /* ── Open / close ── */
+    function open() {
         isOpen = true;
         trigger.classList.add('is-open');
         trigger.setAttribute('aria-expanded', 'true');
+        trigger.setAttribute('aria-label', 'Menu sluiten');
         overlay.classList.add('is-open');
         overlay.setAttribute('aria-hidden', 'false');
         document.body.style.overflow = 'hidden';
     }
 
-    function closeMenu() {
+    function close() {
         isOpen = false;
         trigger.classList.remove('is-open');
         trigger.setAttribute('aria-expanded', 'false');
+        trigger.setAttribute('aria-label', 'Menu openen');
         overlay.classList.remove('is-open');
         overlay.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
-        hideAllPhotos();
+        clearHover();
     }
 
-    trigger.addEventListener('click', () => isOpen ? closeMenu() : openMenu());
+    trigger.addEventListener('click', () => isOpen ? close() : open());
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && isOpen) close(); });
+    overlay.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', close));
 
-    document.addEventListener('keydown', e => {
-        if (e.key === 'Escape' && isOpen) closeMenu();
-    });
-
-    /* Close on nav link click */
-    overlay.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
-
-    /* ── Photo hover ────────────────────────────────────────────────── */
-    function hideAllPhotos() {
+    /* ── Photo / hover state ── */
+    function clearHover() {
+        items.forEach(el => el.classList.remove('is-hovered'));
+        overlay.classList.remove('has-hover');
         overlay.querySelectorAll('.nav-photo').forEach(p => p.classList.remove('is-visible'));
+        counter.textContent = '01';
     }
 
-    navItems.forEach(item => {
-        const photoId = item.dataset.photo;
-        const photo   = photoId ? document.getElementById(photoId) : null;
+    items.forEach(item => {
+        const photo = document.getElementById(item.dataset.photo);
+        const idx   = item.dataset.idx || '01';
 
         item.addEventListener('mouseenter', () => {
-            hideAllPhotos();
+            items.forEach(el => el.classList.remove('is-hovered'));
+            overlay.querySelectorAll('.nav-photo').forEach(p => p.classList.remove('is-visible'));
+            item.classList.add('is-hovered');
+            overlay.classList.add('has-hover');
             if (photo) photo.classList.add('is-visible');
-            cursor.classList.add('is-hover');
+            counter.textContent = idx;
         });
 
         item.addEventListener('mouseleave', () => {
+            item.classList.remove('is-hovered');
             if (photo) photo.classList.remove('is-visible');
-            cursor.classList.remove('is-hover');
+            if (!items.some(el => el.classList.contains('is-hovered'))) {
+                overlay.classList.remove('has-hover');
+                counter.textContent = '01';
+            }
         });
     });
 
-    /* ── Custom cursor ──────────────────────────────────────────────── */
-    let mouseX = 0, mouseY = 0;
-    let curX   = 0, curY   = 0;
-    let rafId  = null;
+    /* ── Custom cursor (lerp) ── */
+    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+    let cx = mx, cy = my;
 
-    document.addEventListener('mousemove', e => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    overlay.addEventListener('mouseenter', () => cursor.classList.add('is-active'));
+    overlay.addEventListener('mouseleave', () => cursor.classList.remove('is-active', 'is-hover'));
 
-        if (!cursor.classList.contains('is-active')) {
-            cursor.classList.add('is-active');
-        }
+    overlay.querySelectorAll('.nav-link, .footer-meta a').forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('is-hover'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('is-hover'));
     });
 
-    function animateCursor() {
-        curX += (mouseX - curX) * 0.12;
-        curY += (mouseY - curY) * 0.12;
-        cursor.style.left = curX + 'px';
-        cursor.style.top  = curY + 'px';
-        rafId = requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-
-    /* Pause cursor raf when menu is closed (minor optimisation) */
-    document.addEventListener('mouseleave', () => {
-        cursor.classList.remove('is-active');
-    });
+    (function loop() {
+        cx += (mx - cx) * 0.12;
+        cy += (my - cy) * 0.12;
+        cursor.style.left = cx + 'px';
+        cursor.style.top  = cy + 'px';
+        requestAnimationFrame(loop);
+    })();
 </script>
 </body>
 </html>
