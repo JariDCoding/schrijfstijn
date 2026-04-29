@@ -558,83 +558,107 @@
         }
 
         /* ── iPhone 14 Pro Max: full-bleed editorial hero ────────────── */
-        @media (max-width: 430px) {
+        /* ── Mobile hero — all phones up to 600px ─────────────────────────────────
+           Matches Figma node 162:3 (430 × 932 px iPhone 14 Pro Max frame).
+           Proportions expressed as vw / svh so they stay correct on all phones.
 
+           Key measurements (px → %) from 430 × 932 frame:
+             photo  left 18.4vw  top 16.2svh  width 132.6vw
+             THE    left  3.7vw  top 61.5svh
+             MAN    left 43.5vw  top 61.5svh  (same row as THE)
+             BEHIND left  3.7vw  top 68.1svh
+             Your   left  6.5vw  top 73.9svh  width 23.5vw
+             SONG   left  4.9vw  top 74.7svh
+             CTA    left  7.7vw  top 87.8svh  width 28.1vw h 47px         */
+
+        @media (max-width: 600px) {
+
+            /* Cream-background full-screen hero — no dark overlay */
             .os-hero {
                 width: 100vw;
                 height: 100svh;
                 overflow: hidden;
+                background: #f8f4f0;
             }
 
-            /* Dark ink gradient — transparent at top, near-opaque at bottom.
-               Words sit in the dark zone and stay fully legible. */
-            .os-hero::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                background: linear-gradient(
-                    to bottom,
-                    rgba(12,10,9,0)    0%,
-                    rgba(12,10,9,0.10) 28%,
-                    rgba(12,10,9,0.60) 55%,
-                    rgba(12,10,9,0.94) 100%
-                );
-                z-index: 1;
-                pointer-events: none;
-            }
-
-            /* Photo fills the full hero — DOM comes after the words,
-               so explicitly set z-index: 0 so words can sit above it */
+            /* Photo: portrait PNG blended into cream via multiply.
+               Extends beyond viewport width — clipped by hero overflow. */
             .os-photo {
-                left: 0; top: 0;
-                width: 100%; height: 100%;
-                object-fit: cover;
-                object-position: center top;
+                left: 18vw;
+                top: 16.2svh;
+                width: 133vw;
+                height: auto;
+                object-fit: initial;
+                object-position: initial;
+                mix-blend-mode: multiply;
                 z-index: 0;
             }
 
-            /* Words: cream on dark gradient — editorial asymmetry:
-               THE / MAN lean left, BEHIND / SONG lean right */
+            /* Words: black, 19vw for editorial scale */
             .os-word {
-                font-size: 20vw;
-                color: #f0ece8;
+                font-size: 19vw;
+                color: #000;
                 z-index: 2;
             }
 
-            #os-the {
-                left: 6vw;
-                top: 37svh;
-            }
-            #os-man {
-                left: 3vw;
-                top: 49svh;
-            }
-            #os-behind {
-                left: auto; right: 4vw;
-                top: 61svh;
-            }
-            #os-song {
-                left: auto; right: 4vw;
-                top: 73svh;
+            /* Row 1: THE and MAN share the same baseline */
+            #os-the    { left: 4vw;   top: 61.5svh; animation-delay: 0.08s; }
+            #os-man    { left: 43.5vw; top: 61.5svh; animation-delay: 0.16s; }
+
+            /* Row 2 */
+            #os-behind { left: 4vw; right: auto; top: 68svh; animation-delay: 0.24s; }
+
+            /* Row 3: "Your" italic script sits above SONG — together they read "Your SONG" */
+            #os-song   { left: 5vw; right: auto; top: 74.7svh; animation-delay: 0.32s; }
+
+            /* "Your" red script — show on mobile, positioned at row 3 */
+            .os-your {
+                display: block;
+                position: absolute;
+                left: 6.5vw;
+                top: 73.9svh;
+                width: 23.5vw;
+                height: auto;
+                max-width: none;
+                z-index: 3;
             }
 
-            /* Body text: cream, small, bottom of screen */
+            /* Quote body text — italic, top of hero */
             .os-body {
-                left: 6vw; right: 6vw;
+                left: 5vw; right: 5vw;
                 width: auto;
-                top: 86svh;
-                font-size: 0.9375rem;
-                line-height: 1.6;
-                color: rgba(240,236,232,0.6);
+                top: 4svh;
+                font-size: clamp(11px, 3.7vw, 16px);
+                font-style: italic;
+                line-height: 1.55;
+                color: rgba(13,11,9,0.65);
                 z-index: 2;
             }
             .os-body-line { white-space: normal; }
 
-            /* Hide decorative SVG and ticket CTA — not needed on mobile hero */
-            .os-your { display: none; }
-            .os-cta  { display: none; }
+            /* CTA: ticket button at bottom */
+            .os-cta {
+                display: block;
+                left: 7.7vw;
+                top: 87.8svh;
+                width: 28.1vw;
+                height: 47px;
+                z-index: 2;
+            }
+            .os-cta-border {
+                left: 6px; top: 5px;
+                width: calc(100% - 12px);
+                height: calc(100% - 10px);
+                border: 1px solid #f8f4f0;
+            }
+            .os-cta-label {
+                font-size: clamp(7px, 2.8vw, 12px);
+                top: 50%;
+                transform: translateY(-50%);
+                letter-spacing: 0.12em;
+            }
 
-            /* Sections below the hero not yet optimised for mobile */
+            /* Sections below hero — not yet optimised for mobile */
             .oo, .vd, .usp { display: none; }
         }
     </style>

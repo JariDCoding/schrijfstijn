@@ -160,7 +160,7 @@
 .menu-nav-num {
     font-family: "Italianno", serif;
     font-size: clamp(1.25rem, 2vw, 2.25rem);
-    color: var(--menu-ink); line-height: 1;
+    color: var(--menu-red); line-height: 1;
     flex-shrink: 0; width: 2.5rem; text-align: right;
     transition: transform 0.38s var(--menu-spring);
 }
@@ -172,7 +172,7 @@
     font-style: italic; font-weight: 300;
     font-size: clamp(2.75rem, min(8.5vw, 9vh), 7.75rem);
     line-height: 0.88; letter-spacing: -0.03em;
-    color: rgba(13,11,9,0.52);
+    color: rgba(13,11,9,0.82);
     text-decoration: none; display: block; white-space: nowrap;
     transition: color 0.32s ease, transform 0.4s var(--menu-spring);
     will-change: transform;
