@@ -875,10 +875,10 @@
                 padding-bottom: 48px;
             }
 
-            /* Section header */
+            /* Section header — tight so script sits flush under title */
             .usp-header {
                 display: block;
-                padding: 44px 4.88vw 20px;
+                padding: 44px 4.88vw 24px;
             }
             .usp-title {
                 position: relative;
@@ -889,22 +889,23 @@
                 line-height: 1;
                 color: #000;
                 white-space: normal;
-                margin: 0 0 6px;
+                margin: 0;           /* no gap — script overlaps like desktop */
                 opacity: 1 !important;
                 transform: none !important;
                 filter: none !important;
                 transition: none !important;
             }
+            /* Script floats inline-right so it sits beside/below title as on desktop */
             .usp-script {
                 position: relative;
                 left: auto; top: auto;
-                width: 62vw;
+                width: 58vw;
                 height: auto;
                 display: block;
-                margin: 0;
+                margin: -2px 0 0 26vw; /* indent to align with desktop script position */
             }
 
-            /* Scrollable carousel track */
+            /* Scrollable carousel track — same cream bg, no visible container */
             .usp-carousel {
                 display: flex;
                 overflow-x: scroll;
@@ -913,43 +914,44 @@
                 -webkit-overflow-scrolling: touch;
                 scrollbar-width: none;
                 padding: 0 4.88vw;
-                gap: 4vw;
+                gap: 5vw;
             }
             .usp-carousel::-webkit-scrollbar { display: none; }
 
-            /* Cards — 80vw so ~11vw of next card peeks */
+            /* Cards — 80vw, no border/bg, pure editorial like desktop */
             .usp-card {
                 flex: 0 0 80vw;
                 scroll-snap-align: start;
                 display: flex;
                 flex-direction: column;
+                background: none;
             }
 
-            /* Photos inside card */
+            /* Photos — tall editorial aspect ratio matching desktop ~1:2 */
             .usp-photo-placeholder {
                 position: relative;
                 left: auto; top: auto;
                 width: 100%;
-                height: 220px;
+                height: 260px;
                 background: #d7d6d4;
                 opacity: 0.82 !important;
                 transform: none !important;
                 transition: none !important;
                 display: block;
-                margin-bottom: 20px;
+                margin-bottom: 16px;
                 flex-shrink: 0;
             }
             .usp-photo {
                 position: relative;
                 left: auto; top: auto;
                 width: 100%;
-                height: 220px;
+                height: 260px;
                 object-fit: cover;
                 opacity: 1 !important;
                 transform: none !important;
                 transition: none !important;
                 display: block;
-                margin-bottom: 20px;
+                margin-bottom: 16px;
                 flex-shrink: 0;
             }
 
