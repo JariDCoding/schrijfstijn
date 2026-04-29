@@ -691,102 +691,135 @@
             /* USP — not yet optimised */
             .usp { display: none; }
 
-            /* ── Over ons (.oo) — mobile layout ── */
+            /* ── Over ons (.oo) — Figma node 162:43, 430px frame ── */
             .oo {
                 display: block;
                 position: relative;
                 width: 100vw;
-                height: 620px;
+                height: 570px;
+                margin: 0;           /* overrides desktop 21.5rem top margin */
                 overflow: hidden;
                 background: #f8f4f0;
             }
+            /* Kill desktop animation states — show immediately */
             .oo-title {
                 position: absolute;
                 top: 34px;
-                left: 4.9vw;
+                left: 4.88vw;
+                margin: 0;
                 font-size: 9.77vw;
+                font-weight: 400;
                 line-height: 1;
+                color: #000;
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
             }
+            /* "achter jouw hit" — not in Figma mobile design */
+            .oo-subtitle { display: none !important; }
+            .oo-line-1   { display: none !important; }
+
+            /* "De persoon" script — Figma: left 210px, top 52px, w 115px */
             .oo-script {
                 position: absolute;
                 top: 52px;
-                left: 48.8vw;
-                width: 26.7vw;
+                left: 48.84vw;
+                width: 26.74vw;
                 height: auto;
+                visibility: visible;
             }
+
+            /* Large photo — Figma: left -58px, top 168px, 182×299px, bleeds left */
             .oo-photo-large {
                 position: absolute;
                 top: 168px;
-                left: -1.6vw;
-                width: 42.3vw;
+                left: -13.49vw;
+                width: 42.33vw;
                 height: 299px;
                 opacity: 0.8;
-                background: #ccc;
+                background: #d7d6d4;
                 overflow: hidden;
+                transform: none !important;
+                transition: none !important;
             }
+            /* Small photo — Figma: left 356px, top 149px, 74×122px, bleeds right */
             .oo-photo-small {
                 position: absolute;
                 top: 149px;
-                left: 82.8vw;
-                width: 17.2vw;
+                left: 82.84vw;
+                width: 17.21vw;
                 height: 122px;
                 opacity: 0.8;
-                background: #ccc;
+                background: #d7d6d4;
                 overflow: hidden;
+                transform: none !important;
+                transition: none !important;
             }
+            /* Body text — Figma: left 230px, top 368px, w 194px, 16px */
             .oo-body {
                 position: absolute;
                 top: 368px;
-                left: 53.5vw;
-                width: 45.1vw;
+                left: 53.49vw;
+                width: 45.12vw;
                 font-size: 10px;
-                line-height: 1.6;
+                line-height: 1.5;
                 color: rgba(13,11,9,0.65);
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
             }
             .oo-body-line { display: block; white-space: normal; }
-            .oo-line-1, .oo-subtitle { display: none; }
+            /* Decorative line — Figma: left 57px, top 533px, w 75px, 1px black */
             .oo-line-2 {
                 display: block;
                 position: absolute;
                 top: 533px;
-                left: 13.3vw;
-                width: 17.4vw;
+                left: 13.26vw;
+                width: 17.44vw;
                 height: 1px;
-                background: rgba(13,11,9,0.15);
+                background: #000;
+                transform: scaleX(1) !important;
+                transform-origin: left center;
+                transition: none !important;
             }
 
-            /* ── Vertrouwd door (.vd) — mobile layout ── */
+            /* ── Vertrouwd door (.vd) — Figma: title top 674px, logos top 730px
+               .oo ends at ~570px, so offset = 674-570=104px / 730-570=160px    ── */
             .vd {
                 display: block;
                 position: relative;
                 width: 100vw;
-                height: 220px;
+                height: 270px;
+                margin: 0;
                 background: #f8f4f0;
-                overflow: visible;
-                padding-top: 20px;
+                overflow: hidden;
+                padding: 0;
             }
             .vd-title {
-                position: relative;
-                top: 0;
+                position: absolute;
+                top: 104px;
                 width: 100%;
                 text-align: center;
                 font-family: "Italianno", serif;
                 font-size: 26px;
                 color: rgba(13,11,9,0.7);
-                margin-bottom: 16px;
+                margin: 0;
             }
+            /* Logos — Figma: left -50/98/246/394px, top 730px, 85×85px
+               Translated to vw (÷430×100), clipped by overflow hidden       */
             .vd-logo {
                 position: absolute;
-                top: 72px;
-                width: 19.8vw;
-                height: 19.8vw;
+                top: 160px;
+                width: 19.77vw;
+                height: 19.77vw;
                 object-fit: contain;
             }
-            /* 4 logos evenly spaced 5vw→95vw, gap = 3.6vw between each */
-            .vd-logo-1 { left: 5vw; }
-            .vd-logo-2 { left: 28.4vw; }
-            .vd-logo-3 { left: 51.8vw; }
-            .vd-logo-4 { left: 75.2vw; }
+            .vd-logo-1 { left: -11.63vw; }
+            .vd-logo-2 { left: 22.79vw; }
+            .vd-logo-3 { left: 57.21vw; }
+            .vd-logo-4 { left: 91.63vw; }
         }
     </style>
 </head>
