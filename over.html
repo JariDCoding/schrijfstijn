@@ -740,13 +740,16 @@
                 transition: none !important;
             }
 
-            /* "achter jouw hit" — right edge aligns with line's right edge (96vw) */
+            /* "achter jouw hit" — right edge aligns with line's right edge (96vw)
+               width: auto resets desktop's 37rem fixed width that was bleeding
+               180px off the left edge of the 430px viewport                    */
             .oo-subtitle {
                 display: block !important;
                 position: absolute;
                 top: 90px;
                 left: auto;
                 right: 4vw;
+                width: auto !important;
                 margin: 0;
                 font-size: 9.77vw;
                 font-weight: 400;
