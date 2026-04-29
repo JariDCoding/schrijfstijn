@@ -1086,54 +1086,54 @@ body {
     }
     .menu-trigger__bar { height: 1.5px; }
 
-    /* ─── Hero ──────────────────────────────────────────────── */
-    .hero { width: 100vw; height: 100svh; overflow: hidden; }
-
-    .hero::after {
-        content: '';
-        position: absolute; left: 0; bottom: 0;
-        width: 100%; height: 55%;
-        background: linear-gradient(
-            to bottom,
-            transparent,
-            rgba(248,244,240,0.88) 45%,
-            #f8f4f0 75%
-        );
-        pointer-events: none; z-index: 1;
+    /* ─── Hero — stacked: text on top, photo below ─────────── */
+    .hero {
+        width: 100vw; height: auto; overflow: hidden;
+        background: #f8f4f0;
+        padding: max(calc(env(safe-area-inset-top) + 1.25rem), 5rem) 4.88vw 0;
+        display: block;
     }
 
-    .hero-photo {
-        left: 0; top: 0; width: 100%; height: 100%;
-        object-fit: cover; object-position: center top;
-        transform: scale(1.04) translateY(0);
-        animation: hero-photo-in 1.4s cubic-bezier(0.16,1,0.3,1) 1.0s forwards;
-    }
+    .hero::after { display: none; }
 
     .hero-title {
-        left: 4.88vw; top: 48svh;
-        font-size: 13vw; white-space: nowrap; line-height: 1; z-index: 2;
+        position: relative; left: auto; top: auto;
+        font-size: 14vw; white-space: nowrap; line-height: 1; z-index: 2;
+        margin: 0;
     }
 
     .schrijfstijn-icon {
-        left: 4.88vw;
-        top: calc(48svh + 13vw + 1.5vw);
-        width: 52vw; height: auto; z-index: 2;
+        position: relative; left: auto; top: auto;
+        width: 54vw; height: auto; z-index: 2;
+        display: block; margin: 0.5rem 0 1.75rem;
+        aspect-ratio: 407.321 / 137.03;
     }
 
     .hero-body {
-        left: 4.88vw; right: 4.88vw;
-        top: calc(48svh + 13vw + 11vw);
-        font-size: clamp(11px, 3.7vw, 16px); line-height: 1.6; z-index: 2;
+        position: relative; left: auto; right: auto; top: auto;
+        font-size: clamp(13px, 3.7vw, 17px); line-height: 1.6; z-index: 2;
+        margin: 0 0 1.5rem;
     }
 
     .hero-body-line { white-space: normal; }
 
     .hero-cta {
-        left: 4.88vw;
-        top: calc(48svh + 13vw + 34vw);
+        position: relative; left: auto; top: auto;
         font-size: clamp(13px, 3.5vw, 15px); z-index: 2;
+        display: block; margin: 0 0 2.5rem;
     }
     .hero-cta::after { width: 8rem; }
+
+    .hero-photo {
+        position: relative; left: auto; top: auto;
+        width: calc(100% + 9.76vw); margin-left: -4.88vw;
+        height: 56svh; max-height: 460px;
+        object-fit: cover; object-position: center top;
+        display: block;
+        opacity: 0;
+        transform: scale(1.04) translateY(0);
+        animation: hero-photo-in 1.4s cubic-bezier(0.16,1,0.3,1) 0.6s forwards;
+    }
 
     /* ─── Services — editorial portrait carousel ─────────── */
     .services {
@@ -1156,6 +1156,7 @@ body {
     .services-script {
         position: relative; left: auto; top: auto;
         width: 82vw; height: auto;
+        aspect-ratio: 622 / 97;
         margin: -1rem 0 0; display: block;
     }
 
@@ -1241,12 +1242,13 @@ body {
     .about-script {
         position: relative; left: auto; top: auto;
         width: 82vw; height: auto;
+        aspect-ratio: 844 / 97;
         margin: -1rem 0 0; display: block;
     }
 
     .about-photo {
         position: relative; left: auto; top: auto;
-        width: 72vw; aspect-ratio: 7 / 10; height: auto;
+        width: 58vw; aspect-ratio: 7 / 10; height: auto;
         object-fit: cover; object-position: top center;
         clip-path: none; margin: 28px 0 0; display: block;
         opacity: 1 !important; transform: none !important;
@@ -1288,15 +1290,19 @@ body {
     }
     .about-cta::after { width: 8rem; }
 
-    /* ─── Waarom Schrijfstijn ─────────────────────────────── */
+    /* ─── Waarom Schrijfstijn — grid: photo left + stats right ── */
     .waarom {
-        display: block; position: relative;
+        display: grid;
+        grid-template-columns: 43vw 1fr;
+        column-gap: 4vw;
+        position: relative;
         width: 100vw; height: auto;
         padding: 40px 4.88vw 48px;
         overflow: hidden; background: #f8f4f0;
     }
 
     .waarom-title {
+        grid-column: 1 / -1; grid-row: 1;
         position: relative; left: auto; top: auto;
         font-size: 9.77vw; font-weight: 400; line-height: 1;
         margin: 0; white-space: normal;
@@ -1305,28 +1311,58 @@ body {
     }
 
     .waarom-script {
+        grid-column: 1 / -1; grid-row: 2;
         position: relative; left: auto; top: auto;
         width: 82vw; height: auto;
-        margin: -1rem 0 0; display: block;
+        aspect-ratio: 791 / 97;
+        margin: -1rem 0 0.5rem; display: block;
     }
 
     .waarom-photo {
+        grid-column: 1; grid-row: 3 / 9;
+        align-self: stretch;
         position: relative; left: auto; top: auto;
-        width: 72vw; aspect-ratio: 7 / 10; height: auto;
+        width: 100%; height: 100%; aspect-ratio: none;
         object-fit: cover; object-position: center top;
-        clip-path: none; margin: 28px 0 0; display: block;
+        clip-path: none; margin: 0; display: block;
         opacity: 1 !important; transform: none !important;
         transition: none !important;
     }
 
+    /* Stats right column — alongside photo */
+    .waarom-stat-num {
+        position: relative; left: auto; top: auto;
+        width: auto; height: clamp(24px, 6.5vw, 34px); max-width: none;
+        display: block;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+    .waarom-stat-num-1 { grid-column: 2; grid-row: 3; align-self: end; }
+    .waarom-stat-num-2 { grid-column: 2; grid-row: 5; align-self: end; }
+    .waarom-stat-num-3 { grid-column: 2; grid-row: 7; align-self: end; }
+
+    .waarom-stat-label {
+        position: relative; left: auto; top: auto;
+        font-size: clamp(12px, 3.2vw, 14px);
+        line-height: 1.2; margin: 4px 0 0; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+    .waarom-stat-label-1 { grid-column: 2; grid-row: 4; align-self: start; padding-bottom: 1rem; }
+    .waarom-stat-label-2 { grid-column: 2; grid-row: 6; align-self: start; padding-bottom: 1rem; }
+    .waarom-stat-label-3 { grid-column: 2; grid-row: 8; align-self: start; }
+
+    /* Text below photo + stats */
     .waarom-heading {
+        grid-column: 1 / -1; grid-row: 9;
         position: relative; left: auto; top: auto;
         font-size: clamp(22px, 5.5vw, 28px); font-weight: 400;
-        line-height: 1; margin: 20px 0 0; white-space: normal;
+        line-height: 1; margin: 24px 0 0; white-space: normal;
         opacity: 1 !important; transform: none !important;
     }
 
     .waarom-subheading {
+        grid-column: 1 / -1; grid-row: 10;
         position: relative; left: auto; top: auto;
         font-size: clamp(20px, 5.2vw, 26px);
         line-height: 1; margin: 4px 0 0; white-space: normal;
@@ -1334,6 +1370,7 @@ body {
     }
 
     .waarom-body {
+        grid-column: 1 / -1; grid-row: 11;
         position: relative; left: auto; top: auto;
         max-width: 100%; font-size: clamp(11px, 3.7vw, 16px);
         line-height: 1.55; margin: 14px 0 0;
@@ -1346,6 +1383,7 @@ body {
     }
 
     .waarom-cta {
+        grid-column: 1 / -1; grid-row: 12;
         position: relative; left: auto; top: auto;
         font-size: clamp(13px, 3.5vw, 15px);
         margin: 20px 0 0; display: block; white-space: normal;
@@ -1353,23 +1391,6 @@ body {
         transition: none !important;
     }
     .waarom-cta::after { width: 10rem; }
-
-    /* Stats — stacked vertically, editorial */
-    .waarom-stat-num {
-        position: relative; left: auto; top: auto;
-        width: auto; height: 2.5rem; max-width: none;
-        display: block; margin: 28px 0 4px;
-        opacity: 1 !important; transform: none !important;
-        transition: none !important;
-    }
-
-    .waarom-stat-label {
-        position: relative; left: auto; top: auto;
-        font-size: clamp(12px, 3.2vw, 15px);
-        line-height: 1; margin: 0; white-space: normal;
-        opacity: 1 !important; transform: none !important;
-        transition: none !important;
-    }
 
     .waarom-trusted, .waarom-logo { display: none !important; }
 
@@ -1379,61 +1400,93 @@ body {
     .trusted-logo { height: 2.5rem; }
     .trusted-track { gap: 5rem; }
 
-    /* ─── Workflow — simplified vertical steps (no sticky scroll) ── */
-    .wf-wrap { width: 100vw; height: auto; }
+    /* ─── Workflow — sticky scroll (same as desktop, no image area) ── */
+    .wf-wrap { width: 100vw; height: calc(100vh * 8); }
 
     .wf-sticky {
-        position: relative; top: 0;
-        width: 100vw; height: auto; min-height: 0;
-        padding: 40px 4.88vw 48px;
-        overflow: visible;
+        position: sticky; top: 0;
+        width: 100vw; height: 100vh; height: 100svh;
+        min-height: 0; padding: 0;
+        overflow: hidden; background: #f8f4f0;
     }
 
     .wf-title {
-        position: relative; left: auto; top: auto;
+        position: absolute; left: 4.88vw; top: 11svh;
         font-size: 9.77vw; font-weight: 400;
-        line-height: 1; white-space: normal; margin: 0;
+        line-height: 1; white-space: nowrap; margin: 0;
     }
 
     .wf-subtitle-svg {
-        position: relative; left: auto; top: auto;
-        width: 82vw; height: auto;
-        margin: -1rem 0 0; display: block;
+        position: absolute; left: 4.88vw;
+        top: calc(11svh + 10.5vw + 1.5vw);
+        width: 76vw; height: auto;
+        aspect-ratio: 534.24 / 65.484;
+        margin: 0; display: block;
     }
 
-    .wf-bar-track, .wf-bar-fill, .wf-dots { display: none; }
+    /* Horizontal dots as step progress — bar stays hidden */
+    .wf-bar-track, .wf-bar-fill { display: none; }
+
+    .wf-dots {
+        position: absolute;
+        display: flex; flex-direction: row;
+        left: 4.88vw;
+        top: calc(11svh + 10.5vw + 1.5vw + 9.5vw + 1.75rem);
+        height: auto; width: auto;
+        gap: 10px; padding: 0;
+    }
+
+    .wf-dot {
+        width: 16px; height: 1px; border-radius: 0;
+        background: rgba(13,11,9,0.18);
+        align-self: center;
+        transform: none;
+        transition: width 0.3s ease, background 0.3s ease;
+    }
+    .wf-dot.is-active {
+        width: 28px; background: #D53212;
+        transform: none;
+    }
+
     .wf-image-area { display: none; }
 
     .wf-step-area {
-        position: relative; left: auto; bottom: auto;
-        width: 100%; margin-top: 32px;
+        position: absolute;
+        left: 4.88vw; right: 4.88vw;
+        bottom: 9svh;
+        width: calc(100vw - 9.76vw);
     }
 
+    /* Steps: restore original animation (JS controls is-active) */
     .wf-step {
-        position: relative; top: auto; left: auto;
-        width: 100%; opacity: 1; transform: none;
-        pointer-events: auto; transition: none;
-        margin-bottom: 28px;
+        position: absolute; top: 0; left: 0;
+        width: 100%; opacity: 0;
+        transform: translateY(0.875rem);
+        transition: opacity 0.55s cubic-bezier(0.22, 0.61, 0.36, 1),
+                    transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+        pointer-events: none;
+        margin-bottom: 0;
     }
     .wf-step:last-child { margin-bottom: 0; }
 
     .wf-step-row { gap: 1rem; }
 
     .wf-step-num {
-        font-size: clamp(28px, 7.5vw, 38px);
+        font-size: clamp(32px, 8vw, 44px);
         height: auto; overflow: visible;
         line-height: 1; width: auto;
     }
 
     .wf-step-title {
-        font-size: clamp(20px, 5.2vw, 26px);
+        font-size: clamp(22px, 5.5vw, 28px);
         white-space: normal; line-height: 1.1;
     }
 
     .wf-step-body {
-        -webkit-line-clamp: unset; overflow: visible;
-        display: block; margin-left: 0;
-        font-size: clamp(11px, 3.7vw, 15px);
+        -webkit-line-clamp: 3; overflow: hidden;
+        display: -webkit-box; -webkit-box-orient: vertical;
+        margin-left: 0; max-width: 100%;
+        font-size: clamp(12px, 3.7vw, 16px);
         margin-top: 0.75rem;
     }
 }
