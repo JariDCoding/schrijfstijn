@@ -160,13 +160,11 @@
 .menu-nav-num {
     font-family: "Italianno", serif;
     font-size: clamp(1.25rem, 2vw, 2.25rem);
-    color: rgba(213,50,18,0.38); line-height: 1;
+    color: var(--menu-ink); line-height: 1;
     flex-shrink: 0; width: 2.5rem; text-align: right;
-    transition: color 0.3s ease, transform 0.38s var(--menu-spring);
+    transition: transform 0.38s var(--menu-spring);
 }
-.menu-nav-item.is-hovered .menu-nav-num {
-    color: var(--menu-red); transform: translateX(0.375rem);
-}
+.menu-nav-item.is-hovered .menu-nav-num { transform: translateX(0.375rem); }
 
 /* Main link */
 .menu-nav-link {
@@ -185,9 +183,6 @@
 .menu-overlay.has-hover .menu-nav-item:not(.is-hovered) .menu-nav-link {
     color: rgba(13,11,9,0.1);
 }
-.menu-overlay.has-hover .menu-nav-item:not(.is-hovered) .menu-nav-num {
-    color: rgba(213,50,18,0.12);
-}
 
 /* Sub-label */
 .menu-nav-sub {
@@ -202,7 +197,7 @@
 
 /* Active page marker */
 .menu-nav-item[data-active] .menu-nav-link { color: rgba(13,11,9,0.75); }
-.menu-nav-item[data-active] .menu-nav-num { color: rgba(213,50,18,0.65); }
+.menu-nav-item[data-active] .menu-nav-num { color: var(--menu-red); }
 .menu-nav-item[data-active]::before {
     content: '';
     position: absolute;
