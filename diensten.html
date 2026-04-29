@@ -365,26 +365,53 @@
             }
         }
 
-        /* ── 1920 × 1080 optimisation ────────────────────────────────────────────────
+        /* ── 1920 × 1080 ─────────────────────────────────────────────────────────────
            Root em: 1920 / 90 = 21.333px → 90rem fills exactly 1920px.
-           Hero height compressed to 50.625rem (= 1080px) so the full hero sits in
-           one viewport. All vertical hero positions scaled × 0.8710 (50.625/58.125).
-           ds-section2 and svc scale naturally via rem.                              */
+           Hero height compressed to 50.625rem (= 1080px) — full hero in one viewport.
+           Vertical positions scaled × 0.871 (50.625 / 58.125).                      */
         @media (min-width: 1920px) and (min-height: 1080px) {
-            html {
-                font-size: 21.3333px;
-            }
+            html { font-size: 21.3333px; }
 
-            .ds-hero {
-                height: 50.625rem; /* 1080px — exactly one viewport */
-            }
+            .ds-hero { height: 50.625rem; }
 
-            .ds-title      { top: 8.76rem;  }   /* 10.0625 × 0.871 */
-            .ds-script     { top: 12.88rem; }   /* 14.7925 × 0.871 */
-            .ds-photo      { top: 21.17rem; height: 29.72rem; } /* top × 0.871, height × 0.871 */
-            .ds-body-left  { top: 27.38rem; }   /* 31.4375 × 0.871 */
-            .ds-body-right { top: 38.21rem; }   /* 43.875  × 0.871 */
-            .ds-cta        { top: 48.17rem; }   /* 55.3125 × 0.871 */
+            .ds-title      { top: 8.76rem;  }
+            .ds-script     { top: 12.88rem; }
+            .ds-photo      { top: 21.17rem; height: 29.72rem; }
+            .ds-body-left  { top: 27.38rem; }
+            .ds-body-right { top: 38.21rem; }
+            .ds-cta        { top: 48.17rem; }
+        }
+
+        /* ── 2560 × 1440 (QHD) ───────────────────────────────────────────────────────
+           Root em: 2560 / 90 = 28.444px → 90rem fills exactly 2560px.
+           Same 16:9 ratio as 1920×1080 → identical rem positions, same hero height.  */
+        @media (min-width: 2560px) and (min-height: 1440px) {
+            html { font-size: 28.4444px; }
+
+            .ds-hero { height: 50.625rem; }
+
+            .ds-title      { top: 8.76rem;  }
+            .ds-script     { top: 12.88rem; }
+            .ds-photo      { top: 21.17rem; height: 29.72rem; }
+            .ds-body-left  { top: 27.38rem; }
+            .ds-body-right { top: 38.21rem; }
+            .ds-cta        { top: 48.17rem; }
+        }
+
+        /* ── 4K (3840 × 2160) ────────────────────────────────────────────────────────
+           Root em: 3840 / 90 = 42.667px → 90rem fills exactly 3840px.
+           Same 16:9 ratio → identical rem positions, same hero height.               */
+        @media (min-width: 3840px) and (min-height: 2160px) {
+            html { font-size: 42.6667px; }
+
+            .ds-hero { height: 50.625rem; }
+
+            .ds-title      { top: 8.76rem;  }
+            .ds-script     { top: 12.88rem; }
+            .ds-photo      { top: 21.17rem; height: 29.72rem; }
+            .ds-body-left  { top: 27.38rem; }
+            .ds-body-right { top: 38.21rem; }
+            .ds-cta        { top: 48.17rem; }
         }
     </style>
 </head>
