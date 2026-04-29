@@ -1090,7 +1090,7 @@ body {
     .hero {
         width: 100vw; height: auto; overflow: hidden;
         background: #f8f4f0;
-        padding: max(calc(env(safe-area-inset-top) + 1.25rem), 5rem) 4.88vw 0;
+        padding: max(calc(env(safe-area-inset-top) + 2rem), 8rem) 4.88vw 0;
         display: block;
     }
 
@@ -1098,14 +1098,14 @@ body {
 
     .hero-title {
         position: relative; left: auto; top: auto;
-        font-size: 14vw; white-space: nowrap; line-height: 1; z-index: 2;
+        font-size: 16.5vw; white-space: nowrap; line-height: 1; z-index: 2;
         margin: 0;
     }
 
     .schrijfstijn-icon {
         position: relative; left: auto; top: auto;
-        width: 54vw; height: auto; z-index: 2;
-        display: block; margin: 0.5rem 0 1.75rem;
+        width: 56vw; height: auto; z-index: 2;
+        display: block; margin: 0.75rem 0 2rem;
         aspect-ratio: 407.321 / 137.03;
     }
 
@@ -1127,7 +1127,7 @@ body {
     .hero-photo {
         position: relative; left: auto; top: auto;
         width: calc(100% + 9.76vw); margin-left: -4.88vw;
-        height: 56svh; max-height: 460px;
+        height: 46svh; max-height: 380px;
         object-fit: cover; object-position: center top;
         display: block;
         opacity: 0;
@@ -1293,8 +1293,8 @@ body {
     /* ─── Waarom Schrijfstijn — grid: photo left + stats right ── */
     .waarom {
         display: grid;
-        grid-template-columns: 43vw 1fr;
-        column-gap: 4vw;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 4.88vw;
         position: relative;
         width: 100vw; height: auto;
         padding: 40px 4.88vw 48px;
@@ -1424,7 +1424,7 @@ body {
         margin: 0; display: block;
     }
 
-    /* Horizontal dots as step progress — bar stays hidden */
+    /* Bar stays hidden — dots become renaissance diamonds */
     .wf-bar-track, .wf-bar-fill { display: none; }
 
     .wf-dots {
@@ -1433,19 +1433,21 @@ body {
         left: 4.88vw;
         top: calc(11svh + 10.5vw + 1.5vw + 9.5vw + 1.75rem);
         height: auto; width: auto;
-        gap: 10px; padding: 0;
+        gap: 14px; padding: 0;
+        align-items: center;
     }
 
     .wf-dot {
-        width: 16px; height: 1px; border-radius: 0;
+        width: 0.3125rem; height: 0.3125rem;
+        border-radius: 0;
         background: rgba(13,11,9,0.18);
         align-self: center;
-        transform: none;
-        transition: width 0.3s ease, background 0.3s ease;
+        transform: rotate(45deg) scale(1);
+        transition: background 0.35s, transform 0.35s;
     }
     .wf-dot.is-active {
-        width: 28px; background: #D53212;
-        transform: none;
+        background: #D53212;
+        transform: rotate(45deg) scale(1.5);
     }
 
     .wf-image-area { display: none; }
@@ -1453,7 +1455,7 @@ body {
     .wf-step-area {
         position: absolute;
         left: 4.88vw; right: 4.88vw;
-        bottom: 9svh;
+        bottom: max(env(safe-area-inset-bottom, 0px) + 2rem, 4.5svh);
         width: calc(100vw - 9.76vw);
     }
 

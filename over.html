@@ -403,7 +403,7 @@
         .usp {
             position: relative;
             width: 90rem;
-            height: 68.75rem;
+            height: 72rem;
             margin: 22.75rem auto 0;
             overflow: hidden;
             background: #f8f4f0;
@@ -479,9 +479,9 @@
                         transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
         }
 
-        .usp-stat-1 { left: 11.4125rem; top: 26.9438rem; width: 7.25rem; height: 2.875rem; transition-delay: 0.40s, 0.40s; }
+        .usp-stat-1 { left: 11.4125rem; top: 26.9438rem; width: 10.6875rem; height: 3.9375rem; transition-delay: 0.40s, 0.40s; }
         .usp-stat-2 { left: 38.3875rem; top: 19.025rem; width:  4.5625rem; height: 2.8125rem; transition-delay: 0.50s, 0.50s; }
-        .usp-stat-3 { left: 62.1125rem; top: 23.8438rem; width: 10.6875rem; height: 3.9375rem; transition-delay: 0.60s, 0.60s; }
+        .usp-stat-3 { left: 62.1125rem; top: 23.8438rem; width:  7.25rem;  height: 2.875rem;  transition-delay: 0.60s, 0.60s; }
 
         /* Labels — same visual rule as homepage services cards:
            right = 1440 - photo_right - 40px  (text right edge sits ~2 chars past photo right)
@@ -504,7 +504,24 @@
         .usp-label-2 { right: 30.75rem; top: 53.25rem; transition-delay: 0.65s, 0.65s; }
         .usp-label-3 { right:  6.0625rem; top: 57rem; transition-delay: 0.75s, 0.75s; }
 
-        .usp-desc { display: none; }
+        /* Descriptions — desktop: absolutely positioned below each label */
+        .usp-desc {
+            position: absolute;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 0.9375rem;
+            font-weight: 400;
+            line-height: 1.55;
+            color: rgba(13,11,9,0.58);
+            margin: 0;
+            max-width: 14.25rem;
+            opacity: 0;
+            transform: translateY(0.5rem);
+            transition: opacity 0.64s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.64s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .usp-card:nth-child(1) .usp-desc { left: 13.5625rem; top: 62.75rem; transition-delay: 0.62s, 0.62s; }
+        .usp-card:nth-child(2) .usp-desc { left: 40.1875rem; top: 56.5rem;  transition-delay: 0.72s, 0.72s; }
+        .usp-card:nth-child(3) .usp-desc { left: 66rem;      top: 60.25rem; transition-delay: 0.82s, 0.82s; }
 
         /* Visible states */
         .usp-title.is-visible  { opacity: 1; transform: translateY(0); filter: blur(0); }
@@ -512,6 +529,7 @@
         .usp-photo.is-visible  { opacity: 1; transform: scale(1) translateY(0); }
         .usp-stat.is-visible   { opacity: 1; transform: translateY(0); }
         .usp-label.is-visible  { opacity: 1; transform: translateY(0); }
+        .usp-desc.is-visible   { opacity: 1; transform: translateY(0); }
 
         @media (prefers-reduced-motion: reduce) {
             .usp-title  { transition: none; opacity: 1; transform: none; filter: none; }
@@ -519,6 +537,7 @@
             .usp-photo  { transition: none; opacity: 1; transform: none; }
             .usp-stat   { transition: none; opacity: 1; transform: none; }
             .usp-label  { transition: none; opacity: 1; transform: none; }
+            .usp-desc   { transition: none; opacity: 1; transform: none; }
         }
 
         /* ── Desktop: carousel wrapper elements transparent to absolute layout ── */
@@ -1208,8 +1227,8 @@
         <div class="usp-carousel">
             <article class="usp-card">
                 <img class="usp-stat usp-stat-1"
-                     data-src="./Schrijfstijn%20home%20page/usp-stat-48.svg"
-                     alt="48+">
+                     data-src="./Schrijfstijn%20home%20page/usp-stat-100.svg"
+                     alt="100%">
                 <div class="usp-photo-placeholder"></div>
                 <p class="usp-label usp-label-1">Volledig begeleid</p>
                 <p class="usp-desc">Van het eerste idee tot de definitieve oplevering. Schrijfstijn begeleidt je door elke stap van het creatieve proces.</p>
@@ -1226,8 +1245,8 @@
             </article>
             <article class="usp-card">
                 <img class="usp-stat usp-stat-3"
-                     data-src="./Schrijfstijn%20home%20page/usp-stat-100.svg"
-                     alt="100%">
+                     data-src="./Schrijfstijn%20home%20page/usp-stat-48.svg"
+                     alt="48+">
                 <img class="usp-photo usp-photo-3"
                      src="./Schrijfstijn%20home%20page/usp-maatwerk.png"
                      alt="Maatwerk">
@@ -1356,12 +1375,14 @@
                 var photos      = section.querySelectorAll('.usp-photo');
                 var stats       = section.querySelectorAll('.usp-stat');
                 var labels      = section.querySelectorAll('.usp-label');
+                var descs       = section.querySelectorAll('.usp-desc');
 
                 if (isReducedMotion()) {
                     show(title);
                     show(photoPh);
                     photos.forEach(show);
                     labels.forEach(show);
+                    descs.forEach(show);
                     stats.forEach(function (el) { setSrc(el); show(el); });
                     setSrc(script);
                     return;
@@ -1383,6 +1404,7 @@
                 });
 
                 labels.forEach(show);
+                descs.forEach(show);
             }, { threshold: 0.15 });
 
             io.observe(section);
