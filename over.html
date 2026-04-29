@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
     <title>Over Schrijfstijn</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -620,28 +620,32 @@
                 z-index: 2;
             }
 
-            /* Menu trigger — pull below dynamic island / notch */
+            /* Menu trigger — clear notch/dynamic island via safe-area */
             .menu-trigger {
-                top: max(1.75rem, calc(env(safe-area-inset-top) + 0.75rem));
-                right: 1.5rem;
+                top: max(2rem, calc(env(safe-area-inset-top) + 0.75rem));
+                right: 1.25rem;
+                z-index: 10000;
+            }
+            .menu-trigger__bar {
+                height: 1.5px;
             }
 
             /* Row 1: THE and MAN share the same baseline */
             #os-the    { left: 4vw;   top: 61.5svh; animation-delay: 0.08s; }
             #os-man    { left: 43.5vw; top: 61.5svh; animation-delay: 0.16s; }
 
-            /* Row 2 */
+            /* Row 2 — gap from row 1: 6.5svh */
             #os-behind { left: 4vw; right: auto; top: 68svh; animation-delay: 0.24s; }
 
-            /* Row 3: extra gap before Your/SONG pair for breathing room */
-            #os-song   { left: 5vw; right: auto; top: 76.5svh; animation-delay: 0.32s; }
+            /* Row 3 — same 6.5svh gap after BEHIND */
+            #os-song   { left: 5vw; right: auto; top: 74.5svh; animation-delay: 0.32s; }
 
-            /* "Your" red script — floats just above SONG */
+            /* "Your" red script — sits just above SONG */
             .os-your {
                 display: block;
                 position: absolute;
                 left: 6.5vw;
-                top: 75.5svh;
+                top: 73.6svh;
                 width: 23.5vw;
                 height: auto;
                 max-width: none;
@@ -678,7 +682,7 @@
                 border: 1px solid #f8f4f0;
             }
             .os-cta-label {
-                font-size: clamp(5px, 2vw, 9px);
+                font-size: clamp(7px, 2.4vw, 11px);
                 top: 50%;
                 transform: translateY(-50%);
                 letter-spacing: 0.1em;
