@@ -472,6 +472,7 @@
             position: absolute;
             display: block;
             max-width: none;
+            z-index: 2;
             opacity: 0;
             transform: translateY(0.875rem);
             transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
@@ -895,14 +896,14 @@
                 filter: none !important;
                 transition: none !important;
             }
-            /* Script — left-aligned with title, tight underneath */
+            /* Script — overlaps into title line like on desktop */
             .usp-script {
                 position: relative;
                 left: auto; top: auto;
                 width: 58vw;
                 height: auto;
                 display: block;
-                margin: 2px 0 0 0;
+                margin: -1.8rem 0 0 0;
             }
 
             /* Scrollable carousel track — same cream bg, no visible container */
@@ -918,16 +919,17 @@
             }
             .usp-carousel::-webkit-scrollbar { display: none; }
 
-            /* Cards — 80vw, no border/bg, pure editorial like desktop */
+            /* Cards — relative so stat can overlay photo top-left */
             .usp-card {
                 flex: 0 0 80vw;
                 scroll-snap-align: start;
                 display: flex;
                 flex-direction: column;
                 background: none;
+                position: relative;
             }
 
-            /* Photos — portrait aspect-ratio matches desktop's tall editorial columns */
+            /* Photos — portrait aspect-ratio, same editorial columns as desktop */
             .usp-photo-placeholder {
                 position: relative;
                 left: auto; top: auto;
@@ -956,15 +958,16 @@
                 flex-shrink: 0;
             }
 
-            /* Stat SVGs — sit above photo, same hierarchy as desktop */
+            /* Stat SVGs — overlaid top-left of photo, matching desktop position */
             .usp-stat {
-                position: relative;
-                left: auto; top: auto;
+                position: absolute;
+                top: 14px;
+                left: 0;
                 width: auto;
-                height: 3.5rem;
+                height: 3rem;
                 max-width: none;
                 display: block;
-                margin-bottom: 14px;
+                z-index: 2;
                 opacity: 1 !important;
                 transform: none !important;
             }
