@@ -1070,82 +1070,370 @@ body {
     .trusted-track { animation: none; }
 }
 
-/* ─── iPhone 14 Pro Max mobile hero ─────────────────────────────── */
+/* ── Desktop: wrapper divs transparent to absolute layout ── */
+.svc-header, .svc-carousel, .svc-card { display: contents; }
+.svc-dots { display: none; }
 
-@media (max-width: 430px) {
-    .hero {
-        width: 100vw;
-        height: 100svh;
-        overflow: hidden;
+/* ─── Mobile — all phones ≤ 600px (focus: iPhone 14 Pro Max 430px) ── */
+
+@media (max-width: 600px) {
+
+    /* ── Menu trigger: clear notch / dynamic island ── */
+    .menu-trigger {
+        top: max(2rem, calc(env(safe-area-inset-top) + 0.75rem));
+        right: 1.25rem;
+        z-index: 10000;
     }
+    .menu-trigger__bar { height: 1.5px; }
 
-    /* Gradient from photo into cream — editorial transition */
+    /* ─── Hero ──────────────────────────────────────────────── */
+    .hero { width: 100vw; height: 100svh; overflow: hidden; }
+
     .hero::after {
         content: '';
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 55%;
+        position: absolute; left: 0; bottom: 0;
+        width: 100%; height: 55%;
         background: linear-gradient(
             to bottom,
             transparent,
-            rgba(248, 244, 240, 0.88) 45%,
+            rgba(248,244,240,0.88) 45%,
             #f8f4f0 75%
         );
-        pointer-events: none;
-        z-index: 1;
+        pointer-events: none; z-index: 1;
     }
 
     .hero-photo {
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center top;
+        left: 0; top: 0; width: 100%; height: 100%;
+        object-fit: cover; object-position: center top;
         transform: scale(1.04) translateY(0);
-        animation: hero-photo-in 1.4s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
+        animation: hero-photo-in 1.4s cubic-bezier(0.16,1,0.3,1) 1.0s forwards;
     }
 
     .hero-title {
-        left: 1.5rem;
-        top: 48svh;
-        font-size: 13vw;
-        white-space: nowrap;
-        line-height: 1;
-        z-index: 2;
+        left: 4.88vw; top: 48svh;
+        font-size: 13vw; white-space: nowrap; line-height: 1; z-index: 2;
     }
 
     .schrijfstijn-icon {
-        left: 1.5rem;
+        left: 4.88vw;
         top: calc(48svh + 13vw + 1.5vw);
-        width: 52vw;
-        height: auto;
-        z-index: 2;
+        width: 52vw; height: auto; z-index: 2;
     }
 
     .hero-body {
-        left: 1.5rem;
-        right: 1.5rem;
+        left: 4.88vw; right: 4.88vw;
         top: calc(48svh + 13vw + 11vw);
-        font-size: 0.9375rem;
-        line-height: 1.6;
-        z-index: 2;
+        font-size: clamp(11px, 3.7vw, 16px); line-height: 1.6; z-index: 2;
     }
 
-    .hero-body-line {
-        white-space: normal;
-    }
+    .hero-body-line { white-space: normal; }
 
     .hero-cta {
-        left: 1.5rem;
+        left: 4.88vw;
         top: calc(48svh + 13vw + 34vw);
-        font-size: 1rem;
-        z-index: 2;
+        font-size: clamp(13px, 3.5vw, 15px); z-index: 2;
+    }
+    .hero-cta::after { width: 8rem; }
+
+    /* ─── Services — editorial portrait carousel ─────────── */
+    .services {
+        display: block; position: relative;
+        width: 100vw; height: auto;
+        overflow: visible; background: #f8f4f0;
+        padding-bottom: 48px;
     }
 
-    .hero-cta::after {
-        width: 9.5rem;
+    .svc-header { display: block; padding: 40px 4.88vw 20px; }
+
+    .services-title {
+        position: relative; left: auto; top: auto;
+        font-size: 9.77vw; font-weight: 400; line-height: 1;
+        white-space: normal; margin: 0;
+        opacity: 1 !important; transform: none !important;
+        filter: none !important; transition: none !important;
+    }
+
+    .services-script {
+        position: relative; left: auto; top: auto;
+        width: 82vw; height: auto;
+        margin: -1rem 0 0; display: block;
+    }
+
+    .svc-carousel {
+        display: flex; overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline-start: 4.88vw;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 0 4.88vw; gap: 8vw;
+    }
+    .svc-carousel::-webkit-scrollbar { display: none; }
+
+    /* Cards 1 & 3: 63vw; card 2 (Producing): 67vw — mirrors desktop
+       where photo-02 is 7% wider, giving taller height at same 10:21 ratio */
+    .svc-card {
+        flex: 0 0 63vw; scroll-snap-align: start;
+        display: flex; flex-direction: column;
+        position: relative; background: none;
+    }
+    .svc-carousel > .svc-card:nth-child(2) { flex-basis: 67vw; }
+
+    .services-photo {
+        position: relative; left: auto; top: auto;
+        width: 100%; aspect-ratio: 10 / 21; height: auto;
+        object-fit: cover; object-position: top center;
+        display: block; flex-shrink: 0;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+
+    .services-num {
+        position: absolute; top: 0; left: 0;
+        width: auto; height: 2rem; max-width: none;
+        display: block; z-index: 2;
+        opacity: 1 !important; transform: none !important;
+    }
+
+    .services-label {
+        position: relative; left: auto; top: auto;
+        font-size: clamp(24px, 6.5vw, 30px);
+        font-weight: 400; line-height: 1;
+        white-space: normal; margin: 14px 0 0;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+
+    .services-cta {
+        position: relative; left: auto; top: auto;
+        font-size: clamp(12px, 3.2vw, 14px);
+        margin: 10px 0 0; display: block;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+
+    .svc-dots {
+        display: flex; justify-content: center;
+        align-items: center; gap: 8px; padding: 24px 0 0;
+    }
+    .svc-dot {
+        display: block; width: 20px; height: 1px;
+        background: rgba(13,11,9,0.18);
+        transition: width 0.3s ease, background 0.3s ease;
+    }
+    .svc-dot.is-active { width: 36px; background: #D53212; }
+
+    /* ─── Ontmoet Schrijfstijn (.about) ──────────────────── */
+    .about {
+        display: block; position: relative;
+        width: 100vw; height: auto;
+        padding: 40px 4.88vw 48px;
+        overflow: hidden; background: #f8f4f0;
+    }
+
+    .about-title {
+        position: relative; left: auto; top: auto;
+        font-size: 9.77vw; font-weight: 400; line-height: 1;
+        margin: 0;
+        opacity: 1 !important; transform: none !important;
+        filter: none !important; transition: none !important;
+    }
+
+    .about-script {
+        position: relative; left: auto; top: auto;
+        width: 82vw; height: auto;
+        margin: -1rem 0 0; display: block;
+    }
+
+    .about-photo {
+        position: relative; left: auto; top: auto;
+        width: 72vw; aspect-ratio: 7 / 10; height: auto;
+        object-fit: cover; object-position: top center;
+        clip-path: none; margin: 28px 0 0; display: block;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+
+    .about-name {
+        position: relative; left: auto; top: auto;
+        font-size: clamp(22px, 5.5vw, 28px); font-weight: 400;
+        line-height: 1; margin: 16px 0 0; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+    }
+
+    .about-alias {
+        position: relative; left: auto; top: auto;
+        font-size: clamp(20px, 5.2vw, 26px);
+        line-height: 1; margin: 4px 0 0; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+    }
+
+    .about-body {
+        position: relative; left: auto; top: auto;
+        max-width: 100%; font-size: clamp(11px, 3.7vw, 16px);
+        line-height: 1.55; margin: 14px 0 0;
+    }
+
+    .about-body-line {
+        display: block; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+
+    .about-cta {
+        position: relative; left: auto; top: auto;
+        font-size: clamp(13px, 3.5vw, 15px);
+        margin: 20px 0 0; display: block; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+    .about-cta::after { width: 8rem; }
+
+    /* ─── Waarom Schrijfstijn ─────────────────────────────── */
+    .waarom {
+        display: block; position: relative;
+        width: 100vw; height: auto;
+        padding: 40px 4.88vw 48px;
+        overflow: hidden; background: #f8f4f0;
+    }
+
+    .waarom-title {
+        position: relative; left: auto; top: auto;
+        font-size: 9.77vw; font-weight: 400; line-height: 1;
+        margin: 0; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+        filter: none !important; transition: none !important;
+    }
+
+    .waarom-script {
+        position: relative; left: auto; top: auto;
+        width: 82vw; height: auto;
+        margin: -1rem 0 0; display: block;
+    }
+
+    .waarom-photo {
+        position: relative; left: auto; top: auto;
+        width: 72vw; aspect-ratio: 7 / 10; height: auto;
+        object-fit: cover; object-position: center top;
+        clip-path: none; margin: 28px 0 0; display: block;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+
+    .waarom-heading {
+        position: relative; left: auto; top: auto;
+        font-size: clamp(22px, 5.5vw, 28px); font-weight: 400;
+        line-height: 1; margin: 20px 0 0; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+    }
+
+    .waarom-subheading {
+        position: relative; left: auto; top: auto;
+        font-size: clamp(20px, 5.2vw, 26px);
+        line-height: 1; margin: 4px 0 0; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+    }
+
+    .waarom-body {
+        position: relative; left: auto; top: auto;
+        max-width: 100%; font-size: clamp(11px, 3.7vw, 16px);
+        line-height: 1.55; margin: 14px 0 0;
+    }
+
+    .waarom-body-line {
+        display: block; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+
+    .waarom-cta {
+        position: relative; left: auto; top: auto;
+        font-size: clamp(13px, 3.5vw, 15px);
+        margin: 20px 0 0; display: block; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+    .waarom-cta::after { width: 10rem; }
+
+    /* Stats — stacked vertically, editorial */
+    .waarom-stat-num {
+        position: relative; left: auto; top: auto;
+        width: auto; height: 2.5rem; max-width: none;
+        display: block; margin: 28px 0 4px;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+
+    .waarom-stat-label {
+        position: relative; left: auto; top: auto;
+        font-size: clamp(12px, 3.2vw, 15px);
+        line-height: 1; margin: 0; white-space: normal;
+        opacity: 1 !important; transform: none !important;
+        transition: none !important;
+    }
+
+    .waarom-trusted, .waarom-logo { display: none !important; }
+
+    /* ─── Trusted by ──────────────────────────────────────── */
+    .trusted { padding: 2.5rem 0 3rem; }
+    .trusted-eyebrow { font-size: clamp(20px, 5.5vw, 26px); margin-bottom: 2rem; }
+    .trusted-logo { height: 2.5rem; }
+    .trusted-track { gap: 5rem; }
+
+    /* ─── Workflow — simplified vertical steps (no sticky scroll) ── */
+    .wf-wrap { width: 100vw; height: auto; }
+
+    .wf-sticky {
+        position: relative; top: 0;
+        width: 100vw; height: auto; min-height: 0;
+        padding: 40px 4.88vw 48px;
+        overflow: visible;
+    }
+
+    .wf-title {
+        position: relative; left: auto; top: auto;
+        font-size: 9.77vw; font-weight: 400;
+        line-height: 1; white-space: normal; margin: 0;
+    }
+
+    .wf-subtitle-svg {
+        position: relative; left: auto; top: auto;
+        width: 82vw; height: auto;
+        margin: -1rem 0 0; display: block;
+    }
+
+    .wf-bar-track, .wf-bar-fill, .wf-dots { display: none; }
+    .wf-image-area { display: none; }
+
+    .wf-step-area {
+        position: relative; left: auto; bottom: auto;
+        width: 100%; margin-top: 32px;
+    }
+
+    .wf-step {
+        position: relative; top: auto; left: auto;
+        width: 100%; opacity: 1; transform: none;
+        pointer-events: auto; transition: none;
+        margin-bottom: 28px;
+    }
+    .wf-step:last-child { margin-bottom: 0; }
+
+    .wf-step-row { gap: 1rem; }
+
+    .wf-step-num {
+        font-size: clamp(28px, 7.5vw, 38px);
+        height: auto; overflow: visible;
+        line-height: 1; width: auto;
+    }
+
+    .wf-step-title {
+        font-size: clamp(20px, 5.2vw, 26px);
+        white-space: normal; line-height: 1.1;
+    }
+
+    .wf-step-body {
+        -webkit-line-clamp: unset; overflow: visible;
+        display: block; margin-left: 0;
+        font-size: clamp(11px, 3.7vw, 15px);
+        margin-top: 0.75rem;
     }
 }

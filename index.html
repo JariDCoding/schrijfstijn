@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1, width=device-width">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
     <title>Homepage Schrijfstijn</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,27 +101,39 @@
     </section>
 
     <section class="services">
-        <h2 class="services-title">Wat Schrijfstijn voor u doet</h2>
-        <!-- data-src: JS sets src at the right moment so SMIL starts from t=0 on cue -->
-        <img class="services-script" data-src="./Schrijfstijn%20home%20page/songwriting-met-gevoel.svg" alt="Songwriting met gevoel">
-
-        <!-- 01 Songwriting -->
-        <img class="services-num services-num-01" data-src="./Schrijfstijn%20home%20page/num-01.svg" alt="01">
-        <img class="services-photo services-photo-01" src="./Schrijfstijn%20home%20page/test-songwriter.png" alt="">
-        <h3 class="services-label services-label-01">Songwriting</h3>
-        <a class="services-cta services-cta-01" href="#">Ontdek meer →</a>
-
-        <!-- 02 Producing -->
-        <img class="services-num services-num-02" data-src="./Schrijfstijn%20home%20page/num-02.svg" alt="02">
-        <img class="services-photo services-photo-02" src="./Schrijfstijn%20home%20page/musiclit1.png" alt="">
-        <h3 class="services-label services-label-02">Producing</h3>
-        <a class="services-cta services-cta-02" href="#">Ontdek meer →</a>
-
-        <!-- 03 Consulting -->
-        <img class="services-num services-num-03" data-src="./Schrijfstijn%20home%20page/num-03.svg" alt="03">
-        <img class="services-photo services-photo-03" src="./Schrijfstijn%20home%20page/consulting.png" alt="">
-        <h3 class="services-label services-label-03">Consulting</h3>
-        <a class="services-cta services-cta-03" href="#">Ontdek meer →</a>
+        <div class="svc-header">
+            <h2 class="services-title">Wat Schrijfstijn voor u doet</h2>
+            <!-- data-src: JS sets src at the right moment so SMIL starts from t=0 on cue -->
+            <img class="services-script" data-src="./Schrijfstijn%20home%20page/songwriting-met-gevoel.svg" alt="Songwriting met gevoel">
+        </div>
+        <div class="svc-carousel">
+            <!-- 01 Songwriting -->
+            <div class="svc-card">
+                <img class="services-num services-num-01" data-src="./Schrijfstijn%20home%20page/num-01.svg" alt="01">
+                <img class="services-photo services-photo-01" src="./Schrijfstijn%20home%20page/test-songwriter.png" alt="">
+                <h3 class="services-label services-label-01">Songwriting</h3>
+                <a class="services-cta services-cta-01" href="#">Ontdek meer →</a>
+            </div>
+            <!-- 02 Producing -->
+            <div class="svc-card">
+                <img class="services-num services-num-02" data-src="./Schrijfstijn%20home%20page/num-02.svg" alt="02">
+                <img class="services-photo services-photo-02" src="./Schrijfstijn%20home%20page/musiclit1.png" alt="">
+                <h3 class="services-label services-label-02">Producing</h3>
+                <a class="services-cta services-cta-02" href="#">Ontdek meer →</a>
+            </div>
+            <!-- 03 Consulting -->
+            <div class="svc-card">
+                <img class="services-num services-num-03" data-src="./Schrijfstijn%20home%20page/num-03.svg" alt="03">
+                <img class="services-photo services-photo-03" src="./Schrijfstijn%20home%20page/consulting.png" alt="">
+                <h3 class="services-label services-label-03">Consulting</h3>
+                <a class="services-cta services-cta-03" href="#">Ontdek meer →</a>
+            </div>
+        </div>
+        <div class="svc-dots" aria-hidden="true">
+            <span class="svc-dot is-active"></span>
+            <span class="svc-dot"></span>
+            <span class="svc-dot"></span>
+        </div>
     </section>
 
     <section class="about">
@@ -558,6 +570,17 @@
             window.addEventListener('scroll', drive, { passive: true });
             window.addEventListener('resize', drive, { passive: true });
             drive();
+        })();
+
+        // ── Services carousel dot tracker ──────────────────────────
+        (function () {
+            var track = document.querySelector('.svc-carousel');
+            var dots  = document.querySelectorAll('.svc-dot');
+            if (!track || !dots.length) return;
+            track.addEventListener('scroll', function () {
+                var idx = Math.round(track.scrollLeft / track.clientWidth);
+                dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
+            }, { passive: true });
         })();
     </script>
     <script src="./menu.js"></script>
