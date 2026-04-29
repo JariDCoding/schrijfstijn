@@ -7,7 +7,8 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Italianno&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italianno&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./menu.css">
 
     <style>
         html {
@@ -388,6 +389,80 @@
     </style>
 </head>
 <body>
+
+<!-- ── Menu ── -->
+<div class="menu-grain" aria-hidden="true"></div>
+<div class="menu-cursor" id="menuCursor" aria-hidden="true">
+    <span class="menu-cursor__arrow">→</span>
+</div>
+<button class="menu-trigger" id="menuTrigger"
+    aria-expanded="false" aria-controls="menuOverlay"
+    aria-label="Menu openen">
+    <span class="menu-trigger__bar"></span>
+    <span class="menu-trigger__bar"></span>
+    <span class="menu-trigger__bar"></span>
+</button>
+<nav class="menu-overlay" id="menuOverlay"
+    aria-hidden="true" aria-label="Hoofdnavigatie">
+    <div class="menu-canvas">
+        <header class="menu-top-bar">
+            <span class="menu-top-label">— Navigatie</span>
+            <span class="menu-top-rule"></span>
+            <span class="menu-top-counter" id="menuCounter">01</span>
+        </header>
+        <div class="menu-divider menu-divider--top"></div>
+        <div class="menu-body">
+            <ul class="menu-nav-list">
+                <li class="menu-nav-item" data-photo="mn-home" data-idx="01" data-href="index.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">01</span>
+                        <a class="menu-nav-link" href="./index.html">Home</a>
+                        <span class="menu-nav-sub">De thuisbasis</span>
+                    </div>
+                </li>
+                <li class="menu-nav-item" data-photo="mn-diensten" data-idx="02" data-href="diensten.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">02</span>
+                        <a class="menu-nav-link" href="./diensten.html">Diensten</a>
+                        <span class="menu-nav-sub">Songwriting · Productie · Consulting</span>
+                    </div>
+                </li>
+                <li class="menu-nav-item" data-photo="mn-over" data-idx="03" data-href="over.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">03</span>
+                        <a class="menu-nav-link" href="./over.html">Over</a>
+                        <span class="menu-nav-sub">Ontmoet Stijn Bouvé</span>
+                    </div>
+                </li>
+                <li class="menu-nav-item" data-photo="mn-contact" data-idx="04" data-href="contact.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">04</span>
+                        <a class="menu-nav-link" href="#contact">Contact</a>
+                        <span class="menu-nav-sub">Start een aanvraag</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="menu-photo-panel">
+                <div class="menu-photo-mono" aria-hidden="true">S</div>
+                <p class="menu-photo-label" aria-hidden="true">Est. 2016 · België</p>
+                <img id="mn-home"     class="menu-nav-photo" src="./Schrijfstijn%20home%20page/schrijfstijnhero.png"  alt="" aria-hidden="true">
+                <img id="mn-diensten" class="menu-nav-photo" src="./Schrijfstijn%20home%20page/svc-songwriting.jpg"   alt="" aria-hidden="true">
+                <img id="mn-over"     class="menu-nav-photo" src="./Schrijfstijn%20home%20page/stijn-portrait.png"    alt="" aria-hidden="true">
+                <img id="mn-contact"  class="menu-nav-photo" src="./Schrijfstijn%20home%20page/studio-100.png"        alt="" aria-hidden="true">
+            </div>
+        </div>
+        <div class="menu-divider menu-divider--bot"></div>
+        <footer class="menu-footer-bar">
+            <span class="menu-footer-brand">Schrijfstijn</span>
+            <span class="menu-footer-sep"></span>
+            <div class="menu-footer-meta">
+                <a href="mailto:info@schrijfstijn.be">info@schrijfstijn.be</a><br>
+                Songwriting &amp; Audio Productie
+            </div>
+        </footer>
+    </div>
+</nav>
+
     <section class="ds-hero">
         <h1 class="ds-title">Van gevoel naar geluid</h1>
 
@@ -621,5 +696,6 @@
             io.observe(section);
         })();
     </script>
+    <script src="./menu.js"></script>
 </body>
 </html>
