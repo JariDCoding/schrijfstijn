@@ -716,18 +716,48 @@
                 filter: none !important;
                 transition: none !important;
             }
-            /* "achter jouw hit" — not in Figma mobile design */
-            .oo-subtitle { display: none !important; }
-            .oo-line-1   { display: none !important; }
-
-            /* "De persoon" script — Figma: left 210px, top 52px, w 115px */
+            /* "De persoon" script — Figma 162:43: left 210px, top 52px, w 115px */
             .oo-script {
                 position: absolute;
                 top: 52px;
                 left: 48.84vw;
                 width: 26.74vw;
                 height: auto;
-                visibility: visible;
+            }
+
+            /* Horizontal line — Figma 162:49: right of "De persoon", 1px black
+               De persoon ends at 48.84+26.74=75.58vw, centre-y at 52+17.5=69.5px */
+            .oo-line-1 {
+                display: block;
+                position: absolute;
+                top: 69px;
+                left: 77vw;
+                width: 19vw;
+                height: 1px;
+                background: #000;
+                transform: scaleX(1) !important;
+                transform-origin: left center;
+                transition: none !important;
+            }
+
+            /* "achter jouw hit" — Figma 162:47: 42px Cormorant Garamond,
+               second line indented below "De persoon"                    */
+            .oo-subtitle {
+                display: block !important;
+                position: absolute;
+                top: 90px;
+                left: 42.09vw;
+                margin: 0;
+                font-size: 9.77vw;
+                font-weight: 400;
+                font-style: normal;
+                line-height: 1;
+                color: #000;
+                white-space: nowrap;
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
             }
 
             /* Large photo — Figma: left -58px, top 168px, 182×299px, bleeds left */
@@ -756,14 +786,15 @@
                 transform: none !important;
                 transition: none !important;
             }
-            /* Body text — Figma: left 230px, top 368px, w 194px, 16px */
+            /* Body text — Figma: left 230px, top 368px, w 194px
+               Font size matches hero quote for editorial consistency    */
             .oo-body {
                 position: absolute;
                 top: 368px;
                 left: 53.49vw;
                 width: 45.12vw;
-                font-size: 10px;
-                line-height: 1.5;
+                font-size: clamp(11px, 3.7vw, 16px);
+                line-height: 1.55;
                 color: rgba(13,11,9,0.65);
                 opacity: 1 !important;
                 transform: none !important;
