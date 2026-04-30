@@ -131,8 +131,9 @@
         max-width: none;
     }
     .final-cta-btn {
-        width: min(76vw, 18rem);
-        font-size: clamp(0.8125rem, 3.5vw, 1rem);
+        width: min(58vw, 13.5rem);
+        font-size: clamp(0.6875rem, 3vw, 0.875rem);
+        letter-spacing: 0.14em;
     }
     .final-cta-btn-border {
         border-width: 1px;
