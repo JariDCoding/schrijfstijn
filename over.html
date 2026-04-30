@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italianno&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./menu.css">
+    <link rel="stylesheet" href="./footer.css">
 
     <style>
         html {
@@ -1271,6 +1272,17 @@
 
     </section>
 
+    <!-- ── Final CTA ── -->
+    <section class="final-cta" id="contact">
+        <h2 class="final-cta-heading">Is Schrijfstijn de juiste partner<br>voor jou project?</h2>
+        <p class="final-cta-body">Wil je graag nog wat extra informatie over één van onze diensten? Plan dan een gratis kennismakingsgesprek in met Stijn. Zo kunnen we je creatieve plannen bespreken en kijken hoe we jou het best kunnen ondersteunen.</p>
+        <a class="final-cta-btn" href="mailto:stijn@schrijfstijn.be">
+            <img class="final-cta-ticket" src="./Schrijfstijn home page/cta-ticket.svg" alt="" aria-hidden="true">
+            <span class="final-cta-btn-border"></span>
+            <span class="final-cta-btn-text">START  AANVRAAG</span>
+        </a>
+    </section>
+
     <script>
         // ── Shared helpers (master animation DNA) ──
         function show(el) { if (el) el.classList.add('is-visible'); }
@@ -1443,5 +1455,18 @@
         })();
     </script>
     <script src="./menu.js"></script>
+    <script>
+        (function () {
+            var section = document.querySelector('.final-cta');
+            if (!section) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                section.classList.add('is-visible'); return;
+            }
+            var io = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) { section.classList.add('is-visible'); io.disconnect(); }
+            }, { threshold: 0.18 });
+            io.observe(section);
+        })();
+    </script>
 </body>
 </html>
