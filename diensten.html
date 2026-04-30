@@ -420,6 +420,187 @@
             .ds-body-right { top: 38.21rem; }
             .ds-cta        { top: 48.17rem; }
         }
+
+        /* ══════════════════════════════════════════════════
+           Mobile  ≤ 600px  (iPhone 14 Pro Max = 430px)
+           ══════════════════════════════════════════════════ */
+        @media (max-width: 600px) {
+
+            /* ── Menu ── */
+            .menu-trigger {
+                top: max(2rem, calc(env(safe-area-inset-top) + 0.75rem));
+                right: 1.25rem; z-index: 10000;
+            }
+            .menu-trigger__bar { height: 1.5px; }
+
+            /* ── Hero ── */
+            .ds-hero {
+                width: 100vw; height: auto; overflow: hidden;
+                background: #f8f4f0;
+                padding: max(calc(env(safe-area-inset-top) + 2rem), 12svh) 4.88vw 3rem;
+                display: flex; flex-direction: column; position: relative;
+            }
+
+            .ds-title {
+                position: relative; left: auto; top: auto;
+                font-size: 14vw; white-space: normal; line-height: 1; z-index: 2;
+                margin: 0; order: 1;
+                opacity: 1; transform: none; filter: none; animation: none;
+            }
+
+            .ds-script {
+                position: relative; left: auto; top: auto;
+                width: 82vw; height: auto;
+                aspect-ratio: 56.75 / 5.125;
+                display: block; margin: -0.6rem 0 0; z-index: 2; order: 2;
+            }
+
+            /* Body-right: editorial quote, shown between script and photo */
+            .ds-body-right {
+                position: relative; left: auto; right: auto; top: auto;
+                width: auto; margin: 1.5rem 0 0; order: 3;
+                font-size: clamp(12px, 3.2vw, 14px);
+                font-style: italic; line-height: 1.5;
+                color: rgba(13,11,9,0.48); text-align: right;
+            }
+
+            .ds-photo {
+                position: relative; left: auto; top: auto;
+                width: calc(100% + 9.76vw); margin-left: -4.88vw;
+                height: auto; aspect-ratio: 23.875 / 34.125;
+                object-fit: cover; object-position: center top;
+                display: block; order: 4;
+                box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+                opacity: 0; transform: scale(1.04) translateY(0);
+                animation: ds-photo-in 1.4s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
+            }
+
+            .ds-body-left {
+                position: relative; left: auto; top: auto;
+                width: auto; margin: 1.5rem 0 0; order: 5;
+                font-size: clamp(13px, 3.7vw, 16px); line-height: 1.55;
+            }
+
+            .ds-body-line {
+                display: inline; white-space: normal;
+                opacity: 1 !important; transform: none !important;
+                animation: none !important;
+            }
+
+            .ds-cta {
+                position: relative; left: auto; top: auto;
+                display: block; margin: 1.75rem 0 0; order: 6;
+                font-size: clamp(14px, 3.675vw, 16px);
+                opacity: 1 !important; transform: none !important;
+                animation: none !important;
+            }
+            .ds-cta::after { top: 1.5em; width: 10rem; }
+
+            /* ── Section 2: Onze diensten ── */
+            .ds-section2 {
+                width: 100vw; height: auto; margin: 0;
+                background: #f8f4f0;
+                padding: 2.5rem 4.88vw 1.5rem;
+                overflow: visible;
+            }
+
+            .ds-section2-title {
+                position: relative; left: auto; top: auto;
+                font-size: 9.77vw; font-weight: 400; line-height: 1;
+                white-space: normal; margin: 0;
+                opacity: 1 !important; transform: none !important;
+                filter: none !important; transition: none !important;
+            }
+
+            .ds-section2-script {
+                position: relative; left: auto; top: auto;
+                width: 80vw; height: auto;
+                aspect-ratio: 54.3917 / 6.6206;
+                display: block; margin: -0.6rem 0 0;
+            }
+
+            /* ── Service Blocks ── */
+            .svc {
+                width: 100vw; height: auto !important;
+                overflow: visible; background: #f8f4f0;
+                padding: 0; position: relative;
+            }
+
+            /* Each block gets a relative container so num-img overlays photo */
+            .svc-block {
+                position: relative;
+                display: flex; flex-direction: column;
+                margin-bottom: 4rem;
+            }
+
+            /* Photo: full-bleed, portrait crop */
+            .svc-photo {
+                position: relative !important;
+                left: auto !important; top: auto !important;
+                width: 100vw !important; height: auto !important;
+                aspect-ratio: 3 / 4;
+                object-fit: cover; object-position: center top;
+                display: block !important; order: 1;
+                box-shadow: none;
+                opacity: 1 !important; transform: none !important;
+                transition: none !important;
+            }
+
+            /* Number SVG: absolute top-left of .svc-block */
+            .svc-num-img {
+                position: absolute !important;
+                top: 0 !important; left: 0 !important;
+                width: auto !important; height: 3rem !important;
+                display: block; z-index: 2; order: 0;
+                opacity: 1 !important; transform: none !important;
+                transition: none !important;
+            }
+
+            /* Red script SVG */
+            .svc-script {
+                position: relative !important;
+                left: auto !important; top: auto !important;
+                width: 68vw !important; height: auto !important;
+                display: block; margin: 1.5rem 0 0 4.88vw; order: 2;
+                opacity: 1 !important; visibility: visible !important;
+            }
+
+            /* Body text */
+            .svc-body {
+                position: relative !important;
+                left: auto !important; top: auto !important;
+                width: auto !important; margin: 1rem 4.88vw 0; order: 3;
+                font-size: clamp(13px, 3.7vw, 16px); line-height: 1.55;
+            }
+
+            .svc-body-line {
+                display: inline; white-space: normal;
+                opacity: 1 !important; transform: none !important;
+                transition: none !important;
+            }
+
+            /* Big service label */
+            .svc-label {
+                position: relative !important;
+                left: auto !important; top: auto !important;
+                font-size: clamp(2rem, 9vw, 3rem); line-height: 1;
+                margin: 1.25rem 4.88vw 0; order: 4;
+                white-space: normal;
+                opacity: 1 !important; transform: none !important;
+                transition: none !important;
+            }
+
+            /* CTA link */
+            .svc-cta {
+                position: relative !important;
+                left: auto !important; top: auto !important;
+                display: block; margin: 0.75rem 4.88vw 0; order: 5;
+                font-size: clamp(14px, 3.675vw, 16px);
+                opacity: 1 !important; transform: none !important;
+                transition: none !important;
+            }
+            .svc-cta::after { top: 1.5em; width: 9rem; }
+        }
     </style>
 </head>
 <body>
@@ -532,6 +713,7 @@
 
     <section class="svc">
         <!-- ── Block 1: Songwriting ── -->
+        <div class="svc-block" data-block="1">
         <img class="svc-num-img"    data-block="1"
              data-src="./Schrijfstijn%20home%20page/01-diensten.svg"
              alt="01"
@@ -558,8 +740,10 @@
         <a class="svc-cta"          data-block="1"
            style="left:69.375rem;top:53.0625rem;--ul-w:12.5rem;"
            href="#">Start songwriting →</a>
+        </div>
 
         <!-- ── Block 2: Producing ── -->
+        <div class="svc-block" data-block="2">
         <img class="svc-num-img"    data-block="2"
              data-src="./Schrijfstijn%20home%20page/02-diensten.svg"
              alt="02"
@@ -586,8 +770,10 @@
         <a class="svc-cta"          data-block="2"
            style="left:7.8125rem;top:114.9375rem;--ul-w:11.4375rem;"
            href="#">Start producing →</a>
+        </div>
 
         <!-- ── Block 3: Consulting ── -->
+        <div class="svc-block" data-block="3">
         <img class="svc-num-img"    data-block="3"
              data-src="./Schrijfstijn%20home%20page/03-diensten.svg"
              alt="03"
@@ -614,6 +800,7 @@
         <a class="svc-cta"          data-block="3"
            style="left:46.0625rem;top:176.8125rem;--ul-w:11.875rem;"
            href="#">Start consultatie →</a>
+        </div>
     </section>
 
     <script>
