@@ -172,6 +172,8 @@ body {
                 filter 0.9s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+.title-m { display: none; }
+
 /* Red cursive subtitle "Songwriting met gevoel" — animated by SMIL */
 .services-script {
     position: absolute;
@@ -1090,7 +1092,7 @@ body {
     .hero {
         width: 100vw; height: auto; overflow: hidden;
         background: #f8f4f0;
-        padding: max(calc(env(safe-area-inset-top) + 2rem), 8rem) 4.88vw 0;
+        padding: max(calc(env(safe-area-inset-top) + 2rem), 16svh) 4.88vw 5svh;
         display: block;
     }
 
@@ -1105,7 +1107,7 @@ body {
     .schrijfstijn-icon {
         position: relative; left: auto; top: auto;
         width: 56vw; height: auto; z-index: 2;
-        display: block; margin: 0.75rem 0 2rem;
+        display: block; margin: 0.2rem 0 2rem;
         aspect-ratio: 407.321 / 137.03;
     }
 
@@ -1127,7 +1129,7 @@ body {
     .hero-photo {
         position: relative; left: auto; top: auto;
         width: calc(100% + 9.76vw); margin-left: -4.88vw;
-        height: 46svh; max-height: 380px;
+        height: auto; max-height: none;
         object-fit: cover; object-position: center top;
         display: block;
         opacity: 0;
@@ -1152,6 +1154,8 @@ body {
         opacity: 1 !important; transform: none !important;
         filter: none !important; transition: none !important;
     }
+    .title-d { display: none; }
+    .title-m { display: block; }
 
     .services-script {
         position: relative; left: auto; top: auto;
@@ -1276,7 +1280,7 @@ body {
     }
 
     .about-body-line {
-        display: block; white-space: normal;
+        display: inline; white-space: normal;
         opacity: 1 !important; transform: none !important;
         transition: none !important;
     }
@@ -1333,24 +1337,25 @@ body {
     .waarom-stat-num {
         position: relative; left: auto; top: auto;
         width: auto; height: clamp(24px, 6.5vw, 34px); max-width: none;
-        display: block;
+        display: block; margin-left: auto; margin-right: auto;
         opacity: 1 !important; transform: none !important;
         transition: none !important;
     }
-    .waarom-stat-num-1 { grid-column: 2; grid-row: 3; align-self: end; }
-    .waarom-stat-num-2 { grid-column: 2; grid-row: 5; align-self: end; }
-    .waarom-stat-num-3 { grid-column: 2; grid-row: 7; align-self: end; }
+    .waarom-stat-num-1 { grid-column: 2; grid-row: 3; align-self: end; justify-self: center; }
+    .waarom-stat-num-2 { grid-column: 2; grid-row: 5; align-self: end; justify-self: center; }
+    .waarom-stat-num-3 { grid-column: 2; grid-row: 7; align-self: end; justify-self: center; }
 
     .waarom-stat-label {
         position: relative; left: auto; top: auto;
         font-size: clamp(12px, 3.2vw, 14px);
         line-height: 1.2; margin: 4px 0 0; white-space: normal;
+        text-align: center;
         opacity: 1 !important; transform: none !important;
         transition: none !important;
     }
-    .waarom-stat-label-1 { grid-column: 2; grid-row: 4; align-self: start; padding-bottom: 1rem; }
-    .waarom-stat-label-2 { grid-column: 2; grid-row: 6; align-self: start; padding-bottom: 1rem; }
-    .waarom-stat-label-3 { grid-column: 2; grid-row: 8; align-self: start; }
+    .waarom-stat-label-1 { grid-column: 2; grid-row: 4; align-self: start; padding-bottom: 1rem; justify-self: center; }
+    .waarom-stat-label-2 { grid-column: 2; grid-row: 6; align-self: start; padding-bottom: 1rem; justify-self: center; }
+    .waarom-stat-label-3 { grid-column: 2; grid-row: 8; align-self: start; justify-self: center; }
 
     /* Text below photo + stats */
     .waarom-heading {
