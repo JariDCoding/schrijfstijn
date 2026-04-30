@@ -671,7 +671,7 @@
                 display: block;
                 position: absolute;
                 left: 6.5vw;
-                top: 76.1svh;
+                top: 75.4svh;
                 width: 23.5vw;
                 height: auto;
                 max-width: none;
@@ -986,10 +986,10 @@
             /* Stat SVGs — overlaid top-left of photo */
             .usp-stat {
                 position: absolute;
-                top: 0;
-                left: 0;
-                width: auto;
-                height: 2rem;
+                top: 0 !important;
+                left: 0 !important;
+                width: auto !important;
+                height: 2rem !important;
                 max-width: none;
                 display: block;
                 z-index: 2;
@@ -1013,6 +1013,9 @@
             }
 
             .usp-desc {
+                position: relative !important;
+                left: auto !important;
+                top: auto !important;
                 display: block;
                 font-family: "Cormorant Garamond", serif;
                 font-size: clamp(13px, 3.7vw, 16px);
@@ -1021,26 +1024,30 @@
                 color: rgba(13,11,9,0.65);
                 margin: 8px 0 0;
                 white-space: normal;
+                opacity: 1 !important;
+                transform: none !important;
             }
 
-            /* Dot indicators — editorial dash style */
+            /* Dot indicators — renaissance diamond style */
             .usp-dots {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                gap: 8px;
+                gap: 14px;
                 padding: 24px 0 0;
             }
             .usp-dot {
                 display: block;
-                width: 20px;
-                height: 1px;
+                width: 0.3125rem;
+                height: 0.3125rem;
                 background: rgba(13,11,9,0.18);
-                transition: width 0.3s ease, background 0.3s ease;
+                border-radius: 0;
+                transform: rotate(45deg) scale(1);
+                transition: background 0.35s, transform 0.35s;
             }
             .usp-dot.is-active {
-                width: 36px;
-                background: var(--menu-red, #D53212);
+                background: #D53212;
+                transform: rotate(45deg) scale(1.5);
             }
         }
     </style>
@@ -1415,12 +1422,23 @@
             var track = document.querySelector('.usp-carousel');
             var dots  = document.querySelectorAll('.usp-dot');
             if (!track || !dots.length) return;
-            track.addEventListener('scroll', function () {
-                var idx = Math.round(track.scrollLeft / track.clientWidth);
-                dots.forEach(function (d, i) {
-                    d.classList.toggle('is-active', i === idx);
-                });
-            }, { passive: true });
+            function updateDots() {
+                var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+                var idx;
+                if (atEnd) {
+                    idx = dots.length - 1;
+                } else {
+                    var cards = track.querySelectorAll('.usp-card');
+                    var best = 0, bestDist = Infinity;
+                    cards.forEach(function(card, i) {
+                        var dist = Math.abs(card.offsetLeft - track.scrollLeft);
+                        if (dist < bestDist) { bestDist = dist; best = i; }
+                    });
+                    idx = best;
+                }
+                dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
+            }
+            track.addEventListener('scroll', updateDots, { passive: true });
         })();
     </script>
     <script src="./menu.js"></script>

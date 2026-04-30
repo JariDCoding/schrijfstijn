@@ -577,10 +577,23 @@
             var track = document.querySelector('.svc-carousel');
             var dots  = document.querySelectorAll('.svc-dot');
             if (!track || !dots.length) return;
-            track.addEventListener('scroll', function () {
-                var idx = Math.round(track.scrollLeft / track.clientWidth);
+            function updateDots() {
+                var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+                var idx;
+                if (atEnd) {
+                    idx = dots.length - 1;
+                } else {
+                    var cards = track.querySelectorAll('.svc-card');
+                    var best = 0, bestDist = Infinity;
+                    cards.forEach(function(card, i) {
+                        var dist = Math.abs(card.offsetLeft - track.scrollLeft);
+                        if (dist < bestDist) { bestDist = dist; best = i; }
+                    });
+                    idx = best;
+                }
                 dots.forEach(function (d, i) { d.classList.toggle('is-active', i === idx); });
-            }, { passive: true });
+            }
+            track.addEventListener('scroll', updateDots, { passive: true });
         })();
     </script>
     <script src="./menu.js"></script>
