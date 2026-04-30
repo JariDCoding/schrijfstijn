@@ -301,6 +301,23 @@
 }
 .menu-cursor.is-hover .menu-cursor__arrow { opacity: 1; }
 
+/* ── Site brand (top-left) ── */
+.site-brand {
+    position: fixed; top: 2.375rem; left: 3rem;
+    z-index: 999;
+    font-family: "Italianno", serif;
+    font-size: 2rem; line-height: 1;
+    color: var(--menu-red);
+    text-decoration: none;
+    transition: opacity 0.28s ease;
+    user-select: none;
+}
+.site-brand:hover { opacity: 0.65; }
+
+@media (max-width: 600px) {
+    .site-brand { top: 2rem; left: 1.5rem; font-size: 1.75rem; }
+}
+
 /* ── A11y ── */
 .menu-sr-only {
     position: absolute; width: 1px; height: 1px; padding: 0;
