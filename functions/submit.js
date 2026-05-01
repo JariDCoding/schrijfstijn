@@ -75,10 +75,19 @@ export async function onRequestPost(context) {
 </body>
 </html>`;
 
+    const apiKey = context.env.RESEND_SCHRIJFSTIJN;
+    if (!apiKey) {
+        console.error("RESEND_SCHRIJFSTIJN is not set in environment");
+        return new Response(
+            "Er ging iets mis bij het versturen van je bericht. Probeer opnieuw of stuur een e-mail naar management@schrijfstijn.be.",
+            { status: 500 }
+        );
+    }
+
     const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-            "Authorization": `Bearer ${context.env.RESEND_SCHRIJFSTIJN}`,
+            "Authorization": `Bearer ${apiKey}`,
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -92,7 +101,7 @@ export async function onRequestPost(context) {
 
     if (!response.ok) {
         const errorText = await response.text();
-        console.error("Resend error:", errorText);
+        console.error("Resend error:", response.status, errorText);
         return new Response(
             "Er ging iets mis bij het versturen van je bericht. Probeer opnieuw of stuur een e-mail naar management@schrijfstijn.be.",
             { status: 500 }
