@@ -324,6 +324,20 @@
     letter-spacing: 0.05em;
 }
 
+.sf-made {
+    font-family: "Cormorant Garamond", serif;
+    font-size: clamp(0.75rem, 0.85vw, 0.875rem);
+    color: rgba(248,244,240,0.42);
+    margin: 0;
+    letter-spacing: 0.05em;
+}
+.sf-made a {
+    color: rgba(248,244,240,0.62);
+    text-decoration: none;
+    transition: color 0.25s;
+}
+.sf-made a:hover { color: #D53212; }
+
 /* ── Tablet: 2-column ── */
 @media (max-width: 1023px) {
     .sf-inner {
