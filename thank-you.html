@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <title>Bedankt — Schrijfstijn</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italianno&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./menu.css">
+    <link rel="stylesheet" href="./footer.css">
+
+    <style>
+        html { font-size: clamp(16px, min(1.1111vw, 1.4815vh), 42.667px); }
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: #f8f4f0;
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 400;
+            color: #0d0b09;
+            line-height: normal;
+            -webkit-font-smoothing: antialiased;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Thank-you section — centered, full height ── */
+        .ty-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(8rem, 12vw, 12rem) clamp(1.5rem, 5.5vw, 7rem) clamp(5rem, 8vw, 8rem);
+        }
+
+        .ty-inner {
+            text-align: center;
+            max-width: 46rem;
+        }
+
+        .ty-script {
+            font-family: "Italianno", serif;
+            font-size: clamp(5rem, 12vw, 11rem);
+            color: #D53212;
+            line-height: 1;
+            margin: 0 0 0.5rem;
+            display: block;
+            opacity: 0;
+            animation: ty-in 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s forwards;
+        }
+
+        .ty-rule {
+            width: 2.5rem;
+            height: 1px;
+            background: rgba(13,11,9,0.18);
+            margin: 0 auto 2.5rem;
+            opacity: 0;
+            animation: ty-in 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.35s forwards;
+        }
+
+        .ty-heading {
+            font-size: clamp(1.75rem, 3vw, 2.625rem);
+            font-weight: 400;
+            margin: 0 0 1.25rem;
+            color: #0d0b09;
+            line-height: 1.2;
+            opacity: 0;
+            animation: ty-in 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.45s forwards;
+        }
+
+        .ty-body {
+            font-size: clamp(1rem, 1.3vw, 1.25rem);
+            line-height: 1.72;
+            color: rgba(13,11,9,0.6);
+            margin: 0 0 3.5rem;
+            opacity: 0;
+            animation: ty-in 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.58s forwards;
+        }
+
+        .ty-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.25rem 2rem;
+            opacity: 0;
+            animation: ty-in 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.72s forwards;
+        }
+
+        .ty-btn-primary {
+            background: #0d0b09;
+            color: #f8f4f0;
+            text-decoration: none;
+            padding: 1.125rem 3rem;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(0.8125rem, 0.9vw, 0.9375rem);
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            transition: background 0.3s, transform 0.38s cubic-bezier(0.34, 1.12, 0.64, 1);
+            display: inline-block;
+        }
+        .ty-btn-primary:hover {
+            background: #D53212;
+            transform: translateY(-2px);
+        }
+
+        .ty-btn-secondary {
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(0.9375rem, 1.1vw, 1.0625rem);
+            color: rgba(13,11,9,0.55);
+            text-decoration: none;
+            font-style: italic;
+            transition: color 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+        }
+        .ty-btn-secondary:hover { color: #0d0b09; }
+
+        @keyframes ty-in {
+            from { opacity: 0; transform: translateY(1.25rem); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .ty-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            .ty-btn-primary { width: 100%; text-align: center; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ty-script, .ty-rule, .ty-heading, .ty-body, .ty-actions {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Menu ── -->
+<div class="menu-grain" aria-hidden="true"></div>
+<a class="site-brand" href="./index.html" aria-label="Schrijfstijn — home">Schrijfstijn</a>
+<div class="menu-cursor" id="menuCursor" aria-hidden="true">
+    <span class="menu-cursor__arrow">→</span>
+</div>
+<button class="menu-trigger" id="menuTrigger"
+    aria-expanded="false" aria-controls="menuOverlay"
+    aria-label="Menu openen">
+    <span class="menu-trigger__bar"></span>
+    <span class="menu-trigger__bar"></span>
+    <span class="menu-trigger__bar"></span>
+</button>
+<nav class="menu-overlay" id="menuOverlay"
+    aria-hidden="true" aria-label="Hoofdnavigatie">
+    <div class="menu-canvas">
+        <header class="menu-top-bar">
+            <span class="menu-top-label">— Navigatie</span>
+            <span class="menu-top-rule"></span>
+            <span class="menu-top-counter" id="menuCounter">01</span>
+        </header>
+        <div class="menu-divider menu-divider--top"></div>
+        <div class="menu-body">
+            <ul class="menu-nav-list">
+                <li class="menu-nav-item" data-photo="mn-home" data-idx="01" data-href="index.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">01</span>
+                        <a class="menu-nav-link" href="./index.html">Home</a>
+                        <span class="menu-nav-sub">De thuisbasis</span>
+                    </div>
+                </li>
+                <li class="menu-nav-item" data-photo="mn-diensten" data-idx="02" data-href="diensten.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">02</span>
+                        <a class="menu-nav-link" href="./diensten.html">Diensten</a>
+                        <span class="menu-nav-sub">Songwriting · Productie · Consulting</span>
+                    </div>
+                </li>
+                <li class="menu-nav-item" data-photo="mn-over" data-idx="03" data-href="over.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">03</span>
+                        <a class="menu-nav-link" href="./over.html">Over</a>
+                        <span class="menu-nav-sub">Ontmoet Stijn Bouvé</span>
+                    </div>
+                </li>
+                <li class="menu-nav-item" data-photo="mn-contact" data-idx="04" data-href="contact.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">04</span>
+                        <a class="menu-nav-link" href="./contact.html">Contact</a>
+                        <span class="menu-nav-sub">Start een aanvraag</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="menu-photo-panel">
+                <div class="menu-photo-mono" aria-hidden="true">S</div>
+                <p class="menu-photo-label" aria-hidden="true">Est. 2016 · België</p>
+                <img id="mn-home"     class="menu-nav-photo" src="./Schrijfstijn%20home%20page/schrijfstijnhero.png"  alt="" aria-hidden="true">
+                <img id="mn-diensten" class="menu-nav-photo" src="./Schrijfstijn%20home%20page/svc-songwriting.jpg"   alt="" aria-hidden="true">
+                <img id="mn-over"     class="menu-nav-photo" src="./Schrijfstijn%20home%20page/stijn-portrait.png"    alt="" aria-hidden="true">
+                <img id="mn-contact"  class="menu-nav-photo" src="./Schrijfstijn%20home%20page/studio-100.png"        alt="" aria-hidden="true">
+            </div>
+        </div>
+        <div class="menu-divider menu-divider--bot"></div>
+        <footer class="menu-footer-bar">
+            <span class="menu-footer-brand">Schrijfstijn</span>
+            <span class="menu-footer-sep"></span>
+            <div class="menu-footer-meta">
+                <a href="mailto:info@schrijfstijn.be">info@schrijfstijn.be</a><br>
+                Songwriting &amp; Audio Productie
+            </div>
+        </footer>
+    </div>
+</nav>
+
+<!-- ── Thank-you ── -->
+<main class="ty-section">
+    <div class="ty-inner">
+        <span class="ty-script" aria-hidden="true">Merci.</span>
+        <div class="ty-rule"></div>
+        <h1 class="ty-heading">Je bericht is verstuurd.</h1>
+        <p class="ty-body">Bedankt voor je bericht. Schrijfstijn neemt zo snel mogelijk contact met je op — normaal gezien binnen de 24 uur.</p>
+        <div class="ty-actions">
+            <a class="ty-btn-primary" href="./index.html">← Terug naar home</a>
+            <a class="ty-btn-secondary" href="./contact.html">Nog een bericht sturen →</a>
+        </div>
+    </div>
+</main>
+
+<!-- ── Footer ── -->
+<footer class="site-footer" itemscope itemtype="https://schema.org/Organization">
+    <div class="sf-inner">
+        <div class="sf-brand">
+            <a class="sf-wordmark" href="./index.html" itemprop="url" aria-label="Schrijfstijn — home">
+                <span itemprop="name">Schrijfstijn</span>
+            </a>
+            <p class="sf-tagline">Woorden die klinken.<br>Muziek die raakt.</p>
+            <div class="sf-social" aria-label="Sociale media">
+                <a class="sf-social-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Schrijfstijn op Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <circle cx="12" cy="12" r="4.5"/>
+                        <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a class="sf-social-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Schrijfstijn op LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="3"/>
+                        <line x1="8" y1="11" x2="8" y2="17"/>
+                        <line x1="8" y1="7.5" x2="8" y2="8.5"/>
+                        <path d="M12 17v-4.5a2 2 0 0 1 4 0V17"/>
+                        <line x1="12" y1="11" x2="12" y2="12.5"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <nav class="sf-nav" aria-label="Sitemap navigatie">
+            <p class="sf-col-label">Navigatie</p>
+            <ul class="sf-nav-list">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./diensten.html">Diensten</a></li>
+                <li><a href="./over.html">Over</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <address class="sf-contact" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <p class="sf-col-label">Contact</p>
+            <a class="sf-email" href="mailto:info@schrijfstijn.be" itemprop="email">info@schrijfstijn.be</a>
+            <a class="sf-contact-cta" href="./contact.html">Start een aanvraag →</a>
+        </address>
+    </div>
+    <div class="sf-bottom">
+        <p class="sf-copy">© 2025 Schrijfstijn — Alle rechten voorbehouden</p>
+        <p class="sf-vat">BTW: <span itemprop="taxID">BE0XXX.XXX.XXX</span></p>
+    </div>
+</footer>
+
+<script src="./menu.js"></script>
+
+</body>
+</html>

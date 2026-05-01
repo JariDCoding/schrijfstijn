@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <title>Contact — Schrijfstijn</title>
+    <meta name="description" content="Neem contact op met Schrijfstijn. Plan een gratis kennismakingsgesprek voor songwriting, productie of consulting.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Italianno&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./menu.css">
+    <link rel="stylesheet" href="./footer.css">
+
+    <style>
+        html { font-size: clamp(16px, min(1.1111vw, 1.4815vh), 42.667px); }
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: #f8f4f0;
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 400;
+            color: #0d0b09;
+            line-height: normal;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ── Hero ── */
+        .ct-hero {
+            padding: clamp(7rem, 11vw, 11rem) clamp(1.5rem, 5.5vw, 7rem) clamp(3.5rem, 5vw, 5rem);
+            max-width: 90rem;
+            margin: 0 auto;
+            border-bottom: 1px solid rgba(13,11,9,0.08);
+        }
+
+        .ct-page-ref {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.6875rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: rgba(13,11,9,0.38);
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: ct-fade-up 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s forwards;
+        }
+        .ct-page-ref::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(13,11,9,0.1);
+        }
+
+        .ct-hero-title {
+            font-size: clamp(3.5rem, 7.5vw, 7.5rem);
+            font-weight: 400;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            margin: 0 0 2rem;
+            color: #0d0b09;
+            opacity: 0;
+            animation: ct-fade-up 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.18s forwards;
+        }
+        .ct-hero-title em {
+            font-style: italic;
+            color: #D53212;
+        }
+
+        .ct-hero-sub {
+            font-size: clamp(1rem, 1.35vw, 1.3125rem);
+            line-height: 1.68;
+            color: rgba(13,11,9,0.58);
+            max-width: 42ch;
+            margin: 0;
+            opacity: 0;
+            animation: ct-fade-up 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 0.32s forwards;
+        }
+
+        @keyframes ct-fade-up {
+            from { opacity: 0; transform: translateY(1.25rem); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── Main content grid ── */
+        .ct-main {
+            max-width: 90rem;
+            margin: 0 auto;
+            padding: clamp(4rem, 7vw, 7rem) clamp(1.5rem, 5.5vw, 7rem) clamp(5rem, 8vw, 8rem);
+            display: grid;
+            grid-template-columns: 1fr 1.7fr;
+            gap: clamp(3rem, 7vw, 8rem);
+            align-items: start;
+        }
+
+        /* ── Aside ── */
+        .ct-aside {
+            position: sticky;
+            top: clamp(5rem, 8vw, 7rem);
+        }
+
+        .ct-aside-script {
+            font-family: "Italianno", serif;
+            font-size: clamp(2.75rem, 3.5vw, 3.75rem);
+            color: #D53212;
+            line-height: 1.05;
+            margin: 0 0 1.25rem;
+            opacity: 0;
+            transform: translateY(1rem);
+        }
+
+        .ct-aside-body {
+            font-size: clamp(1rem, 1.2vw, 1.1875rem);
+            line-height: 1.75;
+            color: rgba(13,11,9,0.62);
+            margin: 0 0 2.75rem;
+            opacity: 0;
+            transform: translateY(1rem);
+        }
+
+        .ct-aside-info {
+            border-top: 1px solid rgba(13,11,9,0.08);
+            padding-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+            opacity: 0;
+            transform: translateY(1rem);
+        }
+
+        .ct-info-item {}
+
+        .ct-info-label {
+            font-size: 0.625rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(13,11,9,0.35);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .ct-info-value {
+            font-size: clamp(1rem, 1.1vw, 1.125rem);
+            color: #0d0b09;
+            text-decoration: none;
+            transition: color 0.25s;
+            display: block;
+            line-height: 1.5;
+        }
+        a.ct-info-value:hover { color: #D53212; }
+
+        .ct-info-note {
+            font-size: clamp(0.875rem, 0.95vw, 0.9375rem);
+            font-style: italic;
+            color: rgba(13,11,9,0.42);
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        .ct-aside.is-visible .ct-aside-script,
+        .ct-aside.is-visible .ct-aside-body,
+        .ct-aside.is-visible .ct-aside-info {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
+                        transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+        .ct-aside.is-visible .ct-aside-script { transition-delay: 0.05s; }
+        .ct-aside.is-visible .ct-aside-body   { transition-delay: 0.15s; }
+        .ct-aside.is-visible .ct-aside-info   { transition-delay: 0.28s; }
+
+        /* ── Contact form ── */
+        .ct-form-wrap {
+            opacity: 0;
+            transform: translateY(1.5rem);
+        }
+        .ct-form-wrap.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s,
+                        transform 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.1s;
+        }
+
+        .cf-form {}
+
+        .cf-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0 2.5rem;
+        }
+
+        .cf-field {
+            margin-bottom: 2.75rem;
+            position: relative;
+        }
+
+        .cf-label {
+            display: block;
+            font-family: "Cormorant Garamond", serif;
+            font-size: 0.625rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(13,11,9,0.42);
+            margin-bottom: 0.75rem;
+            transition: color 0.25s;
+        }
+
+        .cf-field:focus-within .cf-label { color: #D53212; }
+
+        .cf-required {
+            color: #D53212;
+            margin-left: 0.2em;
+        }
+
+        .cf-input,
+        .cf-textarea {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(13,11,9,0.14);
+            padding: 0.75rem 0;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(1rem, 1.15vw, 1.125rem);
+            color: #0d0b09;
+            outline: none;
+            transition: border-color 0.3s;
+            border-radius: 0;
+            -webkit-appearance: none;
+            display: block;
+        }
+
+        .cf-input::placeholder,
+        .cf-textarea::placeholder {
+            color: rgba(13,11,9,0.25);
+        }
+
+        .cf-input:focus,
+        .cf-textarea:focus {
+            border-bottom-color: #D53212;
+        }
+
+        .cf-textarea {
+            resize: vertical;
+            min-height: 9rem;
+            line-height: 1.65;
+        }
+
+        /* Honeypot — never shown to real users */
+        .cf-honeypot {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            pointer-events: none;
+            tabindex: -1;
+        }
+
+        .cf-footer {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem 2.5rem;
+            margin-top: 1rem;
+        }
+
+        .cf-submit {
+            background: #0d0b09;
+            color: #f8f4f0;
+            border: none;
+            padding: 1.125rem 3rem;
+            font-family: "Cormorant Garamond", serif;
+            font-size: clamp(0.8125rem, 0.9vw, 0.9375rem);
+            font-weight: 400;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.38s cubic-bezier(0.34, 1.12, 0.64, 1);
+            -webkit-appearance: none;
+            border-radius: 0;
+            min-height: 3rem;
+        }
+
+        .cf-submit:hover {
+            background: #D53212;
+            transform: translateY(-2px);
+        }
+
+        .cf-submit:active { transform: translateY(0); }
+
+        .cf-privacy {
+            font-size: clamp(0.8125rem, 0.9vw, 0.875rem);
+            font-style: italic;
+            color: rgba(13,11,9,0.38);
+            line-height: 1.5;
+        }
+
+        /* ── Responsive ── */
+
+        /* Tablet */
+        @media (max-width: 1023px) {
+            .ct-main {
+                grid-template-columns: 1fr;
+                gap: clamp(3rem, 5vw, 4rem);
+            }
+            .ct-aside {
+                position: static;
+            }
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .ct-hero-title { letter-spacing: -0.015em; }
+
+            .cf-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cf-footer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .cf-submit {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ct-page-ref,
+            .ct-hero-title,
+            .ct-hero-sub {
+                animation: none;
+                opacity: 1;
+                transform: none;
+            }
+            .ct-aside-script,
+            .ct-aside-body,
+            .ct-aside-info,
+            .ct-form-wrap {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ── Menu ── -->
+<div class="menu-grain" aria-hidden="true"></div>
+<a class="site-brand" href="./index.html" aria-label="Schrijfstijn — home">Schrijfstijn</a>
+<div class="menu-cursor" id="menuCursor" aria-hidden="true">
+    <span class="menu-cursor__arrow">→</span>
+</div>
+<button class="menu-trigger" id="menuTrigger"
+    aria-expanded="false" aria-controls="menuOverlay"
+    aria-label="Menu openen">
+    <span class="menu-trigger__bar"></span>
+    <span class="menu-trigger__bar"></span>
+    <span class="menu-trigger__bar"></span>
+</button>
+<nav class="menu-overlay" id="menuOverlay"
+    aria-hidden="true" aria-label="Hoofdnavigatie">
+    <div class="menu-canvas">
+        <header class="menu-top-bar">
+            <span class="menu-top-label">— Navigatie</span>
+            <span class="menu-top-rule"></span>
+            <span class="menu-top-counter" id="menuCounter">01</span>
+        </header>
+        <div class="menu-divider menu-divider--top"></div>
+        <div class="menu-body">
+            <ul class="menu-nav-list">
+                <li class="menu-nav-item" data-photo="mn-home" data-idx="01" data-href="index.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">01</span>
+                        <a class="menu-nav-link" href="./index.html">Home</a>
+                        <span class="menu-nav-sub">De thuisbasis</span>
+                    </div>
+                </li>
+                <li class="menu-nav-item" data-photo="mn-diensten" data-idx="02" data-href="diensten.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">02</span>
+                        <a class="menu-nav-link" href="./diensten.html">Diensten</a>
+                        <span class="menu-nav-sub">Songwriting · Productie · Consulting</span>
+                    </div>
+                </li>
+                <li class="menu-nav-item" data-photo="mn-over" data-idx="03" data-href="over.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">03</span>
+                        <a class="menu-nav-link" href="./over.html">Over</a>
+                        <span class="menu-nav-sub">Ontmoet Stijn Bouvé</span>
+                    </div>
+                </li>
+                <li class="menu-nav-item" data-photo="mn-contact" data-idx="04" data-href="contact.html">
+                    <div class="menu-nav-item__inner">
+                        <span class="menu-nav-num">04</span>
+                        <a class="menu-nav-link" href="./contact.html">Contact</a>
+                        <span class="menu-nav-sub">Start een aanvraag</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="menu-photo-panel">
+                <div class="menu-photo-mono" aria-hidden="true">S</div>
+                <p class="menu-photo-label" aria-hidden="true">Est. 2016 · België</p>
+                <img id="mn-home"     class="menu-nav-photo" src="./Schrijfstijn%20home%20page/schrijfstijnhero.png"  alt="" aria-hidden="true">
+                <img id="mn-diensten" class="menu-nav-photo" src="./Schrijfstijn%20home%20page/svc-songwriting.jpg"   alt="" aria-hidden="true">
+                <img id="mn-over"     class="menu-nav-photo" src="./Schrijfstijn%20home%20page/stijn-portrait.png"    alt="" aria-hidden="true">
+                <img id="mn-contact"  class="menu-nav-photo" src="./Schrijfstijn%20home%20page/studio-100.png"        alt="" aria-hidden="true">
+            </div>
+        </div>
+        <div class="menu-divider menu-divider--bot"></div>
+        <footer class="menu-footer-bar">
+            <span class="menu-footer-brand">Schrijfstijn</span>
+            <span class="menu-footer-sep"></span>
+            <div class="menu-footer-meta">
+                <a href="mailto:info@schrijfstijn.be">info@schrijfstijn.be</a><br>
+                Songwriting &amp; Audio Productie
+            </div>
+        </footer>
+    </div>
+</nav>
+
+<!-- ── Page hero ── -->
+<section class="ct-hero" aria-labelledby="ct-title">
+    <p class="ct-page-ref">04 &nbsp;— Contact</p>
+    <h1 class="ct-hero-title" id="ct-title">Neem <em>contact</em> op</h1>
+    <p class="ct-hero-sub">Wil je samenwerken, heb je vragen over onze diensten of wil je gewoon meer weten? Plan een gratis kennismakingsgesprek in — Schrijfstijn luistert.</p>
+</section>
+
+<!-- ── Main: aside + form ── -->
+<main class="ct-main" id="formulier">
+
+    <aside class="ct-aside">
+        <p class="ct-aside-script">Schrijfstijn<br>luistert.</p>
+        <p class="ct-aside-body">Elk project begint met een gesprek. Vertel ons over je idee, je deadline of je twijfels — wij helpen je verder met de juiste service op maat.</p>
+        <div class="ct-aside-info">
+            <div class="ct-info-item">
+                <span class="ct-info-label">E-mail</span>
+                <a class="ct-info-value" href="mailto:info@schrijfstijn.be">info@schrijfstijn.be</a>
+                <span class="ct-info-note">Reactie binnen 24 uur</span>
+            </div>
+            <div class="ct-info-item">
+                <span class="ct-info-label">Gebaseerd in</span>
+                <span class="ct-info-value">België</span>
+            </div>
+            <div class="ct-info-item">
+                <span class="ct-info-label">Diensten</span>
+                <span class="ct-info-value">Songwriting · Productie · Consulting</span>
+            </div>
+        </div>
+    </aside>
+
+    <div class="ct-form-wrap">
+        <form class="cf-form"
+              method="POST"
+              action="/submit"
+              novalidate>
+
+            <!-- Honeypot — hidden from real users -->
+            <div class="cf-honeypot" aria-hidden="true">
+                <label for="cf-website">Laat dit veld leeg</label>
+                <input type="text" id="cf-website" name="website" autocomplete="off" tabindex="-1">
+            </div>
+
+            <div class="cf-row">
+                <div class="cf-field">
+                    <label class="cf-label" for="cf-name">
+                        Naam <span class="cf-required" aria-hidden="true">*</span>
+                    </label>
+                    <input class="cf-input" type="text" id="cf-name" name="name"
+                           autocomplete="name" required
+                           placeholder="Jouw naam">
+                </div>
+                <div class="cf-field">
+                    <label class="cf-label" for="cf-email">
+                        E-mail <span class="cf-required" aria-hidden="true">*</span>
+                    </label>
+                    <input class="cf-input" type="email" id="cf-email" name="email"
+                           autocomplete="email" required
+                           placeholder="jouw@email.be">
+                </div>
+            </div>
+
+            <div class="cf-row">
+                <div class="cf-field">
+                    <label class="cf-label" for="cf-phone">Telefoon</label>
+                    <input class="cf-input" type="tel" id="cf-phone" name="phone"
+                           autocomplete="tel"
+                           placeholder="+32 …">
+                </div>
+                <div class="cf-field">
+                    <label class="cf-label" for="cf-subject">Onderwerp</label>
+                    <input class="cf-input" type="text" id="cf-subject" name="subject"
+                           autocomplete="off"
+                           placeholder="Songwriting, productie, consulting …">
+                </div>
+            </div>
+
+            <div class="cf-field">
+                <label class="cf-label" for="cf-message">
+                    Bericht <span class="cf-required" aria-hidden="true">*</span>
+                </label>
+                <textarea class="cf-textarea" id="cf-message" name="message"
+                          required rows="6"
+                          placeholder="Vertel ons over je project, idee of vraag …"></textarea>
+            </div>
+
+            <div class="cf-footer">
+                <button class="cf-submit" type="submit">Verstuur bericht</button>
+                <span class="cf-privacy">Jouw gegevens worden enkel gebruikt om te reageren op je bericht.</span>
+            </div>
+
+        </form>
+    </div>
+
+</main>
+
+<!-- ── Footer ── -->
+<footer class="site-footer" itemscope itemtype="https://schema.org/Organization">
+    <div class="sf-inner">
+        <div class="sf-brand">
+            <a class="sf-wordmark" href="./index.html" itemprop="url" aria-label="Schrijfstijn — home">
+                <span itemprop="name">Schrijfstijn</span>
+            </a>
+            <p class="sf-tagline">Woorden die klinken.<br>Muziek die raakt.</p>
+            <div class="sf-social" aria-label="Sociale media">
+                <a class="sf-social-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Schrijfstijn op Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <circle cx="12" cy="12" r="4.5"/>
+                        <circle cx="17.5" cy="6.5" r="0.75" fill="currentColor" stroke="none"/>
+                    </svg>
+                </a>
+                <a class="sf-social-link" href="#" target="_blank" rel="noopener noreferrer" aria-label="Schrijfstijn op LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="3"/>
+                        <line x1="8" y1="11" x2="8" y2="17"/>
+                        <line x1="8" y1="7.5" x2="8" y2="8.5"/>
+                        <path d="M12 17v-4.5a2 2 0 0 1 4 0V17"/>
+                        <line x1="12" y1="11" x2="12" y2="12.5"/>
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <nav class="sf-nav" aria-label="Sitemap navigatie">
+            <p class="sf-col-label">Navigatie</p>
+            <ul class="sf-nav-list">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="./diensten.html">Diensten</a></li>
+                <li><a href="./over.html">Over</a></li>
+                <li><a href="./contact.html">Contact</a></li>
+            </ul>
+        </nav>
+        <address class="sf-contact" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+            <p class="sf-col-label">Contact</p>
+            <a class="sf-email" href="mailto:info@schrijfstijn.be" itemprop="email">info@schrijfstijn.be</a>
+            <a class="sf-contact-cta" href="./contact.html">Start een aanvraag →</a>
+        </address>
+    </div>
+    <div class="sf-bottom">
+        <p class="sf-copy">© 2025 Schrijfstijn — Alle rechten voorbehouden</p>
+        <p class="sf-vat">BTW: <span itemprop="taxID">BE0XXX.XXX.XXX</span></p>
+    </div>
+</footer>
+
+<script src="./menu.js"></script>
+<script>
+    (function () {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        var aside   = document.querySelector('.ct-aside');
+        var formWrap = document.querySelector('.ct-form-wrap');
+
+        function observe(el) {
+            if (!el) return;
+            var io = new IntersectionObserver(function (entries) {
+                if (entries[0].isIntersecting) {
+                    el.classList.add('is-visible');
+                    io.disconnect();
+                }
+            }, { threshold: 0.12 });
+            io.observe(el);
+        }
+
+        observe(aside);
+        observe(formWrap);
+    })();
+</script>
+
+</body>
+</html>
