@@ -78,12 +78,12 @@ export async function onRequestPost(context) {
     const response = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
-            "Authorization": `Bearer ${context.env.RESEND_API_KEY}`,
+            "Authorization": `Bearer ${context.env.RESEND_SCHRIJFSTIJN}`,
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
             from:     "Schrijfstijn <noreply@schrijfstijn.be>",
-            to:       ["info@schrijfstijn.be"],
+            to:       ["management@schrijfstijn.be"],
             reply_to: email,
             subject:  `Nieuw contactformulier via Schrijfstijn: ${name}`,
             html,
@@ -94,7 +94,7 @@ export async function onRequestPost(context) {
         const errorText = await response.text();
         console.error("Resend error:", errorText);
         return new Response(
-            "Er ging iets mis bij het versturen van je bericht. Probeer opnieuw of stuur een e-mail naar info@schrijfstijn.be.",
+            "Er ging iets mis bij het versturen van je bericht. Probeer opnieuw of stuur een e-mail naar management@schrijfstijn.be.",
             { status: 500 }
         );
     }
