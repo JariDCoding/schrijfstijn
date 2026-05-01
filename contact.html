@@ -255,6 +255,7 @@
         }
 
         .cf-input,
+        .cf-select,
         .cf-textarea {
             width: 100%;
             background: transparent;
@@ -265,9 +266,10 @@
             font-size: clamp(1rem, 1.15vw, 1.125rem);
             color: #0d0b09;
             outline: none;
-            transition: border-color 0.3s, background 0.3s;
+            transition: border-color 0.3s;
             border-radius: 0;
             -webkit-appearance: none;
+            appearance: none;
             display: block;
         }
 
@@ -277,10 +279,43 @@
         }
 
         .cf-input:focus,
+        .cf-select:focus,
         .cf-textarea:focus {
             border-bottom-color: #D53212;
             border-bottom-width: 2px;
         }
+
+        /* Custom select wrapper + arrow */
+        .cf-select-wrap {
+            position: relative;
+        }
+
+        .cf-select-wrap::after {
+            content: '';
+            position: absolute;
+            right: 0.125rem;
+            top: 50%;
+            translate: 0 -50%;
+            width: 0.5rem;
+            height: 0.5rem;
+            border-right: 1.5px solid rgba(13,11,9,0.45);
+            border-bottom: 1.5px solid rgba(13,11,9,0.45);
+            transform: rotate(45deg) translateY(-30%);
+            pointer-events: none;
+            transition: border-color 0.25s;
+        }
+
+        .cf-field:focus-within .cf-select-wrap::after {
+            border-color: #D53212;
+        }
+
+        .cf-select {
+            cursor: pointer;
+            padding-right: 1.5rem;
+        }
+
+        .cf-select option { color: #0d0b09; background: #f8f4f0; }
+        .cf-select option[value=""] { color: rgba(13,11,9,0.35); }
 
         .cf-textarea {
             resize: vertical;
@@ -521,13 +556,24 @@
 
             <div class="cf-row">
                 <div class="cf-field">
-                    <label class="cf-label" for="cf-name">
+                    <label class="cf-label" for="cf-firstname">
                         Naam <span class="cf-required" aria-hidden="true">*</span>
                     </label>
-                    <input class="cf-input" type="text" id="cf-name" name="name"
-                           autocomplete="name" required
-                           placeholder="Jouw naam">
+                    <input class="cf-input" type="text" id="cf-firstname" name="firstname"
+                           autocomplete="given-name" required
+                           placeholder="Voornaam">
                 </div>
+                <div class="cf-field">
+                    <label class="cf-label" for="cf-lastname">
+                        Achternaam <span class="cf-required" aria-hidden="true">*</span>
+                    </label>
+                    <input class="cf-input" type="text" id="cf-lastname" name="lastname"
+                           autocomplete="family-name" required
+                           placeholder="Familienaam">
+                </div>
+            </div>
+
+            <div class="cf-row">
                 <div class="cf-field">
                     <label class="cf-label" for="cf-email">
                         E-mail <span class="cf-required" aria-hidden="true">*</span>
@@ -536,20 +582,28 @@
                            autocomplete="email" required
                            placeholder="jouw@email.be">
                 </div>
-            </div>
-
-            <div class="cf-row">
                 <div class="cf-field">
                     <label class="cf-label" for="cf-phone">Telefoon</label>
                     <input class="cf-input" type="tel" id="cf-phone" name="phone"
                            autocomplete="tel"
                            placeholder="+32 …">
                 </div>
-                <div class="cf-field">
-                    <label class="cf-label" for="cf-subject">Onderwerp</label>
-                    <input class="cf-input" type="text" id="cf-subject" name="subject"
-                           autocomplete="off"
-                           placeholder="Songwriting, productie, consulting …">
+            </div>
+
+            <div class="cf-field">
+                <label class="cf-label" for="cf-subject">
+                    Onderwerp <span class="cf-required" aria-hidden="true">*</span>
+                </label>
+                <div class="cf-select-wrap">
+                    <select class="cf-select" id="cf-subject" name="subject" required>
+                        <option value="" disabled selected>Kies een onderwerp …</option>
+                        <option value="Songwriting">Songwriting</option>
+                        <option value="Productie">Productie</option>
+                        <option value="Consulting">Consulting</option>
+                        <option value="Samenwerking">Samenwerking</option>
+                        <option value="Algemene vraag">Algemene vraag</option>
+                        <option value="Andere">Andere</option>
+                    </select>
                 </div>
             </div>
 

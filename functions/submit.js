@@ -14,20 +14,22 @@
 export async function onRequestPost(context) {
     const formData = await context.request.formData();
 
-    const name    = String(formData.get("name")    || "").trim();
-    const email   = String(formData.get("email")   || "").trim();
-    const phone   = String(formData.get("phone")   || "").trim();
-    const subject = String(formData.get("subject") || "").trim();
-    const message = String(formData.get("message") || "").trim();
-    const website = String(formData.get("website") || "").trim(); // honeypot
+    const firstname = String(formData.get("firstname") || "").trim();
+    const lastname  = String(formData.get("lastname")  || "").trim();
+    const name      = [firstname, lastname].filter(Boolean).join(" ");
+    const email     = String(formData.get("email")     || "").trim();
+    const phone     = String(formData.get("phone")     || "").trim();
+    const subject   = String(formData.get("subject")   || "").trim();
+    const message   = String(formData.get("message")   || "").trim();
+    const website   = String(formData.get("website")   || "").trim(); // honeypot
 
     // Honeypot triggered — silently redirect as if successful
     if (website) {
         return Response.redirect(new URL("/thank-you.html", context.request.url), 303);
     }
 
-    if (!name || !email || !message) {
-        return new Response("Naam, e-mail en bericht zijn verplicht.", { status: 400 });
+    if (!firstname || !lastname || !email || !message || !subject) {
+        return new Response("Naam, achternaam, e-mail, onderwerp en bericht zijn verplicht.", { status: 400 });
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
